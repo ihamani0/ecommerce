@@ -52,33 +52,4 @@ Route::middleware('auth')->group(function (){
 
 
 
-    Route::controller(AdminController::class)->group(function (){
-
-        Route::middleware('auth.admin')->group(function (){
-
-            Route::get("admin/dasboard" ,'index')
-                ->name('admin.dashboard');
-
-            Route::post("admin/logout" ,'logout')
-                ->name('admin.logout');
-
-        });
-
-
-        Route::middleware('guest.admin')->group(function (){
-
-            Route::get("admin/login" ,'showLogin')
-                ->name('admin.login');
-
-            Route::post("admin/store" ,'LoginStore')
-                ->name('admin.loginStore');
-
-        });
-
-
-
-
-    });
-
-
 

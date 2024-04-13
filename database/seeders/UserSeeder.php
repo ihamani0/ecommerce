@@ -14,19 +14,19 @@ class UserSeeder extends Seeder
      */
     public function run(): void
     {
-            
+
             DB::table("users")->insert([
-                "full_name"=> "Vendor",
-                "user_name"=>"Vendor",
-                "email"=> "Vendor@example.com",
+                "name"=> "Vendor",
+                "username"=>"Vendor",
+                "email"=> "vendor@vendor.com",
                 "password"=> Hash::make("1234"),
                 "role"=> "vendor",
 
             ]);
             DB::table("users")->insert([
-                "full_name"=> "User",
-                "user_name"=>"User",
-                "email"=> "User@example.com",
+                "name"=> "User",
+                "username"=>"User",
+                "email"=> "user@user.com",
                 "password"=> Hash::make("1234"),
                 "role"=> "user",
             ]);
