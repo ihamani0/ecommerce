@@ -36,6 +36,16 @@ Route::middleware('auth.admin')->group(function (){
         Route::get('admin/profile','index')
         ->name('admin.profile');
 
+        Route::post('admin/profile/store','store')
+        ->name('admin.profile.store');
+
+        Route::get('admin/profile/change-password','Password_change_index')
+        ->name('admin.profile.ChangePassword.index');
+
+        Route::post('admin/profile/change-password/update','Password_update')
+            ->name("admin.profile.update.password");
+
+
     });
 
 

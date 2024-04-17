@@ -326,7 +326,20 @@
             </div>
             <div class="user-box dropdown">
                 <a class="d-flex align-items-center nav-link dropdown-toggle dropdown-toggle-nocaret" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset("backend/assets/images/avatars/avatar-1.png") }}" class="user-img" alt="user avatar">
+
+
+
+                    {{-- start image  --}}
+                    <img src="
+                    {{ ( !empty(Auth::guard("admin")->user()->photo_profile )
+                                ? url("upload/admin.photo/".Auth::guard("admin")->user()->photo_profile)
+                                    :  url("upload/user.png") ) }}"
+                    class="user-img" alt="user avatar">
+
+                    {{-- end  image  --}}
+
+
+
                     <div class="user-info ps-3">
                         <p class="user-name mb-0"> {{ str( Auth::guard("admin")->user()->name )->limit(6) }}  </p>
                         <p class="designattion mb-0">{{ str(Auth::guard("admin")->user()->email )->limit(6) }} </p>

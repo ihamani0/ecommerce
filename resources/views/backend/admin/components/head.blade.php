@@ -24,3 +24,6 @@
 <link rel="stylesheet" href="{{ asset("backend/assets/css/dark-theme.css") }}" />
 <link rel="stylesheet" href="{{ asset("backend/assets/css/semi-dark.css") }}" />
 <link rel="stylesheet" href="{{ asset("backend/assets/css/header-colors.css") }}" />
+
+
+@stack('style')

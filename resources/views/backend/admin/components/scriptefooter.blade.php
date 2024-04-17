@@ -29,3 +29,6 @@
         document.getElementById("form_logout").submit();
     });
 </script> --}}
+
+
+@stack('script')

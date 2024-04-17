@@ -8,7 +8,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-use Illuminate\Support\MessageBag;
+
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -47,7 +47,7 @@ class AdminController extends Controller
         {
 
             RateLimiter::hit($this->throttleKey($request));
-            return redirect()->route("admin.login")->withErrors("Credentiales invalid login");
+            return redirect()->back()->withErrors("Credentiales invalid login");
         }
 
         RateLimiter::clear($this->throttleKey($request));
@@ -59,8 +59,6 @@ class AdminController extends Controller
         $request->validate([
             "email"=> "required | email",
             "password"=> "required | min:4"
-        ] , [
-            "password"=> "Password is maybe worng at least 6 char ",
         ]);
 
     }

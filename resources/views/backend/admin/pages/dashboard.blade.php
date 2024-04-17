@@ -4,7 +4,7 @@
     dashboard
 @endsection
 
-@push("Style")
+@push("style")
 {{-- style her if you want  --}}
 
 @endpush

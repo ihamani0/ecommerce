@@ -50,6 +50,7 @@ Route::middleware('auth')->group(function (){
 });
 
 
+Route::view("/login-vendor" , "backend.vendor.pages.login");
 
 
 

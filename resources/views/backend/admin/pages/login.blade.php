@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section("title")
- Ecommerc| Login
+ Ecommerce | Login
 @endsection
 
 @push("style")
@@ -45,7 +45,7 @@
             @error('error')
                 <div class="text-center alert alert-danger">{{ $message }}</div>
             @enderror
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -53,7 +53,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif --}}
             <div class="text-center">
               <img src="https://cdn.pixabay.com/photo/2016/03/31/19/56/avatar-1295397__340.png" class="img-fluid profile-image-pic img-thumbnail rounded-circle my-3"
                 width="200px" alt="profile">
@@ -70,7 +70,15 @@
               <input type="password" class="form-control @error("password") is-invalid  @enderror " id="password" placeholder="password" name="password" @required(true)>
             </div>
 
-            @error('password')<div class="alert alert-danger">{{ $message }}</div>@enderror
+            @error('password')<div class="alert alert-danger" role="alert">{{ $message }}</div>@enderror
+
+            <!-- Remember Me -->
+            <div class="block mt-4">
+                <label for="remember_me" class="inline-flex items-center">
+                    <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                    <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                </label>
+            </div>
 
 
             <div class="text-center">
