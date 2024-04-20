@@ -11,7 +11,7 @@
     <meta name="author" content="issamhamani" />
 
 
-	@include("backend.admin.components.head")
+	@include("backend.vendor.components.head")
 
 	<title>
         @yield("title" , "E-comme")
@@ -21,10 +21,10 @@
 
     <div class="wrapper">
         {{-- <!--sidebar wrapper --> --}}
-        @include("backend.admin.components.sidebar")
+        @include("backend.vendor.components.sidebar")
 
         {{-- navbar --}}
-        @include("backend.admin.components.navbar")
+        @include("backend.vendor.components.navbar")
 
 
         {{-- <!--start page wrapper --> --}}
@@ -43,16 +43,16 @@
 
         {{-- footer with script and switcher --}}
 
-        @include("backend.admin.components.footer")
+        @include("backend.vendor.components.footer")
 
     </div>
 
         {{-- <!--start switcher--> --}}
-        @include("backend.admin.components.switcher")
+        @include("backend.vendor.components.switcher")
         <!--end switcher-->
 
 
-        @include("backend.admin.components.scriptefooter")
+        @include("backend.vendor.components.scriptefooter")
 
     </body>
 

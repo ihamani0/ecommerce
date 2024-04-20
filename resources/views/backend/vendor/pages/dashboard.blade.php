@@ -1,7 +1,7 @@
-@extends("backend.admin.layout.master")
+@extends("backend.vendor.layout.master")
 
 @section("title")
-    dashboard
+    dashboard | vendor
 @endsection
 
 @push("style")

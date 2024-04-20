@@ -93,7 +93,7 @@
                                     </div>
                                     <div class="col-sm-9 text-secondary">
                                         <input type="password" name="new_password_confirmation" class="form-control" id="new_password_confirmation"
-                                        placeholder="Confirm New Password"" oncopy="return false;" onpaste="return false;" required />
+                                        placeholder="Confirm New Password" oncopy="return false;" onpaste="return false;" required />
                                         @error('confirm_new_password')<span class="text-danger mt-2">{{ $message }}</span>@enderror
                                     </div>
                                 </div>

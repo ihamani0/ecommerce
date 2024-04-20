@@ -48,42 +48,62 @@
 
                                     <div class="text-center mb-6">
 										<h3 class="">Vendor Sign in</h3>
-										<p>Don't have an account yet? <a href="authentication-signup.html">Sign up here</a>
+										<p>Don't have an account yet? <a href="{{ route("vendor.register") }}">Sign up here</a>
 										</p>
 									</div>
 
                                         <br>
+
+                        @if ($errors->any())
+                            <div class="row mb-3 alert alert-danger">
+
+                                <div class="col-sm-9 text-secondary">
+                                    {{ $errors->first('Error')}}
+                                </div>
+                            </div>
+                        @endif
 										<hr/>
 
 
 
 									<div class="form-body">
-										<form class="row g-3">
-											<div class="col-12">
-												<label for="inputEmailAddress" class="form-label">Email Address</label>
-												<input type="email" class="form-control" id="inputEmailAddress" placeholder="Email Address">
-											</div>
-											<div class="col-12">
-												<label for="inputChoosePassword" class="form-label">Enter Password</label>
-												<div class="input-group" id="show_hide_password">
-													<input type="password" class="form-control border-end-0" id="inputChoosePassword"
-                                                     placeholder="Enter Password"> <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
-												</div>
-											</div>
-											<div class="col-md-6">
-												<div class="form-check form-switch">
-													<input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
-													<label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
-												</div>
-											</div>
-											<div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
-											</div>
-											<div class="col-12">
-												<div class="d-grid">
-													<button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
-												</div>
-											</div>
-										</form>
+<form class="row g-3" method="POST" action="{{ route("vendor.login.store") }}" >
+    @csrf
+    <div class="col-12">
+        <label for="inputEmailAddress" class="form-label">Email Address</label>
+        <input type="email" class="form-control @error('email') is-invalide @enderror " name="email" id="inputEmailAddress" placeholder="Email Address">
+    </div>
+    @error('email')<span class="text-danger mt-2">{{ $message }}</span>@enderror
+
+    <div class="col-12">
+        <label for="inputChoosePassword" class="form-label">Enter Password</label>
+        <div class="input-group" id="show_hide_password">
+            <input type="password" class="form-control border-end-0" name="password" id="inputChoosePassword"
+                placeholder="Enter Password">
+                <a href="javascript:;" class="input-group-text bg-transparent"><i class='bx bx-hide'></i></a>
+        </div>
+    @error('password')<span class="text-danger mt-2">{{ $message }}</span>@enderror
+    </div>
+
+
+    <div class="col-md-6">
+        <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked>
+            <label class="form-check-label" for="flexSwitchCheckChecked">Remember Me</label>
+        </div>
+    </div>
+
+
+    <div class="col-md-6 text-end">	<a href="authentication-forgot-password.html">Forgot Password ?</a>
+    </div>
+
+    <div class="col-12">
+        <div class="d-grid">
+            <button type="submit" class="btn btn-primary"><i class="bx bxs-lock-open"></i>Sign in</button>
+        </div>
+    </div>
+
+</form>
 									</div>
 								</div>
 							</div>

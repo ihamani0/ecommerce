@@ -37,20 +37,18 @@ Route::middleware('auth')->group(function (){
 
 
 
-    Route::middleware('role:vendor')->group(function (){
-        Route::namespace('Vendor')->group(function () {
-            Route::get("vendor/dasboard" , [App\Http\Controllers\Vendor\VendorController::class,'index'])->name('vendor.dashboard');
-        });
-    //end middlware role vendor
-    });
+    // Route::middleware('role:vendor')->group(function (){
+    //     Route::namespace('Vendor')->group(function () {
+    //         Route::get("vendor/dasboard" , [App\Http\Controllers\Vendor\VendorController::class,'index'])->name('vendor.dashboard');
+    //     });
+    // //end middlware role vendor
+    // });
 
 
 
  //end middlware auth
 });
 
-
-Route::view("/login-vendor" , "backend.vendor.pages.login");
 
 
 

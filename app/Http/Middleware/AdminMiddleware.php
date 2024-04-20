@@ -17,6 +17,8 @@ class AdminMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('admin')->guest()) {
+
+            //$request->expectsJson() -> header of request is => application/json
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'Unauthorized'], 401);
             }

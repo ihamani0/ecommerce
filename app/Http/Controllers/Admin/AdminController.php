@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Support\Str;
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\RateLimiter;
-
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 class AdminController extends Controller
@@ -96,13 +96,11 @@ class AdminController extends Controller
 
 
 
-    public function throttleKey(Request $request): string
-    {
+    public function throttleKey(Request $request): string{
         return Str::transliterate(Str::lower($request->email).'|'.$this->ip($request));
     }
 
-    public function ip(Request $request)
-    {
+    public function ip(Request $request){
         $ipAddress = $request->server('REMOTE_ADDR');
 
         return $ipAddress;
