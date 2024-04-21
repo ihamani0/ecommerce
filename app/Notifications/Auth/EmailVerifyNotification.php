@@ -2,7 +2,7 @@
 
 namespace App\Notifications\Auth;
 
-use Ichtrojan\Otp\Models\Otp;
+use Ichtrojan\Otp\Otp;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
@@ -49,13 +49,14 @@ class EmailVerifyNotification extends Notification
             otp->generate($notifiable->email,6,20);
             code = otp->token
         */
+        $codeOtp = $this->otp->generate($notifiable->email,"numeric", 6 , 60);
 
         return (new MailMessage)
         //by default im useing pop3 from env file if you want to specify u can use : ->mailer('smtp')
                     ->line($this->title)
                     ->line("Hello".$notifiable->name)
                     ->line($this->message)
-                    ->line("code : ".$this->otp->generate($notifiable->email,6,20)->token)
+                    ->line("code : ". $codeOtp->token)
                     ->line('Thank you for using our application!');
     }
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\backend\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Notifications\Auth\EmailVerifyNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -54,7 +55,7 @@ class VendorAuthController extends Controller
 
             $user = $this->LoginAttemp($credentials);
 
-            
+
 
             if (! $user) {
 
@@ -98,9 +99,17 @@ class VendorAuthController extends Controller
 
             $user = $this->serviceRegister($request->all());
 
+
             if($user){
+
                 Auth::login($user);
-                return redirect()->route('vendor.dashboard');
+
+                //notificate user to verify email before singind
+                $user->notify(new EmailVerifyNotification());
+
+
+                return redirect()->route('verification.notice');
+
             }else{
                 return back()->withInput()->withErrors(['Error' => "Please Try again"]);
             }
