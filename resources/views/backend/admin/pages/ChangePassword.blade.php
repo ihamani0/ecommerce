@@ -20,7 +20,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('admin.profile')}}">Admin Profile</a></li>
 
 
                     <li class="breadcrumb-item active" aria-current="page">Change Password</li>
@@ -57,7 +57,7 @@
                                 </div>
                             @endif
                             {{-- Start Form  --}}
-                            <form action="{{ route("admin.profile.update.password") }}" method="post" enctype="multipart/form-data" >
+                            <form action="{{ route("admin.update.password") }}" method="post" enctype="multipart/form-data" >
                                 @csrf
 
                                 <div class="row mb-3">

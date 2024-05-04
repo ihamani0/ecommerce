@@ -23,5 +23,19 @@ return array(
     | ],
     */
 
-    'options' => array(),
-);
+    'options' => [
+
+
+
+        //script her option
+        'scripts' => [
+            'local' => array(
+                '/vendor/flasher/jquery.min.js',
+                '/vendor/flasher/flasher-toastr.min.js',
+            ),
+        ]
+        //end script her option
+
+    ],//end options
+    
+);//end return array

@@ -332,7 +332,7 @@
                     {{-- start image  --}}
                     <img src="
                     {{ ( !empty(Auth::user()->photo_profile )
-                                ? url("upload/admin.photo/".Auth::user()->photo_profile)
+                                ? url("upload/vendor.photo/".Auth::user()->photo_profile)
                                     :  url("upload/user.png") ) }}"
                     class="user-img" alt="user avatar">
 
@@ -346,7 +346,7 @@
                     </div>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">
-                    <li><a class="dropdown-item" href="{{ route("admin.profile") }}"><i class="bx bx-user"></i><span>Profile</span></a>
+                    <li><a class="dropdown-item" href="{{ route("vendor.profile") }}"><i class="bx bx-user"></i><span>Profile</span></a>
                     </li>
                     <li><a class="dropdown-item" href="javascript:;"><i class="bx bx-cog"></i><span>Settings</span></a>
                     </li>

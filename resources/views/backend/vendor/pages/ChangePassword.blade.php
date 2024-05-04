@@ -1,7 +1,7 @@
-@extends("backend.admin.layout.master")
+@extends("backend.vendor.layout.master")
 
 @section("title")
-    Admin | E-comme
+    Change-password | E-comme
 @endsection
 
 @push("style")
@@ -9,7 +9,7 @@
 
 @endpush
 
-@section("admin")
+@section("vendor")
 <div class="page-content">
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
@@ -18,9 +18,9 @@
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}"><i class="bx bx-home-alt"></i></a>
+                    <li class="breadcrumb-item"><a href="{{ route('vendor.dashboard') }}"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Admin Profile</li>
+                    <li class="breadcrumb-item active" aria-current="page"><a href="{{route('vendor.profile')}}">Vendor Profile</a></li>
 
 
                     <li class="breadcrumb-item active" aria-current="page">Change Password</li>
@@ -40,14 +40,14 @@
                         <div class="card-body">
 
                             @if ($errors->any())
-                                <div class="row mb-3 alert alert-danger">
-
-                                    <div class="col-sm-9 text-secondary">
-                                        {{ $errors->first('errorPassword')}}
+                                    <div class="alert alert-danger border-0 alert-dismissible">
+                                        @foreach ($errors->all() as $error)
+                                            <div>{{ $error }}</div><br>
+                                        @endforeach
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
                                     </div>
-                                </div>
                             @endif
-
 
                             @if (session("success"))
                                 <div class="row mb-3 alert alert-success">
@@ -56,8 +56,10 @@
                                     </div>
                                 </div>
                             @endif
+
+                            
                             {{-- Start Form  --}}
-                            <form action="{{ route("admin.profile.update.password") }}" method="post" enctype="multipart/form-data" >
+                            <form action="{{ route("vendor.profile.update.password") }}" method="post" enctype="multipart/form-data" >
                                 @csrf
 
                                 <div class="row mb-3">

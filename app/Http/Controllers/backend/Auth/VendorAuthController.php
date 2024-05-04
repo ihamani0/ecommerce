@@ -8,7 +8,7 @@ use App\Notifications\Auth\EmailVerifyNotification;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
@@ -87,13 +87,19 @@ class VendorAuthController extends Controller
     //-----------------------------------------------------
     //Register
 
+    // view blade file register
     public function showRegister(){
         return view("backend.vendor.pages.register");
     }
 
+
+    //register user
     public function Register(Request $request){
 
+
+        DB::beginTransaction();
        try {
+        //validatuion
             $request->validate($this->rules());
 
 
@@ -105,8 +111,11 @@ class VendorAuthController extends Controller
                 Auth::login($user);
 
                 //notificate user to verify email before singind
+               
                 $user->notify(new EmailVerifyNotification());
+                
 
+                DB::commit();
 
                 return redirect()->route('verification.notice');
 
@@ -114,6 +123,7 @@ class VendorAuthController extends Controller
                 return back()->withInput()->withErrors(['Error' => "Please Try again"]);
             }
        } catch (\Exception $e) {
+                DB::rollBack();
                 return back()->withInput()->withErrors(["Error"=> $e->getMessage()]);
        }
 
@@ -123,12 +133,12 @@ class VendorAuthController extends Controller
 
 
     public function rules(){
-    return [
-        'firstname' => 'required|string',
-        'lastname' => 'required|string',
-        'email' => 'required|email|unique:users',
-        'password' => 'required|min:4|string|confirmed',
-    ];
+        return [
+            'firstname' => 'required|string',
+            'lastname' => 'required|string',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:4|string|confirmed',
+        ];
 
     }
 

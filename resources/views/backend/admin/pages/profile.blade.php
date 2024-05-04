@@ -31,7 +31,8 @@
                 <button type="button" class="btn btn-primary split-bg-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">	<span class="visually-hidden">Toggle Dropdown</span>
                 </button>
                 <div class="dropdown-menu dropdown-menu-right dropdown-menu-lg-end">
-                    <a class="dropdown-item" href="{{ route("admin.profile.ChangePassword.index") }} ">Change Password</a>
+                    <a class="dropdown-item" href="{{ route('admin.changePassword') }} " 
+                    >Change Password</a>
                 </div>
             </div>
         </div>

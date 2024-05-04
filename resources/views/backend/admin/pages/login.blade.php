@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section("title")
- Ecommerce | Login
+  Ecommerce | Login
 @endsection
 
 @push("style")

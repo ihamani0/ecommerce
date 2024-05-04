@@ -4,12 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\backend\Auth\VendorAuthController;
 use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Auth\VerifyEmailVendorController;
+use App\Http\Controllers\backend\Vendor\VendorProfileController;
 
-
-
-
-
-
+//in this middleware i give him role:vendor and path of his dashborad : vendor/dashboard
 Route::middleware('guest:vendor,vendor/dashboard')->group(function (){
 
 
@@ -55,16 +52,35 @@ Route::middleware('auth')->group(function (){
             ->middleware("VerifyEmail")
             ->name('vendor.logout'); // logout
 
-    //controller Vendor
+
+    /*
+        Session of the vendor 
+            ->Dashboard
+            
+    */     
     Route::controller(VendorController::class)->group(function (){
 
-        Route::get("/vendor/dashboard" , "index" )
-                ->middleware("VerifyEmail")
-                ->name('vendor.dashboard');
-
+            Route::get("/vendor/dashboard" , "index" )
+                    ->name('vendor.dashboard');
+            
     });
 
+            //->Profile Route
 
+    Route::controller(VendorProfileController::class)->group(function (){
+            
+            Route::get("/vendor/profile" , "index" )
+                ->name('vendor.profile');
+            
+            Route::post("/vendor/profile/store" , 'store')
+                ->name("vendor.profile.store");
+
+            Route::get('admin/profile/change-password','Password_change_index')
+            ->name('vendor.profile.ChangePassword.index');
+    
+            Route::post('admin/profile/change-password/update','Password_update')
+                ->name("vendor.profile.update.password");
+    });   
 
 
 

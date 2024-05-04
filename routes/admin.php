@@ -1,15 +1,14 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\AdminProfileController;
+use App\Http\Controllers\backend\Admin\AdminProfileController;
+use App\Http\Controllers\backend\Auth\AdminAuthController;
 use Illuminate\Support\Facades\Route;
-
 
 
 Route::middleware('guest.admin')->group(function (){
 
 
-    Route::controller(AdminController::class)->group(function (){
+    Route::controller(AdminAuthController::class)->group(function (){
 
 
 
@@ -39,11 +38,15 @@ Route::middleware('auth.admin')->group(function (){
         Route::post('admin/profile/store','store')
         ->name('admin.profile.store');
 
-        Route::get('admin/profile/change-password','Password_change_index')
-        ->name('admin.profile.ChangePassword.index');
 
-        Route::post('admin/profile/change-password/update','Password_update')
-            ->name("admin.profile.update.password");
+
+        Route::get('admin/change-password','changePassword')
+            ->name('admin.changePassword');
+
+        Route::post('admin/change-password/update','updatePassword')
+            ->name("admin.update.password");
+
+
 
 
     });
@@ -51,7 +54,7 @@ Route::middleware('auth.admin')->group(function (){
 
     //controller Admin
 
-    Route::controller(AdminController::class)->group(function (){
+    Route::controller(AdminAuthController::class)->group(function (){
 
         Route::get("admin/dasboard" ,'index')
             ->name('admin.dashboard'); //end dashoboard
