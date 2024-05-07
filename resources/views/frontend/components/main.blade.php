@@ -1,7 +1,8 @@
+@extends("frontend.layout.master")
 
 
-<main class="main">
 
+@section("main")
     <!--slider-->
         @include("frontend.components.MainColumn.home-slider")
     <!--End hero slider-->
@@ -54,4 +55,4 @@
         <!--End Vendor List -->
 
 
-</main>
+@endsection

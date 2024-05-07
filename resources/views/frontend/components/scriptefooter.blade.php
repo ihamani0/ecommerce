@@ -1,4 +1,6 @@
 
+{{--tailwindcss--}}
+{{--<script src="https://cdn.tailwindcss.com"></script>--}}
 
 <!-- Vendor JS-->
 <script src={{ asset("frontend/assets/js/vendor/modernizr-3.6.0.min.js") }}></script>

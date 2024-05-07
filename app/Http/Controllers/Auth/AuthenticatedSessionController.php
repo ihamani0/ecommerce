@@ -18,7 +18,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('auth.login');
+        return view('frontend.pages.auth.login');
     }
 
     /**
@@ -26,26 +26,14 @@ class AuthenticatedSessionController extends Controller
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+
         $request->authenticate();
 
         $request->session()->regenerate();
 
-        $role = $request->user()->role;
-
-
-        return redirect()->intended($this->redirectUrl($role));
+        return redirect()->intended('/dashboard');
     }
 
-    public function redirectUrl(String $role){
-        switch ($role) {
-            case 'user':
-                return '/dashboard';
-            case 'vendor':
-                return 'vendor/dashboard';
-            default:
-                return '404';
-        }
-    }
 
     /**
      * Destroy an authenticated session.
@@ -58,7 +46,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/');
+        return redirect('/login');
     }
 
 

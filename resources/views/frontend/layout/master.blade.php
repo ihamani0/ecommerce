@@ -26,11 +26,11 @@
 <!-- End Header  -->
 
 
-@include("frontend.components.main")
+<main class="main">
 
+@yield("main")
 
-
-
+</main>
 
 
 <!-- Preloader Start -->

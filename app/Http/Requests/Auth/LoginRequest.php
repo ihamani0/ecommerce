@@ -16,6 +16,7 @@ class LoginRequest extends FormRequest
      */
     public function authorize(): bool
     {
+
         return true;
     }
 
@@ -29,6 +30,7 @@ class LoginRequest extends FormRequest
         return [
             'email' => ['required', 'string', 'email'],
             'password' => ['required', 'string'],
+            'securityCodeInput' => ['required' , 'numeric' ,'confirmed']
         ];
     }
 
@@ -63,7 +65,7 @@ class LoginRequest extends FormRequest
             return;
         }
 
-        event(new Lockout($this));
+        //event(new Lockout($this));
 
         $seconds = RateLimiter::availableIn($this->throttleKey());
 

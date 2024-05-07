@@ -15,7 +15,7 @@ class RedirectIfAuthenticated
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle(Request $request, Closure $next , string $role , string $u , string ...$guards): Response
+    public function handle(Request $request, Closure $next , string ...$guards): Response
     {
         $guards = empty($guards) ? [null] : $guards;
 
@@ -26,9 +26,7 @@ class RedirectIfAuthenticated
                 //redirect to the correct dashboard depending on the role
                 //si if the role is of auth user is the same as the role in the middleware
                 //redirect to the correct dashboard depending on the role
-                (Auth::user()->role == $role) ? $Url=$u : $Url= RouteServiceProvider::HOME;
-
-                return redirect($Url);
+                return redirect("/");
             }
         }
 
