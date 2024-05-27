@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\Auth\EmailVerifyNotification;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -23,10 +24,6 @@ class VendorAuthController extends Controller
     }
 
     public function Login(Request $request){
-
-
-
-
 
         $this->authntication($request);
 
@@ -99,7 +96,7 @@ class VendorAuthController extends Controller
 
         DB::beginTransaction();
        try {
-        //validatuion
+            //validatuion
             $request->validate($this->rules());
 
 
@@ -111,13 +108,12 @@ class VendorAuthController extends Controller
                 Auth::login($user);
 
                 //notificate user to verify email before singind
-               
-                $user->notify(new EmailVerifyNotification());
-                
+
+                event(new Registered($user));
 
                 DB::commit();
 
-                return redirect()->route('verification.notice');
+                return redirect()->route('vendor.dashboard');
 
             }else{
                 return back()->withInput()->withErrors(['Error' => "Please Try again"]);

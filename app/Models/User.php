@@ -23,6 +23,10 @@ class User extends Authenticatable implements IMustVerifyEmail
     protected $fillable = [
         'name',
         'role',
+        'phone_number' ,
+        'street_address',
+        'city',
+        'postal_code',
         'email',
         'password',
     ];

@@ -21,6 +21,7 @@ class UserSeeder extends Seeder
                 "email"=> "vendor@vendor.com",
                 "password"=> Hash::make("1234"),
                 "role"=> "vendor",
+                "email_verified_at"=>now()
 
             ]);
             DB::table("users")->insert([
@@ -29,6 +30,7 @@ class UserSeeder extends Seeder
                 "email"=> "user@user.com",
                 "password"=> Hash::make("1234"),
                 "role"=> "user",
+                "email_verified_at"=>now()
             ]);
     }
 }

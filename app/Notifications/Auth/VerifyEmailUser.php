@@ -27,7 +27,7 @@ class VerifyEmailUser extends Notification
     }
 
     /**
-     * Get the notification's delivery channels.
+     * via: This method specifies the channels through which the notification will be delivered. In this case, it will be sent via email.
      *
      * @return array<int, string>
      */
@@ -43,7 +43,7 @@ class VerifyEmailUser extends Notification
     {
         $verificationUrl = $this->verificationUrl($notifiable);
 
-// Set the custom mail message callback
+        // Set the custom mail message callback
         return $this->buildMailMessage($verificationUrl);
     }
 
@@ -66,7 +66,7 @@ class VerifyEmailUser extends Notification
             ->subject(Lang::get('Verify Email Address'))
             ->view(
                 'frontend.pages.auth.template-email', // Blade view path
-                ['verificationUrl' => $url] // Data to pass to the view
+                    ['verificationUrl' => $url] // Data to pass to the view
             );
     }
 
@@ -82,7 +82,7 @@ class VerifyEmailUser extends Notification
             ]
         );
     }
-
+            //dds the user's ID to the URL. getKey() typically returns the primary key of the user, usually the id.
 
 
 }

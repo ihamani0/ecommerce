@@ -5,11 +5,11 @@ namespace App\Http\Controllers\backend\Admin;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Yoeunes\Toastr\Facades\Toastr;
 
 class AdminProfileController extends Controller
@@ -18,9 +18,15 @@ class AdminProfileController extends Controller
             public ProfileRepoInterface $adminRepo,
             public ProfileServiceInterface $adminService
         )
-        {}
+        {
+            /*Log::info('AdminProfileController instantiated with:', [
+                'adminRepo' => get_class($adminRepo),
+                'adminService' => get_class($adminService),
+            ]);*/
+        }
 
         public function index(){
+
             return view("backend.admin.pages.profile",["user" => $this->adminRepo->getUser()]);
         }
 
@@ -52,7 +58,7 @@ class AdminProfileController extends Controller
 
 
         public function changePassword(){
-            return view("backend.admin.pages.ChangePassword");
+            return view("backend.admin.pages.auth.ChangePassword");
         }
 
         public function updatePassword(Request $request){

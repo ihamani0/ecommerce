@@ -10,8 +10,7 @@ class VendorController extends Controller
 
     public function __construct()
     {
-        $this->middleware('VerifyEmail');
-    } 
+    }
     /**
      * Display a listing of the resource.
      */

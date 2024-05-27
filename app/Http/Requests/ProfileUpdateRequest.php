@@ -17,7 +17,12 @@ class ProfileUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string', 'max:255'],
+            'phone_number' => ['required', 'string', 'digits:10', 'numeric'],
+            'street_address' => ['required', 'string', 'max:255'],
+            'city' => ['required', 'string', 'max:255'],
+            'postal_code' => ['required', 'string', 'digits:5' , 'numeric'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', Rule::unique(User::class)->ignore($this->user()->id)],
+            /*->ignore($this->user()->id)] This mean record of user in database that handle this ID   */
         ];
     }
 }

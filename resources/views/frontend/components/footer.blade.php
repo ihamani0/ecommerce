@@ -101,12 +101,12 @@
                     <div class="widget-about font-md mb-md-3 mb-lg-3 mb-xl-0 wow animate__animated animate__fadeInUp" data-wow-delay="0">
                         <div class="logo mb-30">
                             <a href="index.html" class="mb-15"><img src="{{asset("frontend/assets/imgs/theme/logo.svg")}}" alt="logo" /></a>
-                            <p class="font-lg text-heading">Awesome grocery store website template</p>
+                            <p class="font-lg text-heading">Awesome grocery store </p>
                         </div>
                         <ul class="contact-infor">
-                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-location.svg")}}" alt="" /><strong>Address: </strong> <span>5171 W Campbell Ave undefined Kent, Utah 53127 United States</span></li>
-                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-contact.svg")}}" alt="" /><strong>Call Us:</strong><span>(+91) - 540-025-124553</span></li>
-                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-email-2.svg")}}" alt="" /><strong>Email:</strong><span>sale@Nest.com</span></li>
+                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-location.svg")}}" alt="" /><strong>Address: </strong> <span>Setif Setif -Algeria</span></li>
+                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-contact.svg")}}" alt="" /><strong>Call Us:</strong><span>(+213) - 540-025-12</span></li>
+                            <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-email-2.svg")}}" alt="" /><strong>Email:</strong><span>sale@example.com</span></li>
                             <li><img src="{{asset("frontend/assets/imgs/theme/icons/icon-clock.svg")}}" alt="" /><strong>Hours:</strong><span>10:00 - 18:00, Mon - Sat</span></li>
                         </ul>
                     </div>
@@ -123,6 +123,8 @@
                         <li><a href="#">Careers</a></li>
                     </ul>
                 </div>
+                @auth
+
                 <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".2s">
                     <h4 class="widget-title">Account</h4>
                     <ul class="footer-list mb-sm-5 mb-md-0">
@@ -135,16 +137,17 @@
                         <li><a href="#">Compare products</a></li>
                     </ul>
                 </div>
+                @endauth
                 <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".3s">
                     <h4 class="widget-title">Corporate</h4>
                     <ul class="footer-list mb-sm-5 mb-md-0">
-                        <li><a href="#">Become a Vendor</a></li>
-                        <li><a href="#">Affiliate Program</a></li>
+                        <li><a href="{{route(App\Constants\Constants::VENDOR_REGISTER)}}">Become a Vendor</a></li>
+                        {{--<li><a href="#">Affiliate Program</a></li>
                         <li><a href="#">Farm Business</a></li>
                         <li><a href="#">Farm Careers</a></li>
                         <li><a href="#">Our Suppliers</a></li>
                         <li><a href="#">Accessibility</a></li>
-                        <li><a href="#">Promotions</a></li>
+                        <li><a href="#">Promotions</a></li>--}}
                     </ul>
                 </div>
                 <div class="footer-link-widget col wow animate__animated animate__fadeInUp" data-wow-delay=".4s">
@@ -168,13 +171,13 @@
                 <div class="footer-bottom"></div>
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6">
-                <p class="font-sm mb-0">&copy; 2022, <strong class="text-brand">Nest</strong> - HTML Ecommerce Template <br />All rights reserved</p>
+                <p class="font-sm mb-0">&copy; 2024, <strong class="text-brand">Ecomme</strong> - Awesome grocery store <br />All rights reserved</p>
             </div>
             <div class="col-xl-4 col-lg-6 text-center d-none d-xl-block">
 
                 <div class="hotline d-lg-inline-flex">
                     <img src="{{asset("frontend/assets/imgs/theme/icons/phone-call.svg")}}" alt="hotline" />
-                    <p>1900 - 8888<span>24/7 Support Center</span></p>
+                    <p>19000 - 8888<span>24/7 Support Center</span></p>
                 </div>
             </div>
             <div class="col-xl-4 col-lg-6 col-md-6 text-end d-none d-md-block">
@@ -186,7 +189,7 @@
                     <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-pinterest-white.svg")}}" alt="" /></a>
                     <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-youtube-white.svg")}}" alt="" /></a>
                 </div>
-                <p class="font-sm">Up to 15% discount on your first subscribe</p>
+               {{-- <p class="font-sm">Up to 15% discount on your first subscribe</p>--}}
             </div>
         </div>
     </div>

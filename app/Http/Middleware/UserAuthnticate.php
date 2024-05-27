@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Constants\Constants;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class UserAuthnticate
                 return response()->json(['error' => 'Unauthorized'], 401);
             }
 
-            return redirect()->route('login');
+            return redirect()->route(Constants::USER_LOGIN);
         }
         return $next($request);
     }

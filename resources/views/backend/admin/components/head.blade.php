@@ -26,4 +26,8 @@
 <link rel="stylesheet" href="{{ asset("backend/assets/css/header-colors.css") }}" />
 
 
+<!--Datatable-->
+<link   rel="stylesheet" href="{{ asset("backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css") }}" />
+<!--Datatable-->
+
 @stack('style')

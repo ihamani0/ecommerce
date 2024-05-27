@@ -12,6 +12,11 @@ use Illuminate\View\View;
 
 class ConfirmablePasswordController extends Controller
 {
+
+    /*
+     *  this code ensures that the user's password is confirmed
+     *          before allowing access to certain protected routes or actions
+     *
     /**
      * Show the confirm password view.
      */

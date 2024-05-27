@@ -25,14 +25,7 @@
             <ul>
                 <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
                 </li>
-                <li> <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>
-                </li>
-                <li> <a href="dashboard-analytics.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
-                </li>
-                <li> <a href="dashboard-digital-marketing.html"><i class="bx bx-right-arrow-alt"></i>Digital Marketing</a>
-                </li>
-                <li> <a href="dashboard-human-resources.html"><i class="bx bx-right-arrow-alt"></i>Human Resources</a>
-                </li>
+
             </ul>
         </li>
 
@@ -40,7 +33,7 @@
 
 
         <li>
-            <a href="{{ route("admin.profile") }}">
+            <a href="{{ route(App\Constants\Constants::VENDOR_PROFILE_INDEX) }}">
                 <div class="parent-icon"><i class="bx bx-user-circle"></i>
                 </div>
                 <div class="menu-title">User Profile</div>

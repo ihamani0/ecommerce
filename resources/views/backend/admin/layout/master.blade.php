@@ -13,12 +13,13 @@
 
 	@include("backend.admin.components.head")
 
+
 	<title>
         @yield("title" , "E-comme")
     </title>
 </head>
 
-
+    <body>
     <div class="wrapper">
         {{-- <!--sidebar wrapper --> --}}
         @include("backend.admin.components.sidebar")
@@ -48,7 +49,7 @@
     </div>
 
         {{-- <!--start switcher--> --}}
-        @include("backend.admin.components.switcher")
+        {{--@include("backend.admin.components.switcher")--}}
         <!--end switcher-->
 
 

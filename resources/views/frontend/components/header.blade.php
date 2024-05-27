@@ -147,34 +147,48 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="header-action-icon-2">
-                                <a href="page-account.html">
-                                    <img class="svgInject" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-user.svg")}}" />
-                                </a>
-                                <a href="page-account.html"><span class="lable ml-0">Account</span></a>
-                                <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
-                                    <ul>
-                                        <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-user mr-10"></i>My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
-                                        </li>
-                                        <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
-                                        </li>
-                                        <li>
-                                            <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
-                                        </li>
-                                        <li>
-                                            <a href="page-login.html"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
-                                        </li>
-                                    </ul>
+                            <a href="{{route(Constants::USER_LOGIN)}}">
+                                <img class="svgInject mr-1" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-user.svg")}}" />
+                            </a>
+
+                            @auth
+                                {{--List account info--}}
+                                <div class="header-action-icon-2">
+                                    <a href="{{route(Constants::USER_ACCOUNT)}}"><span class="lable ml-0">Account</span></a>
+                                    <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
+                                        <ul>
+                                            <li>
+                                                <a href="{{route(Constants::USER_ACCOUNT)}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                            </li>
+                                            <li>
+                                                <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                            </li>
+                                            <li>
+                                                <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
+                                            </li>
+                                            <li>
+                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                            </li>
+                                            <li>
+                                                <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
+                                            </li>
+                                            <li>
+                                                <a href="{{route(Constants::USER_LOGOUT)}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 </div>
-                            </div>
+                            @else
+                              {{--  Redrect login Page--}}
+
+                                <a href="{{route(Constants::USER_LOGIN)}}"><span class="lable ml-5 font-weight-bold fs-6">Login</span></a>
+
+                                <b class="lable ml-10" >|</b>
+
+                                <a href="{{route(Constants::USER_Register)}}"><span class="lable ml-10 font-weight-bold fs-6">Register</span></a>
+                            @endauth
+
+
                         </div>
                     </div>
                 </div>

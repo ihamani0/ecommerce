@@ -31,10 +31,15 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth.user')->group(function () {
 
+
+
+
     //Verification Email
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
 
+   /* signed: Ensures that the URL must be signed, meaning it has not been tampered with.
+    throttle:6,1: Limits the rate at which this route can be accessed to prevent abuse. It allows up to 6 attempts every 1 minute.*/
     Route::get('verify-email/{id}/{hash}', VerifyEmailController::class)
         ->middleware(['signed', 'throttle:6,1'])
         ->name('verification.verify');
@@ -44,13 +49,14 @@ Route::middleware('auth.user')->group(function () {
         ->name('verification.send');
 
 
-    //Rest password
+    //Password Confirmation
     Route::get('confirm-password', [ConfirmablePasswordController::class, 'show'])
         ->name('password.confirm');
 
     Route::post('confirm-password', [ConfirmablePasswordController::class, 'store']);
 
-    Route::put('password', [PasswordController::class, 'update'])
+    //Update Password
+    Route::post('password', [PasswordController::class, 'update'])
             ->name('password.update');
 
 

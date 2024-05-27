@@ -20,7 +20,7 @@ class AdminAuthController extends Controller
 
     public function showLogin()
     {
-        return view("backend.admin.pages.login");
+        return view("backend.admin.pages.auth.login");
     }
 
     public function LoginStore(Request $request)

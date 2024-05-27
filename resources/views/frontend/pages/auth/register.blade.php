@@ -26,7 +26,7 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                    <a href="{{route(Constants::WELCOME)}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                     <span></span> Pages <span></span> My Account
                 </div>
             </div>
@@ -42,7 +42,7 @@
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
                                             <h1 class="mb-5">Create an Account</h1>
-                                            <p class="mb-30">Already have an account? <a href="{{route("login")}}">Login</a></p>
+                                            <p class="mb-30">Already have an account? <a href="{{route(Constants::USER_LOGIN)}}">Login</a></p>
                                         </div>
 
                                         @if ($errors->any())
@@ -56,7 +56,7 @@
                                         @endif
 
                                         {{--Start form--}}
-                                        <form method="post" action="{{route("register.store")}}">
+                                        <form method="post" action="{{route(Constants::USER_Register_STORE)}}">
                                             @csrf
 
                                             <div class="row">
@@ -122,7 +122,7 @@
                                 </div>
                             </div>
                             <div class="col-lg-6 pr-30 d-none d-lg-block">
-                                <img class="border-radius-15" src="{{asset("frontend/assets/imgs/page/login-1.jpg")}}" alt="" />
+                                <img class="border-radius-15" src="{{asset("frontend/assets/imgs/page/login-1.png")}}" alt="" />
                             </div>
                             {{--oauth--}}
                             {{--<div class="col-lg-6 pr-30 d-none d-lg-block">

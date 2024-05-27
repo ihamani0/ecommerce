@@ -31,6 +31,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        toastr()->success('Hello Dear '.$request->user()->name , "Welcome Back");
         return redirect()->intended('/dashboard');
     }
 
@@ -46,6 +47,7 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerateToken();
 
+        toastr()->success("You have Log out Successfully");
         return redirect('/login');
     }
 
