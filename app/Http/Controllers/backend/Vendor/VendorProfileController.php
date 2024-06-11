@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\backend\Vendor;
 
 
+use App\Constants\Constants;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
 use App\Http\Controllers\Controller;
@@ -31,13 +32,13 @@ class VendorProfileController extends Controller
 
     public function store(Request $request)
     {
+
         try {
             DB::beginTransaction();
 
             $user = $this->vendorRepo->getUser();
 
             $cred = ["email" => $user->email, "password" => $request->password];
-
             if (! $this->vendorService->attempt($cred) ) {
 
                 toastr()->error('Oops! Something went wrong!', 'Oops!');
@@ -50,7 +51,7 @@ class VendorProfileController extends Controller
             DB::commit();
 
             toastr()->success('Profile Update Successfully', 'Success');
-            return redirect()->route("vendor.profile");
+            return redirect()->route(Constants::VENDOR_PROFILE_INDEX);
         } catch (Exception $e) {
             DB::rollBack();
             toastr()->error('Oops! Something went wrong!', 'Oops!');

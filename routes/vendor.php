@@ -7,7 +7,10 @@ use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Auth\VerifyEmailVendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
 
-//in this middleware i give him role:vendor and path of his dashborad : vendor/dashboard
+
+/*---------------------------------------------------------------------------*/
+/*---------------------- Vendor Auth Route -------------------------------------*/
+/*---------------------------------------------------------------------------*/
 Route::middleware('guest')->group(function (){
 
 
@@ -28,33 +31,34 @@ Route::middleware('guest')->group(function (){
 
             Route::post("/register-vendor/store" , "Register")
                 ->name(Constants::VENDOR_REGISTER_STORE);
-
-
-
-
         });
 
 
 });//end guest middleware
 
-
+/*---------------------------------------------------------------------------*/
+/*---------------------- Vendor Route -------------------------------------*/
+/*---------------------------------------------------------------------------*/
 Route::middleware(['auth' ,'verified'])->group(function (){
 
-
+    //Logout
     Route::post("vendor/logout" ,[VendorAuthController::class,'logout'])
             ->middleware("VerifyEmail")
             ->name('vendor.logout'); // logout
 
 
+
     Route::controller(VendorController::class)->group(function (){
 
-            Route::get("/vendor/dashboard" , "index" )
-                    ->name('vendor.dashboard');
-        //App\Constants\Constants::VENDOR_DASHBOARD
+            Route::get("/vendor-dashboard" , "index" )
+                    ->name(App\Constants\Constants::VENDOR_DASHBOARD);
+
     });
 
-    //->Profile Route
 
+    /*---------------------------------------------------------------------------*/
+    /*---------------------- Profile Route -------------------------------------*/
+    /*---------------------------------------------------------------------------*/
     Route::controller(VendorProfileController::class)->group(function (){
 
             Route::get("/vendor/profile" , "index" )
@@ -70,6 +74,48 @@ Route::middleware(['auth' ,'verified'])->group(function (){
                 ->name("vendor.profile.update.password");
     });
 
+
+        Route::controller(\App\Http\Controllers\backend\Vendor\Products\ProductsController::class)->group(function (){
+            Route::prefix("vendor")->group(function (){
+                Route::get("/Products-List" , "index")
+                    ->name(Constants::Vendor_Products_INDEX);
+
+                Route::get("Products-Add" , "create")
+                    ->name(Constants::Vendor_Products_ADD);
+
+                Route::post("Products-Store" , "store")
+                    ->name(Constants::Vendor_Products_STORE);
+
+                Route::get("Products-Edit/{uuid}" , "edit")
+                    ->name(Constants::Vendor_Products_EDIT);
+
+                Route::post("Products-update" , "update")
+                    ->name(Constants::Vendor_Products_UPDATE);
+
+                Route::get("Products-Destroy/{id}" , "destroy")
+                    ->name(Constants::Vendor_Products_DESTORY);
+
+                //This rout for update Image in Products
+                Route::post("Products-update-img" , "updateImg")
+                    ->name(Constants::Vendor_Products_UPDATE_Img);
+                //This rout for update Multiples Image in Products
+                Route::post("Products-update-multi-img" , "updateMultiImg")
+                    ->name(Constants::Vendor_Products_UPDATE_MultiImg);
+                //This rout for update Image in Products
+                Route::post("Products-add-multi-img" , "AddMultiImg")
+                    ->name(Constants::Vendor_Products_Add_MultiImg);
+                //This Route  for Destroy  Image  From multiple Images Table
+                Route::get("Products-Destroy-Multi-Images/{id}/{idProduct}" , "destroyMultiImage")
+                    ->name(Constants::Vendor_Products_DESTORY_MultiImg);
+
+                //Status of products Route
+                Route::get("/admin/Products-status/{id}" , "statusProduct")
+                    ->name(Constants::Vendor_Products_Status);
+
+
+            }); // end prefix
+            Route::get("/api/vendor/subcategory/{id}" , "getSubCategories");
+        });//end product controller
 
 
 });//end middleware auth and verified

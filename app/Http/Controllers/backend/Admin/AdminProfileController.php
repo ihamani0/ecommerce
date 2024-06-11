@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
-use Yoeunes\Toastr\Facades\Toastr;
+
 
 class AdminProfileController extends Controller
 {
@@ -18,12 +18,7 @@ class AdminProfileController extends Controller
             public ProfileRepoInterface $adminRepo,
             public ProfileServiceInterface $adminService
         )
-        {
-            /*Log::info('AdminProfileController instantiated with:', [
-                'adminRepo' => get_class($adminRepo),
-                'adminService' => get_class($adminService),
-            ]);*/
-        }
+        {}
 
         public function index(){
 

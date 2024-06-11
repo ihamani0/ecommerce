@@ -7,7 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="keywords" content="HTML5 Template" />
-    <meta name="description" content="Ecoomerce bu hamani issam" />
+    <meta name="description" content="Ecoomerce by hamani issam" />
     <meta name="author" content="issamhamani" />
 
 
@@ -18,7 +18,7 @@
     </title>
 </head>
 
-
+<body>
     <div class="wrapper">
         {{-- <!--sidebar wrapper --> --}}
         @include("backend.vendor.components.sidebar")
@@ -47,13 +47,10 @@
 
     </div>
 
-        {{-- <!--start switcher--> --}}
-        @include("backend.vendor.components.switcher")
-        <!--end switcher-->
 
 
         @include("backend.vendor.components.scriptefooter")
 
     </body>
 
-    </html>
+</html>

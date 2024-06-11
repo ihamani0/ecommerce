@@ -16,7 +16,7 @@ class VendorController extends Controller
      */
     public function index()
     {
-        return view("backend.vendor.pages.dashboard");
+        return view("backend.vendor.pages.dashboard" );
     }
 
     /**

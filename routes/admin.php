@@ -11,9 +11,6 @@ Route::middleware('guest.admin')->group(function (){
 
     Route::controller(AdminAuthController::class)->group(function (){
 
-
-
-
         Route::get("admin/login" ,'showLogin')
             ->name('admin.login');
 
@@ -57,11 +54,8 @@ Route::middleware('auth.admin')->group(function (){
 
     Route::controller(AdminAuthController::class)->group(function (){
 
-        Route::get("admin/dasboard" ,'index')
-            ->name(Constants::Admin_DASHBOARD); //end dashoboard
-
-
-
+        Route::get("admin/dashboard" ,'index')
+            ->name(Constants::Admin_DASHBOARD); //end dashboard
 
         Route::post("admin/logout" ,'logout')
             ->name('admin.logout'); // logout
@@ -142,7 +136,7 @@ Route::middleware('auth.admin')->group(function (){
 
     });//end Controller Category
 
-
+    //Vendors Status Route
     Route::controller(\App\Http\Controllers\backend\Admin\Vendor\VendorStatus::class)->group(function (){
 
         Route::get("/admin/vendor-status-active" , "index_active")
@@ -151,10 +145,65 @@ Route::middleware('auth.admin')->group(function (){
         Route::get("/admin/vendor-status-inactive" , "index_in_active")
                 ->name(Constants::Admin_Vendor_StatusInActive_INDEX);
 
+        Route::get("/admin/vendor-status/active/{id}" , "active")
+            ->name(Constants::Admin_Active_Vendor);
+
+        Route::get("/admin/vendor-status/inactive/{id}" , "inactive")
+            ->name(Constants::Admin_InActive_Vendor);
+
+        //api endpoint using to fetch Vendor Details from DB
         Route::get("/admin/vendor-status/details/{id}" , "getDetails");
 
 
     });//end controller vendor status
 
 
+    Route::controller(\App\Http\Controllers\backend\Admin\Products\ProductsController::class)->group(function (){
+            Route::get("/admin/Products-List" , "index")
+                ->name(Constants::Admin_Products_INDEX);
+
+            Route::get("/admin/Products-Add" , "create")
+                ->name(Constants::Admin_Products_ADD);
+
+            Route::post("/admin/Products-Store" , "store")
+                ->name(Constants::Admin_Products_STORE);
+
+            Route::get("/admin/Products-Edit/{uuid}" , "edit")
+                ->name(Constants::Admin_Products_EDIT);
+
+            Route::post("/admin/Products-update" , "update")
+                ->name(Constants::Admin_Products_UPDATE);
+
+            Route::get("/admin/Products-Destroy/{id}" , "destroy")
+                ->name(Constants::Admin_Products_DESTORY);
+
+            //This rout for update Image in Products
+            Route::post("/admin/Products-update-img" , "updateImg")
+                ->name(Constants::Admin_Products_UPDATE_Img);
+            //This rout for update Multiples Image in Products
+            Route::post("/admin/Products-update-multi-img" , "updateMultiImg")
+                        ->name(Constants::Admin_Products_UPDATE_MultiImg);
+            //This rout for update Image in Products
+            Route::post("/admin/Products-add-multi-img" , "AddMultiImg")
+                ->name(Constants::Admin_Products_Add_MultiImg);
+            //This Route  for Destroy  Image  From multiple Images Table
+            Route::get("/admin/Products-Destroy-Multi-Images/{id}/{idProduct}" , "destroyMultiImage")
+                ->name(Constants::Admin_Products_DESTORY_MultiImg);
+
+            //Status of products Route
+            Route::get("/admin/Products-status/{id}" , "statusProduct")
+                        ->name(Constants::Admin_Products_Status);
+
+            Route::get("/api/admin/subcategory/{id}" , "getSubCategories");
+    });//end products  controller
+
+
+
+    //Slide Panel
+    Route::controller(\App\Http\Controllers\backend\Admin\Slide\SlideController::class)->group(function (){
+
+    });//end slide Controller
+    //banner Panel
+    Route::controller(\App\Http\Controllers\backend\Admin\Banner\BannerController::class)->group(function (){});//end BannerController
 });//end auth admin middleware
+

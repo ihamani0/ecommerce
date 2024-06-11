@@ -59,7 +59,7 @@
             </ul>
         </li>
 
-        {{--Category --}}
+        {{--SubCategory --}}
         <li>
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class='bx bx-duplicate' ></i>
@@ -74,9 +74,27 @@
             </ul>
         </li>
 
+        {{--Products Managmnet--}}
+
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bxs-user-pin'></i>
+                <div class="parent-icon"><i class='bx bx-store-alt'></i>
+                </div>
+                <div class="menu-title">Products</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Products_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>List Products</a>
+                </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Products_ADD)}}"><i class="bx bx-right-arrow-alt"></i>Add Product</a>
+                </li>
+            </ul>
+        </li>
+
+
+        {{--Vendors Status--}}
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-user-pin'></i>
                 </div>
                 <div class="menu-title">Vendors</div>
             </a>
@@ -90,29 +108,43 @@
 
 
 
+        <li class="menu-label">Landing Page</li>
 
-       {{-- <li>
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+        {{--Slide Panel--}}
+        <li>
+            <a class="has-arrow" href="javascript:;" >
+                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-sm"></i>
                 </div>
-                <div class="menu-title">Dashboard</div>
+                <div class="menu-title">Slide Panel</div>
             </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
+                <li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>Slide List</a>
                 </li>
-                <li> <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>eCommerce</a>
-                </li>
-                <li> <a href="dashboard-analytics.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
-                </li>
-                <li> <a href="dashboard-digital-marketing.html"><i class="bx bx-right-arrow-alt"></i>Digital Marketing</a>
-                </li>
-                <li> <a href="dashboard-human-resources.html"><i class="bx bx-right-arrow-alt"></i>Human Resources</a>
+                <li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Add Slide</a>
                 </li>
             </ul>
-        </li>--}}
+        </li>
+
+        {{--Banner Panel--}}
+        <li>
+            <a class="has-arrow" href="javascript:;" >
+                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-sm"></i>
+                </div>
+                <div class="menu-title">Banner Panel</div>
+            </a>
+            <ul>
+                <li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>Banner List</a>
+                </li>
+                <li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
+                </li>
+            </ul>
+        </li>
 
 
 
+
+
+        <hr>
         <li>
             <a href="{{ route("admin.profile") }}">
                 <div class="parent-icon"><i class="bx bx-user-circle"></i>

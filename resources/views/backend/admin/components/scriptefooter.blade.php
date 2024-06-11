@@ -23,7 +23,9 @@
 {{--<script src="{{ asset("backend/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js") }}"></script>--}}
 {{--Image upload File--}}
 
-
+{{--Tag input --}}
+<script src="{{asset("backend/assets/plugins/input-tags/js/tagsinput.js")}}"></script>
+{{---- Tag input ----}}
 <!--Datatable-->
 <script src="{{ asset("backend/assets/plugins/datatable/js/jquery.dataTables.min.js") }}"></script>
 <script>
@@ -39,6 +41,7 @@
           $(".knob").knob();
       });
   </script>
+
   <script src="{{ asset("backend/assets/js/index.js") }}"></script>
 <!--app JS-->
 <script src="{{ asset("backend/assets/js/app.js") }}"></script>

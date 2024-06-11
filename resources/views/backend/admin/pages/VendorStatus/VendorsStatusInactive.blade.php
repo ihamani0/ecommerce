@@ -48,9 +48,9 @@
                                 <td>{{ $item->created_at?->format("Y-m-d") }}</td>
                                 <td><span class="badge bg-danger">inactive</span></td>
                                 <td>
-                                    <a href=""   data-bs-toggle="modal" data-bs-target="#details"   onclick="fetchVendorDetails({{ $item->id }})"  class="btn btn-outline-primary">info
+                                    <a     data-bs-toggle="modal" data-bs-target="#details"   onclick="fetchVendorDetails({{ $item->id }})"  class="btn btn-outline-primary mr-5">info
                                     </a>
-                                    <a href=""  type="button" class="btn btn-outline-success" id="disablebtn">active
+                                    <a href="{{route(App\Constants\Constants::Admin_Active_Vendor,$item->id)}}"  type="button" class="btn btn-outline-success" id="Enablebtn">active
                                     </a>
                                 </td>
 
@@ -84,24 +84,24 @@
 @push('script')
     <script>
         $(function(){
-            $(document).on('click','#disableBtn',function(e){
+            $(document).on('click','#Enablebtn',function(e){
                 e.preventDefault();
                 var link = $(this).attr("href");
 
                 Swal.fire({
                     title: 'Are you sure?',
-                    text: "Disable This Vendor?",
+                    text: "Enable This Vendor?",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',
                     cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, Disable it!'
+                    confirmButtonText: 'Yes, active it!'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         window.location.href = link
                         Swal.fire(
-                            'Disable!',
-                            'Your Vendor has been Disable it.',
+                            'Enable!',
+                            'Your Vendor has been Enaable it.',
                             'success'
                         )
                     }
@@ -117,6 +117,7 @@
                     url: '/admin/vendor-status/details/' + vendorId,
                     method: 'GET',
                     success: function(vendor) {
+                        console.log(vendor)
 
                         var modalId = '#details' + vendorId;
                         var modalBody = $('#details .modal-body table tbody');
@@ -152,6 +153,29 @@
                         cityRow.append("<th>City: </th>")
                         cityRow.append("<td>"+ (vendor.city || 'N/A') +"</td>")
                         modalBody.append(cityRow)
+
+
+                        const formattedDate = new Date(vendor.created_at).toISOString().slice(0, 10);
+                        var DataCreateRow = $('<tr></tr>');
+                        DataCreateRow.append("<th>Create At: </th>")
+                        DataCreateRow.append("<td>"+ formattedDate +"</td>")
+                        modalBody.append(DataCreateRow)
+
+                        if(vendor.photo_profile) {
+                            var url = "{{url('upload/vendor.photo')}}/";
+                            var src = url+vendor.photo_profile;
+                            console.log(src);
+                        } else {
+                            var varDefault = "{{url('upload/user.png')}}";
+                            var src = varDefault;
+                            console.log(src);
+                        }
+
+                        var photoRow = $('<tr></tr>');
+                        photoRow.append("<th>Photo Profile: </th>");
+                        photoRow.append(`<td><img src='${src}' alt="avatar" style="width:100px;height:100px" class="rounded-circle p-1 bg-dark"></td>`);
+
+                        modalBody.append(photoRow)
 
 
                     },

@@ -25,4 +25,22 @@ class VendorRepo implements VendorInterface {
         return User::where('role' , "vendor")
                         ->where("id" , $id)->first();
     }
+
+    public function ActiveVendor($id)
+    {
+        return User::where('role' , "vendor")
+            ->where("id" , $id)
+                ->update([
+                    "status" => 1
+                ]);
+    }
+
+    public function InActiveVendor($id)
+    {
+        return User::where('role' , "vendor")
+                ->where("id" , $id)
+                    ->update([
+                        "status" => 0
+                    ]);
+    }
 }

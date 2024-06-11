@@ -63,11 +63,26 @@ class  Constants {
     public const Admin_SubCategory_UPDATE = "admin.subcategory.update";
     public const Admin_SubCategory_DESTORY = "admin.subcategory.destroy";
     /*****************************************************/
+    /*****************Products Route****************/
+    /*********************************************/
+    public const Admin_Products_INDEX = "admin.products.index";
+    public const Admin_Products_ADD = "admin.products.add";
+    public const Admin_Products_EDIT = "admin.products.edit";
+    public const Admin_Products_STORE = "admin.products.store";
+    public const Admin_Products_UPDATE = "admin.products.update";
+    public const Admin_Products_DESTORY = "admin.products.destroy";
+    public const Admin_Products_UPDATE_Img = "admin.products.update.img";
+    public const Admin_Products_UPDATE_MultiImg = "admin.products.update.MultiImg";
+    public const Admin_Products_Add_MultiImg = "admin.products.add.MultiImg";
+    public const Admin_Products_DESTORY_MultiImg = "admin.products.destroy.MultiImg";
+    public const  Admin_Products_Status  = "admin.products.status";
+    /*****************************************************/
     /*****************Vendor Status Route****************/
     /*********************************************/
     public const Admin_Vendor_StatusActive_INDEX = "admin.vendor.status.active.index";
     public const Admin_Vendor_StatusInActive_INDEX = "admin.vendor.status.inactive.index";
-
+    public const Admin_Active_Vendor= "admin.status.vendor.active";
+    public const Admin_InActive_Vendor = "admin.status.vendor.Inactive";
     /*****************************************************/
 
 
@@ -79,12 +94,11 @@ class  Constants {
     /*********************************************/
     /********** Route Vendors **********************************************************************************************************/
     /*********************************************/
-
     public const VENDOR_DASHBOARD = 'vendor.dashboard';
-
+    /*********************************************/
     /****************** Profile ***************/
     public const VENDOR_PROFILE_INDEX = 'vendor.profile.index';
-
+    /*********************************************/
     /****************** Auth ***************/
     //Register
     public const VENDOR_REGISTER = 'vendor.register';
@@ -93,6 +107,21 @@ class  Constants {
     //login
     public const VENDOR_LOGIN = 'vendor.login';
     public const VENDOR_LOGIN_STORE = "vendor.login.store";
+
+    /*****************************************************/
+    /*****************Products Route****************/
+    /*********************************************/
+    public const Vendor_Products_INDEX = "vendor.products.index";
+    public const Vendor_Products_ADD = "vendor.products.add";
+    public const Vendor_Products_EDIT = "vendor.products.edit";
+    public const Vendor_Products_STORE = "vendor.products.store";
+    public const Vendor_Products_UPDATE = "vendor.products.update";
+    public const Vendor_Products_DESTORY = "vendor.products.destroy";
+    public const Vendor_Products_UPDATE_Img = "vendor.products.update.img";
+    public const Vendor_Products_UPDATE_MultiImg = "vendor.products.update.MultiImg";
+    public const Vendor_Products_Add_MultiImg = "vendor.products.add.MultiImg";
+    public const Vendor_Products_DESTORY_MultiImg = "vendor.products.destroy.MultiImg";
+    public const Vendor_Products_Status  = "vendor.products.status";
 
 
 

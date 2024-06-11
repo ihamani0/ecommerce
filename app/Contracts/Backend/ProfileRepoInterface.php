@@ -11,7 +11,6 @@ interface ProfileRepoInterface {
 
     public function getUser();
 
-
     public function UpdatePassword(Request $request);
 
 }

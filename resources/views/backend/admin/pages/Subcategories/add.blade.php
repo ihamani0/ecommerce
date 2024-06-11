@@ -63,7 +63,7 @@
 
                                             <div class="mb-5">
                                                 <select  name="category_id" class="form-select mb-3" aria-label="Default select example">
-                                                    <option selected="">Open this select menu</option>
+                                                    <option selected disabled>Open this select menu</option>
                                                     @foreach($categories as $item)
                                                         <option value="{{$item->id}}">{{$item->category_name}}</option>
                                                     @endforeach

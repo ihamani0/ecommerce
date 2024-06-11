@@ -18,7 +18,6 @@ class Admin_RedirectIfAuthenticated
     {
         if(Auth::guard("admin")->check()) {
 
-            
             if ($request->expectsJson()) {
                 return response()->json(['error' => 'Forbidden'], 403);
             }

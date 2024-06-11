@@ -44,13 +44,13 @@
                             <tr>
 
                                 <td> {{ $key+1 }} </td>
-                                <td>{{ $item->username }}</td>
+                                <td>{{ ($item->username)?? "N/A" }}</td>
                                 <td>{{ $item->created_at?->format("Y-m-d") }}</td>
                                 <td><span class="badge bg-success">active</span></td>
                                 <td>
-                                    <a href=""   class="btn btn-outline-primary">info
+                                    <a href=""   data-bs-toggle="modal" data-bs-target="#details"   onclick="fetchVendorDetails({{ $item->id }})"  class="btn btn-outline-primary mr-5">info
                                     </a>
-                                    <a href=""  type="button" class="btn btn-outline-danger" id="disablebtn">inactive
+                                    <a href="{{route(App\Constants\Constants::Admin_InActive_Vendor, $item->id)}}"  type="button" class="btn btn-outline-danger" id="Disablebtn">inactive
                                     </a>
                                 </td>
 
@@ -74,12 +74,13 @@
 
     </div>
 </div>
+@include('backend.admin.pages.VendorStatus.vendor-details')
 @endsection
 
 @push('script')
     <script>
         $(function(){
-            $(document).on('click','#disableBtn',function(e){
+            $(document).on('click','#Disablebtn',function(e){
                 e.preventDefault();
                 var link = $(this).attr("href");
 
@@ -106,6 +107,90 @@
             });
 
         });
+    </script>
+
+    <script>
+        function fetchVendorDetails(vendorId) {
+            $(document).ready(function (){
+                $.ajax({
+                    url: '/admin/vendor-status/details/' + vendorId,
+                    method: 'GET',
+                    success: function(vendor) {
+                        console.log(vendor)
+
+                        var modalId = '#details' + vendorId;
+                        var modalBody = $('#details .modal-body table tbody');
+
+                        var nameShopRow = $('<tr></tr>');
+                        nameShopRow.append("<th>Shop Name: </th>")
+                        nameShopRow.append("<td>"+ (vendor.username  || 'N/A' )+"</td>")
+                        modalBody.append(nameShopRow)
+
+                        var nameRow = $('<tr></tr>');
+                        nameRow.append("<th>Name : </th>")
+                        nameRow.append("<td>"+ vendor.name +"</td>")
+                        modalBody.append(nameRow)
+
+
+                        var emailRow = $('<tr></tr>');
+                        emailRow.append("<th>Email : </th>")
+                        emailRow.append("<td>"+ vendor.email +"</td>")
+                        modalBody.append(emailRow)
+
+                        var phoneRow = $('<tr></tr>');
+                        phoneRow.append("<th>Phone Number: </th>")
+                        phoneRow.append("<td>"+ (vendor.phone_number || 'N/A') +"</td>")
+                        modalBody.append(phoneRow)
+
+                        var streetRow = $('<tr></tr>');
+                        streetRow.append("<th>Street Address: </th>")
+                        streetRow.append("<td>"+ (vendor.street_address || 'N/A') +"</td>")
+                        modalBody.append(streetRow)
+
+
+                        var cityRow = $('<tr></tr>');
+                        cityRow.append("<th>City: </th>")
+                        cityRow.append("<td>"+ (vendor.city || 'N/A') +"</td>")
+                        modalBody.append(cityRow)
+
+                        const formattedDate = new Date(vendor.created_at).toISOString().slice(0, 10);
+                        var DataCreateRow = $('<tr></tr>');
+                        DataCreateRow.append("<th>Create At: </th>")
+                        DataCreateRow.append("<td>"+ formattedDate +"</td>")
+                        modalBody.append(DataCreateRow)
+
+
+                        if(vendor.photo_profile) {
+                            var url = "{{url('upload/vendor.photo')}}/";
+                            var src = url + vendor.photo_profile;
+                            console.log(src);
+                        } else {
+                            var varDefault = "{{url('upload/user.png')}}";
+                            var src = varDefault;
+                            console.log(src);
+                        }
+
+                        var photoRow = $('<tr></tr>');
+                        photoRow.append("<th>Photo Profile: </th>");
+                        photoRow.append(`<td><img src='${src}' alt="avatar" style="width:100px;height:100px" class="rounded-circle p-1 bg-dark"></td>`);
+
+                        modalBody.append(photoRow)
+
+
+                    },
+                    error: function(xhr, status, error) {
+                        console.error('Error fetching vendor details:', error);
+                    }
+                });
+            });
+        }
+
+        // Add this event listener
+        $('#details').on('hidden.bs.modal', function () {
+            var modalBody = $(this).find('.modal-body table tbody');
+            modalBody.empty();
+        });
+
     </script>
 @endpush
 

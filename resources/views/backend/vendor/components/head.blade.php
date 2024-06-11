@@ -25,5 +25,11 @@
 <link rel="stylesheet" href="{{ asset("backend/assets/css/semi-dark.css") }}" />
 <link rel="stylesheet" href="{{ asset("backend/assets/css/header-colors.css") }}" />
 
+<!--Datatable-->
+<link   rel="stylesheet" href="{{ asset("backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css") }}" />
+<!--Datatable-->
 
+
+<!--Font awesome-->
+<link   rel="stylesheet" href="{{ asset("backend/assets/font-awosome/css/all.css") }}" />
 @stack('style')

@@ -7,7 +7,7 @@
 <link href="{{ asset("backend/assets/plugins/simplebar/css/simplebar.css") }}" rel="stylesheet" />
 <link href="{{ asset("backend/assets/plugins/perfect-scrollbar/css/perfect-scrollbar.css") }}" rel="stylesheet" />
 <link href="{{ asset("backend/assets/plugins/metismenu/css/metisMenu.min.css") }}" rel="stylesheet" />
-
+<link href="{{asset("backend/assets/plugins/input-tags/css/tagsinput.css")}}" rel="stylesheet" />
 
 <!-- loader-->
 <link href="{{ asset("backend/assets/css/pace.min.css") }}" rel="stylesheet" />
@@ -29,5 +29,8 @@
 <!--Datatable-->
 <link   rel="stylesheet" href="{{ asset("backend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css") }}" />
 <!--Datatable-->
+
+<!--Font awesome-->
+<link   rel="stylesheet" href="{{ asset("backend/assets/font-awosome/css/all.css") }}" />
 
 @stack('style')
