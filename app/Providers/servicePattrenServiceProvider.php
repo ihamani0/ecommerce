@@ -9,12 +9,14 @@ use App\Contracts\Backend\ProfileServiceInterface;
 
 use App\Contracts\Backend\VendorInterface;
 use  App\Http\Controllers\backend\Admin\AdminProfileController;
+use App\Http\Controllers\backend\Admin\Banner\BannerController;
 use App\Http\Controllers\backend\Admin\Brand\BrandController;
 use App\Http\Controllers\backend\Admin\Category\CategoryController;
 use App\Http\Controllers\backend\Admin\Category\SubcategoryController;
 /*use App\Http\Controllers\backend\Admin\Products\ProductsController;*/
 
 use App\Http\Controllers\backend\Admin\Products\ProductsController as adminProductsController;
+use App\Http\Controllers\backend\Admin\Slide\SlideController;
 use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorProductsController;
 
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
@@ -22,9 +24,11 @@ use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
 use App\Repositories\AdminProfileRepo;
 
+use App\Repositories\Backend\BannerRepo;
 use App\Repositories\Backend\BrandRepo;
 use App\Repositories\Backend\CategoryRepo;
 use App\Repositories\Backend\ProductRepo;
+use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
 use App\Repositories\Backend\VendorRepo;
 use App\Repositories\VendorProfileRepo;
@@ -42,7 +46,17 @@ class servicePattrenServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        //--------------------------------------------------------------------------------
+        //--------------------for Banner--------------------
+        $this->app->when(SlideController::class)
+                    ->needs(CrudInterface::class)
+                        ->give(SlideRepo::class);
+        //--------------------------------------------------------------------------------
+        //--------------------for Slide--------------------
+        $this->app->when(BannerController::class)
+                    ->needs(CrudInterface::class)
+                        ->give(BannerRepo::class);
+        //--------------------------------------------------------------------------------
         //--------------------for Product--------------------
         $this->app->when(adminProductsController::class)
                         ->needs(ProductInterface::class)

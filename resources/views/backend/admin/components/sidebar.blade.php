@@ -118,9 +118,9 @@
                 <div class="menu-title">Slide Panel</div>
             </a>
             <ul>
-                <li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>Slide List</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Slide_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Slide List</a>
                 </li>
-                <li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Add Slide</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Slide_ADD)}}"><i class="bx bx-right-arrow-alt"></i>Add Slide</a>
                 </li>
             </ul>
         </li>
@@ -133,9 +133,9 @@
                 <div class="menu-title">Banner Panel</div>
             </a>
             <ul>
-                <li> <a href="charts-apex-chart.html"><i class="bx bx-right-arrow-alt"></i>Banner List</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Banner_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Banner List</a>
                 </li>
-                <li> <a href="charts-chartjs.html"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Banner_ADD)}}"><i class="bx bx-right-arrow-alt"></i>Add Banner</a>
                 </li>
             </ul>
         </li>

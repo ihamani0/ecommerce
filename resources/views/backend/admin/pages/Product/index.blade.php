@@ -75,7 +75,7 @@
                             <td>
                                 <a  href="{{route(\App\Constants\Constants::Admin_Products_EDIT,$item->products_uuid)}}" class="btn btn-outline-secondary" id="edit">
                                     <i class="fa-duotone fa-pen-nib"></i></a>
-                                <a href="{{route(\App\Constants\Constants::Admin_Products_INDEX)}}"  type="button" class="btn btn-outline-info" title="details" >
+                                <a href=""  type="button" class="btn btn-outline-info" title="details" >
                                     <i class="fa-duotone fa-eye"></i></a>
                                 <a href="{{route(\App\Constants\Constants::Admin_Products_DESTORY,$item->products_uuid)}}"  type="button" class="btn btn-outline-danger" id="deleteBtn">
                                     <i class="fa-duotone fa-trash"></i></a>

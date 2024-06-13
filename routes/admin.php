@@ -201,9 +201,47 @@ Route::middleware('auth.admin')->group(function (){
 
     //Slide Panel
     Route::controller(\App\Http\Controllers\backend\Admin\Slide\SlideController::class)->group(function (){
+        Route::prefix("admin")->group(function(){
+            Route::get("/Slide-List" , "index")
+                ->name(Constants::Admin_Slide_INDEX);
 
+            Route::get("/Slide-Add" , "create")
+                ->name(Constants::Admin_Slide_ADD);
+
+            Route::post("/Slide-Store" , "store")
+                ->name(Constants::Admin_Slide_STORE);
+
+            Route::get("/Slide-Edit/{uuid}" , "edit")
+                ->name(Constants::Admin_Slide_EDIT);
+
+            Route::post("/Slide-update" , "update")
+                ->name(Constants::Admin_Slide_UPDATE);
+
+            Route::get("/Slide-Destroy/{id}" , "destroy")
+                ->name(Constants::Admin_Slide_DESTORY);
+        }); //end prefix admin
     });//end slide Controller
     //banner Panel
-    Route::controller(\App\Http\Controllers\backend\Admin\Banner\BannerController::class)->group(function (){});//end BannerController
+    Route::controller(\App\Http\Controllers\backend\Admin\Banner\BannerController::class)->group(function (){
+        Route::prefix("admin")->group(function(){
+            Route::get("/Banner-List" , "index")
+                ->name(Constants::Admin_Banner_INDEX);
+
+            Route::get("/Banner-Add" , "create")
+                ->name(Constants::Admin_Banner_ADD);
+
+            Route::post("/Banner-Store" , "store")
+                ->name(Constants::Admin_Banner_STORE);
+
+            Route::get("/Banner-Edit/{uuid}" , "edit")
+                ->name(Constants::Admin_Banner_EDIT);
+
+            Route::post("/Banner-update" , "update")
+                ->name(Constants::Admin_Banner_UPDATE);
+
+            Route::get("/Banner-Destroy/{id}" , "destroy")
+                ->name(Constants::Admin_Banner_DESTORY);
+        }); //end prefix admin
+    });//end BannerController
 });//end auth admin middleware
 

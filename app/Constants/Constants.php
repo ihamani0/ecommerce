@@ -84,8 +84,25 @@ class  Constants {
     public const Admin_Active_Vendor= "admin.status.vendor.active";
     public const Admin_InActive_Vendor = "admin.status.vendor.Inactive";
     /*****************************************************/
-
-
+    /*****************Slide Route****************/
+    /*********************************************/
+    public const Admin_Slide_INDEX = "admin.slide.index";
+    public const Admin_Slide_ADD = "admin.slide.add";
+    public const Admin_Slide_EDIT = "admin.slide.edit";
+    public const Admin_Slide_STORE = "admin.slide.store";
+    public const Admin_Slide_UPDATE = "admin.slide.update";
+    public const Admin_Slide_DESTORY = "admin.slide.destroy";
+    /*****************************************************/
+    /*****************Banner Route****************/
+    /*********************************************/
+    public const Admin_Banner_INDEX = "admin.banner.index";
+    public const Admin_Banner_ADD = "admin.banner.add";
+    public const Admin_Banner_EDIT = "admin.banner.edit";
+    public const Admin_Banner_STORE = "admin.banner.store";
+    public const Admin_Banner_UPDATE = "admin.banner.update";
+    public const Admin_Banner_DESTORY = "admin.banner.destroy";
+    /*****************************************************/
+    /*********************************************/
 
 
 
