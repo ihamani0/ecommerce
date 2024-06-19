@@ -332,8 +332,8 @@
                     {{-- start image  --}}
                     <img src="
                     {{ ( !empty(Auth::user()->photo_profile )
-                                ? url("upload/vendor.photo/".Auth::user()->photo_profile)
-                                    :  url("upload/user.png") ) }}"
+                                ? \Illuminate\Support\Facades\Storage::url(Auth::user()->photo_profile)
+                                    :  \Illuminate\Support\Facades\Storage::url("upload/user-1.svg") ) }}"
                     class="user-img" alt="user avatar">
 
                     {{-- end  image  --}}

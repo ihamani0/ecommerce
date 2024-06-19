@@ -48,9 +48,16 @@
 
                         {{-- Photo Profile --}}
 
-                        <img src="{{ (! empty($user->photo_profile)) ? url("upload/admin.photo/$user->photo_profile") : url("upload/user.png") }}"
-                        alt="Admin" class="rounded-circle p-1 bg-dark" width="110">
-                        <div class="mt-3">
+                                {{--@if(Auth::guard("admin")->user()->photo_profile)
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url(Auth::guard("admin")->user()->photo_profile)}}"
+                                         class="user-img rounded-circle p-1 bg-dark" alt="Admin avatar"  >
+                                @else
+                                    <img src="{{\Illuminate\Support\Facades\Storage::url("public/upload/user-1.svg")}}"
+                                         class="user-img rounded-circle p-1 bg-dark" alt="Admin avatar"  >
+                                @endif--}}
+                                <img src="{{ (! empty($user->photo_profile)) ? Storage::url($user->photo_profile) : Storage::url("upload/user-1.svg") }}"
+                                alt="Admin" class="rounded-circle   bg-dark" width="110">
+                                <div class="mt-3">
 
                         {{-- ------------ --}}
                                     <h4>{{ $user->name }}</h4>
@@ -130,9 +137,8 @@
                                         <h6 class="mb-0"></h6>
                                     </div>
                                     <div class="col-sm-9 text-secondary">
-                                        <img
-                                        src="{{ (! empty($user->photo_profile)) ? url("upload/admin.photo/$user->photo_profile") : url("upload/user.png") }}"
-                                        id="showImage" alt="avatar" style="width:100px;height:100px"  class="rounded-circle p-1 bg-dark">
+                                        <img src="{{ (! empty($user->photo_profile)) ? Storage::url($user->photo_profile) : Storage::url("upload/user-1.svg") }}"
+                                             alt="Admin" class="rounded-1 p-1 bg-white" width="110">
                                     </div>
                                 </div>
 

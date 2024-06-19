@@ -40,7 +40,7 @@
 
 
 
-
+        @include("frontend.components.MainColumn.offer")
 
 
 

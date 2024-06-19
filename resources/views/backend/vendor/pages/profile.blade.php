@@ -48,8 +48,12 @@
 
                                     {{-- Photo Profile --}}
 
-                                    <img src="{{ !empty($user->photo_profile) ? url("upload/vendor.photo/$user->photo_profile") : url('upload/user.png') }}"
-                                        alt="Admin" class="rounded-circle p-2 bg-dark" width="110">
+                                    <img src="{{ ( !empty(Auth::user()->photo_profile )
+                                                ? \Illuminate\Support\Facades\Storage::url(Auth::user()->photo_profile)
+                                                    :  \Illuminate\Support\Facades\Storage::url("upload/user-1.svg") ) }}"
+                                         alt="Admin" class="rounded-circle p-2 bg-dark" width="110">
+
+
                                     <div class="mt-3">
 
                                         {{-- ------------ --}}
@@ -237,9 +241,10 @@
                                             <h6 class="mb-0"></h6>
                                         </div>
                                         <div class="col-sm-9 text-secondary">
-                                            <img src="{{ !empty($user->photo_profile) ? url("upload/vendor.photo/$user->photo_profile") : url('upload/user.png') }}"
-                                                id="showImage" alt="avatar" style="width:100px;height:100px"
-                                                class="rounded-circle p-1 bg-dark">
+                                            <img src="{{ ( !empty(Auth::user()->photo_profile )
+                                                ? \Illuminate\Support\Facades\Storage::url(Auth::user()->photo_profile)
+                                                    :  \Illuminate\Support\Facades\Storage::url("upload/user-1.svg") ) }}"
+                                                 alt="Admin" class="rounded-circle p-2 bg-dark" width="110">
                                         </div>
                                     </div>
 

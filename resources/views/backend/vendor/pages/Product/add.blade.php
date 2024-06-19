@@ -289,9 +289,6 @@
                     product_Qty: {
                         required: true,
                     },
-                    brand_id: {
-                        required: true,
-                    },
                     category_id: {
                         required: true,
                     },
@@ -329,10 +326,6 @@
 
                     product_Qty: {
                         required: 'Please insert The Quantity of Product',
-                    },
-
-                    brand_id: {
-                        required: 'Please insert The Brand of Product',
                     },
                     category_id: {
                         required: 'Please insert The Category of Product',

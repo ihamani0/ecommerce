@@ -11,16 +11,22 @@
     <meta property="og:type" content="" />
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
+
+    <meta name="csrf-token" content="{{csrf_token()}}"/>
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{asset("frontend/assets/imgs/theme/favicon.svg")}}" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{asset("frontend/assets/css/plugins/animate.min.css")}}" />
     <link rel="stylesheet" href="{{asset("frontend/assets/css/main.css?v=5.3")}}" />
     {{--@vite([asset("frontend/assets/css/main.css")])--}}
+    @stack('style')
 </head>
 
 {{--Start Body--}}
 <body>
+
+{{--Quick view Modal--}}
+@include("frontend.components.quickViewModal")
 
 <!-- Strat Header  -->
 @include("frontend.components.header")
@@ -50,5 +56,6 @@
 {{--SCript section--}}
 @include("frontend.components.scriptefooter")
 {{--End Body--}}
+@stack('script')
 </body>
 </html>

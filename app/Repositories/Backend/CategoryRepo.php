@@ -62,12 +62,20 @@ class CategoryRepo implements CrudInterface {
             }
             $image = $request->file("category_image");
             $new_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $extension = $image->getClientOriginalExtension();
 
             $path = 'public/upload/categorys/' . $new_name;
 
-            error_reporting(E_ERROR | E_PARSE);
-            Image::read($image)->resize(120,120)->save(storage_path('app/'.$path));
-            error_reporting(E_ALL);
+
+            if (strtolower($extension) == 'svg') {
+                // Store the SVG file directly
+                Storage::put($path, file_get_contents($image));
+            } else {
+                // Process and store other image files
+                error_reporting(E_ERROR | E_PARSE);
+                Image::make($image)->resize(120, 120)->save(storage_path('app/' . $path));
+                error_reporting(E_ALL);
+            }
 
             $category->category_img =  $path;
         }

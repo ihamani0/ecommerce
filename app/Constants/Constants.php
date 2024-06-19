@@ -4,14 +4,17 @@ namespace App\Constants;
 
 class  Constants {
 
-    //Welcome MAin PAGE
-    public const WELCOME = "welcome";
-
-    //------------Route----------------
-    /*
-
+    /********Web PAGe Route**********************************************************************************/
+    public const WELCOME = "web.welcome";
+    public const WEB_Products_Details = "web.product.details";
+    public const WEB_Vendor_Details = "web.vendor.details";
+    public const WEB_All_Vendors = "web.all.vendors";
+    public const WEB_Products_By_Category = "web.product.by.category";
+    public const WEB_Products_By_Subcategory = "web.product.by.subcategory";
+    /*********************Route******************************************************************************************
+    /******************************************************************************************/
     /********** Routes User **********************************************************************************************************/
-    /***********************************************/
+    /********************************************************************************************/
             //login
             public const USER_LOGIN = "user.login" ;
             public const USER_LOGIN_STORE = "login.store";

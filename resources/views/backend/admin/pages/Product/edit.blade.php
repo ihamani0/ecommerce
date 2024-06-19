@@ -120,16 +120,17 @@
                                                 <input type="text" class="form-control" id="inputStarPoints" placeholder="00" name="product_Qty"
                                                        value="{{$product->product_Qty}}">
                                             </div>
-                                            <div class=" form-group col-12">
-                                                <label for="inputProductType" class="form-label">Product Brand</label>
-                                                <select name="brand_id" class="form-select" id="inputProductType">
-                                                    <option value="{{$product->brand->id}}" selected>{{$product->brand->brand_name}}</option>
-                                                    @foreach($Brands as $item)
-                                                        <option value="{{$item->id}}">{{$item->brand_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
-
+                                            @if($product->brand_id)
+                                                <div class=" form-group col-12">
+                                                    <label for="inputProductType" class="form-label">Product Brand</label>
+                                                    <select name="brand_id" class="form-select" id="inputProductType">
+                                                        <option value="{{$product->brand->id}}" selected>{{$product->brand->brand_name}}</option>
+                                                        @foreach($Brands as $item)
+                                                            <option value="{{$item->id}}">{{$item->brand_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                             <div class="form-group col-12">
                                                 <label for="inputProductType" class="form-label">Product Category</label>
                                                 <select class="form-select" id="ProductCategory" name="category_id">
@@ -148,15 +149,17 @@
                                                 </select>
                                             </div>
 
-                                            <div class="form-group col-12">
-                                                <label for="inputVendor" class="form-label">Vendor</label>
-                                                <select class="form-select" id="inputVendor" name="vendor_id">
-                                                    <option value="{{$product->vendor->id}}" selected>{{$product->vendor->username}}</option>
-                                                    @foreach($Vendors as $item)
-                                                        <option value="{{$item->id}}">{{$item->username}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            @if($product->vendor_id)
+                                                <div class="form-group col-12">
+                                                    <label for="inputVendor" class="form-label">Vendor</label>
+                                                    <select class="form-select" id="inputVendor" name="vendor_id">
+                                                        <option value="{{$product->vendor->id}}" selected>{{$product->vendor->username}}</option>
+                                                        @foreach($Vendors as $item)
+                                                            <option value="{{$item->id}}">{{$item->username}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
                                             <div class="col-12">
 
                                                 <div class="row g-3">

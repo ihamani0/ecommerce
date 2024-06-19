@@ -6,6 +6,8 @@ use App\Contracts\Backend\ProfileRepoInterface;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class VendorProfileRepo implements ProfileRepoInterface{
     // Define your class methods here
@@ -14,23 +16,29 @@ class VendorProfileRepo implements ProfileRepoInterface{
 
         $user = $this->getUser();
 
+        if ($request->hasFile('photo')) {
+            if($user->photo_profile){
+                Storage::delete($user->photo_profile);
+            }
+            $image = $request->file("photo");
+            $new_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $extension = $image->getClientOriginalExtension();
 
-        if($request->file("photo")){
+            $path = 'public/upload/vendor/' . $new_name;
 
-            //if exists photo in folder vendor.photo delete it and make new one
-            @unlink(public_path('upload/vendor.photo/'.$user->photo_profile));
 
-            // to get extnsion of image example : png jpg
-            $file_extension = $request->file("photo")->getClientOriginalExtension();
-            //to rename image by data+extnsion
-            $file_name = date('YmdHi').".".$file_extension;
-            //to move file to public folder
-            $request->file("photo")->move(public_path('upload/vendor.photo'),$file_name);
+            if (strtolower($extension) == 'svg') {
+                // Store the SVG file directly
+                Storage::put($path, file_get_contents($image));
+            } else {
+                // Process and store other image files
+                error_reporting(E_ERROR | E_PARSE);
+                Image::make($image)->resize(120, 120)->save(storage_path('app/' . $path));
+                error_reporting(E_ALL);
+            }
 
-            // to put name of file in database
-            $user->photo_profile = $file_name;
-        }//end if file exists
-
+            $user->photo_profile =  $path;
+        }
 
             $user->name = $request->name;
             $user->username = $request->username;

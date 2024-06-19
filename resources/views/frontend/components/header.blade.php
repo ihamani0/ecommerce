@@ -1,3 +1,4 @@
+
 <!-- Header  -->
 <header class="header-area header-style-1 header-height-2">
     <div class="mobile-promotion">
@@ -209,7 +210,10 @@
                 <div class="logo logo-width-1 d-block d-lg-none">
                     <a href="index.html"><img src="{{asset("frontend/assets/imgs/theme/logo.svg")}}" alt="logo" /></a>
                 </div>
+
+
                 <div class="header-nav d-none d-lg-flex">
+                    {{------------------All Categories----------------}}
                     <div class="main-categori-wrap d-none d-lg-block">
                         <a class="categories-button-active" href="#">
                             <span class="fi-rs-apps"></span>   All Categories
@@ -218,121 +222,62 @@
                         <div class="categories-dropdown-wrap categories-dropdown-active-large font-heading">
                             <div class="d-flex categori-dropdown-inner">
                                 <ul>
+                                    @foreach($Categories->take(4) as $item)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-1.svg")}}" alt="" />Milks and Dairies</a>
+                                        <a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,
+                                                                   ['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">
+                                            <img src="{{\Illuminate\Support\Facades\Storage::url($item->category_img)}}" alt="" />{{$item->category_name}}</a>
                                     </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-2.svg")}}" alt="" />Clothing & beauty</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-3.svg")}}" alt="" />Pet Foods & Toy</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-4.svg")}}" alt="" />Baking material</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-5.svg")}}" alt="" />Fresh Fruit</a>
-                                    </li>
+                                    @endforeach
                                 </ul>
                                 <ul class="end">
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-6.svg")}}" alt="" />Wines & Drinks</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-7.svg")}}" alt="" />Fresh Seafood</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-8.svg")}}" alt="" />Fast food</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-9.svg")}}" alt="" />Vegetables</a>
-                                    </li>
-                                    <li>
-                                        <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/category-10.svg")}}" alt="" />Bread and Juice</a>
-                                    </li>
+                                    @foreach($Categories->skip(4)->take(4) as $item)
+                                        <li>
+                                            <a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,
+                                                                   ['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">
+                                                <img src="{{\Illuminate\Support\Facades\Storage::url($item->category_img)}}" alt="" />{{$item->category_name}}</a>
+                                        </li>
+                                    @endforeach
                                 </ul>
                             </div>
                             <div class="more_slide_open" style="display: none">
                                 <div class="d-flex categori-dropdown-inner">
                                     <ul>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/icon-1.svg")}}" alt="" />Milks and Dairies</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/icon-2.svg")}}" alt="" />Clothing & beauty</a>
-                                        </li>
+                                        @foreach($Categories->skip(8)->take(4) as $item)
+                                            <li>
+                                                <a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,
+                                                                   ['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">
+                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($item->category_img)}}" alt="" />{{$item->category_name}}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                     <ul class="end">
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/icon-3.svg")}}" alt="" />Wines & Drinks</a>
-                                        </li>
-                                        <li>
-                                            <a href="shop-grid-right.html"> <img src="{{asset("frontend/assets/imgs/theme/icons/icon-4.svg")}}" alt="" />Fresh Seafood</a>
-                                        </li>
+                                        @foreach($Categories->skip(12)->all() as $item)
+                                            <li>
+                                                <a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,
+                                                                   ['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">
+                                                    <img src="{{\Illuminate\Support\Facades\Storage::url($item->category_img)}}" alt="" />{{$item->category_name}}</a>
+                                            </li>
+                                        @endforeach
                                     </ul>
                                 </div>
                             </div>
                             <div class="more_categories"><span class="icon"></span> <span class="heading-sm-1">Show more...</span></div>
                         </div>
                     </div>
+                    {{------------------All Categories----------------}}
                     <div class="main-menu main-menu-padding-1 main-menu-lh-2 d-none d-lg-block font-heading">
                         <nav>
                             <ul>
 
-                                <li>
-                                    <a class="active" href="index.html">Home  </a>
 
-                                </li>
+
                                 <li>
-                                    <a href="page-about.html">About</a>
+                                    <a class="active" href="{{route(App\Constants\Constants::WELCOME)}}">Home</a>
                                 </li>
-                                <li>
-                                    <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                        <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                        <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                        <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                        <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                        <li>
-                                            <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                                <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                                <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                                <li><a href="shop-product-vendor.html">Product – Vendor Info</a></li>
-                                            </ul>
-                                        </li>
-                                        <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                        <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                        <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                        <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                        <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                        <li>
-                                            <a href="#">Shop Invoice<i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu">
-                                                <li><a href="shop-invoice-1.html">Shop Invoice 1</a></li>
-                                                <li><a href="shop-invoice-2.html">Shop Invoice 2</a></li>
-                                                <li><a href="shop-invoice-3.html">Shop Invoice 3</a></li>
-                                                <li><a href="shop-invoice-4.html">Shop Invoice 4</a></li>
-                                                <li><a href="shop-invoice-5.html">Shop Invoice 5</a></li>
-                                                <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
-                                            </ul>
-                                        </li>
-                                    </ul>
-                                </li>
-                                <li>
-                                    <a href="#">Vendors <i class="fi-rs-angle-down"></i></a>
-                                    <ul class="sub-menu">
-                                        <li><a href="vendors-grid.html">Vendors Grid</a></li>
-                                        <li><a href="vendors-list.html">Vendors List</a></li>
-                                        <li><a href="vendor-details-1.html">Vendor Details 01</a></li>
-                                        <li><a href="vendor-details-2.html">Vendor Details 02</a></li>
-                                        <li><a href="vendor-dashboard.html">Vendor Dashboard</a></li>
-                                        <li><a href="vendor-guide.html">Vendor Guide</a></li>
-                                    </ul>
-                                </li>
-                                <li class="position-static">
+
+                                {{--Mega menu--}}
+                                {{--<li class="position-static">
                                     <a href="#">Mega menu <i class="fi-rs-angle-down"></i></a>
                                     <ul class="mega-menu">
                                         <li class="sub-mega-menu sub-mega-menu-width-22">
@@ -393,43 +338,68 @@
                                             </div>
                                         </li>
                                     </ul>
-                                </li>
-                                <li>
-                                    <a href="blog-category-grid.html">Blog <i class="fi-rs-angle-down"></i></a>
+                                </li>--}}
+                                {{-- End Mega menu--}}
+
+                                {{--Nestead neasted Meanu --}}
+                                {{--<li>
+                                    <a href="shop-grid-right.html">Shop <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
-                                        <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                        <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                        <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                        <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
+                                        <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
+                                        <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
                                         <li>
-                                            <a href="#">Single Post <i class="fi-rs-angle-right"></i></a>
-                                            <ul class="level-menu level-menu-modify">
-                                                <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                                <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                                <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
+                                            <a href="#">Single Product <i class="fi-rs-angle-right"></i></a>
+                                            <ul class="level-menu">
+                                                <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
+                                                <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
+                                                <li><a href="shop-product-full.html">Product – No sidebar</a></li>
+                                                <li><a href="shop-product-vendor.html">Product – Vendor Info</a></li>
                                             </ul>
                                         </li>
                                     </ul>
-                                </li>
+                                </li>--}}
+
+                                @foreach($Categories->take(5) as $item)
+                                        <li>
+                                            <a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">
+                                                {{$item->category_name}} <i class="fi-rs-angle-down"></i>
+                                            </a>
+
+                                            @if($item->subcategories)
+                                                <ul class="sub-menu">
+                                                    @foreach($item->subcategories as $subcategory)
+                                                        <li><a href="{{route(\App\Constants\Constants::WEB_Products_By_Subcategory ,['uuid'=>$subcategory->uuid_subcategory , 'slug' => $subcategory->subcategory_slug])}}">
+                                                                {{$subcategory->subcategory_name}}</a></li>
+                                                    @endforeach
+                                                </ul>
+                                            @endif
+
+                                        </li>
+                                @endforeach
+
+
+
+
+                                {{--Pages --}}
                                 <li>
                                     <a href="#">Pages <i class="fi-rs-angle-down"></i></a>
                                     <ul class="sub-menu">
                                         <li><a href="page-about.html">About Us</a></li>
                                         <li><a href="page-contact.html">Contact</a></li>
-                                        <li><a href="page-account.html">My Account</a></li>
-                                        <li><a href="page-login.html">Login</a></li>
-                                        <li><a href="page-register.html">Register</a></li>
-                                        <li><a href="page-forgot-password.html">Forgot password</a></li>
-                                        <li><a href="page-reset-password.html">Reset password</a></li>
-                                        <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
+
+                                        @auth
+                                            <li><a href="page-account.html">My Account</a></li>
+                                        @endauth
+                                        @guest
+                                            <li><a href="page-login.html">Login</a></li>
+                                            <li><a href="page-register.html">Register</a></li>
+                                        @endguest
                                         <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
                                         <li><a href="page-terms.html">Terms of Service</a></li>
-                                        <li><a href="page-404.html">404 Page</a></li>
+
                                     </ul>
                                 </li>
-                                <li>
-                                    <a href="page-contact.html">Contact</a>
-                                </li>
+                                {{--End Pages --}}
                             </ul>
                         </nav>
                     </div>
@@ -507,6 +477,8 @@
 
 
 
+{{-- Phone Grid --}}
+
 <div class="mobile-header-active mobile-header-wrapper-style">
     <div class="mobile-header-wrapper-inner">
         <div class="mobile-header-top">
@@ -532,32 +504,21 @@
                 <nav>
                     <ul class="mobile-menu font-heading">
                         <li class="menu-item-has-children">
-                            <a href="index.html">Home</a>
-
+                            <a href="{{route(App\Constants\Constants::WELCOME)}}">Home</a>
                         </li>
+
+
                         <li class="menu-item-has-children">
-                            <a href="shop-grid-right.html">shop</a>
+                            <a href="#">Categories</a>
                             <ul class="dropdown">
-                                <li><a href="shop-grid-right.html">Shop Grid – Right Sidebar</a></li>
-                                <li><a href="shop-grid-left.html">Shop Grid – Left Sidebar</a></li>
-                                <li><a href="shop-list-right.html">Shop List – Right Sidebar</a></li>
-                                <li><a href="shop-list-left.html">Shop List – Left Sidebar</a></li>
-                                <li><a href="shop-fullwidth.html">Shop - Wide</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Single Product</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop-product-right.html">Product – Right Sidebar</a></li>
-                                        <li><a href="shop-product-left.html">Product – Left Sidebar</a></li>
-                                        <li><a href="shop-product-full.html">Product – No sidebar</a></li>
-                                        <li><a href="shop-product-vendor.html">Product – Vendor Infor</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="shop-filter.html">Shop – Filter</a></li>
-                                <li><a href="shop-wishlist.html">Shop – Wishlist</a></li>
-                                <li><a href="shop-cart.html">Shop – Cart</a></li>
-                                <li><a href="shop-checkout.html">Shop – Checkout</a></li>
-                                <li><a href="shop-compare.html">Shop – Compare</a></li>
-                                <li class="menu-item-has-children">
+
+
+                                @foreach ($Categories as $item )
+                                    <li><a href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,
+                                                                   ['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}">{{$item->category_name}}</a></li>
+                                @endforeach
+
+                                {{-- <li class="menu-item-has-children">
                                     <a href="#">Shop Invoice</a>
                                     <ul class="dropdown">
                                         <li><a href="shop-invoice-1.html">Shop Invoice 1</a></li>
@@ -567,82 +528,40 @@
                                         <li><a href="shop-invoice-5.html">Shop Invoice 5</a></li>
                                         <li><a href="shop-invoice-6.html">Shop Invoice 6</a></li>
                                     </ul>
-                                </li>
+                                </li> --}}
                             </ul>
                         </li>
 
-                        <li class="menu-item-has-children">
-                            <a href="#">Mega menu</a>
-                            <ul class="dropdown">
-                                <li class="menu-item-has-children">
-                                    <a href="#">Women's Fashion</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop-product-right.html">Dresses</a></li>
-                                        <li><a href="shop-product-right.html">Blouses & Shirts</a></li>
-                                        <li><a href="shop-product-right.html">Hoodies & Sweatshirts</a></li>
-                                        <li><a href="shop-product-right.html">Women's Sets</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Men's Fashion</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop-product-right.html">Jackets</a></li>
-                                        <li><a href="shop-product-right.html">Casual Faux Leather</a></li>
-                                        <li><a href="shop-product-right.html">Genuine Leather</a></li>
-                                    </ul>
-                                </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Technology</a>
-                                    <ul class="dropdown">
-                                        <li><a href="shop-product-right.html">Gaming Laptops</a></li>
-                                        <li><a href="shop-product-right.html">Ultraslim Laptops</a></li>
-                                        <li><a href="shop-product-right.html">Tablets</a></li>
-                                        <li><a href="shop-product-right.html">Laptop Accessories</a></li>
-                                        <li><a href="shop-product-right.html">Tablet Accessories</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
-                        <li class="menu-item-has-children">
-                            <a href="blog-category-fullwidth.html">Blog</a>
-                            <ul class="dropdown">
-                                <li><a href="blog-category-grid.html">Blog Category Grid</a></li>
-                                <li><a href="blog-category-list.html">Blog Category List</a></li>
-                                <li><a href="blog-category-big.html">Blog Category Big</a></li>
-                                <li><a href="blog-category-fullwidth.html">Blog Category Wide</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Single Product Layout</a>
-                                    <ul class="dropdown">
-                                        <li><a href="blog-post-left.html">Left Sidebar</a></li>
-                                        <li><a href="blog-post-right.html">Right Sidebar</a></li>
-                                        <li><a href="blog-post-fullwidth.html">No Sidebar</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </li>
+
+
+
                         <li class="menu-item-has-children">
                             <a href="#">Pages</a>
                             <ul class="dropdown">
                                 <li><a href="page-about.html">About Us</a></li>
                                 <li><a href="page-contact.html">Contact</a></li>
-                                <li><a href="page-account.html">My Account</a></li>
-                                <li><a href="page-login.html">Login</a></li>
-                                <li><a href="page-register.html">Register</a></li>
-                                <li><a href="page-forgot-password.html">Forgot password</a></li>
-                                <li><a href="page-reset-password.html">Reset password</a></li>
-                                <li><a href="page-purchase-guide.html">Purchase Guide</a></li>
+                                @auth
+                                    <li><a href="{{route(App\Constants\Constants::USER_ACCOUNT)}}">My Account</a></li>
+                                @endauth
+                                @guest
+                                    <li><a href="{{route(App\Constants\Constants::USER_LOGIN)}}">Login</a></li>
+                                    <li><a href="{{route(App\Constants\Constants::USER_Register)}}">Register</a></li>
+                                @endguest
+
                                 <li><a href="page-privacy-policy.html">Privacy Policy</a></li>
                                 <li><a href="page-terms.html">Terms of Service</a></li>
-                                <li><a href="page-404.html">404 Page</a></li>
+
                             </ul>
                         </li>
-                        <li class="menu-item-has-children">
-                            <a href="#">Language</a>
-                            <ul class="dropdown">
-                                <li><a href="#">English</a></li>
-                                <li><a href="#">French</a></li>
-                            </ul>
-                        </li>
+                        {{-- LAnguage --}}
+                            {{-- <li class="menu-item-has-children">
+                                <a href="#">Language</a>
+                                <ul class="dropdown">
+                                    <li><a href="#">English</a></li>
+                                    <li><a href="#">French</a></li>
+                                </ul>
+                            </li> --}}
+
                     </ul>
                 </nav>
                 <!-- mobile menu end -->
@@ -661,12 +580,9 @@
             <div class="mobile-social-icon mb-50">
                 <h6 class="mb-15">Follow Us</h6>
                 <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-facebook-white.svg")}}" alt="" /></a>
-                <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-twitter-white.svg")}}" alt="" /></a>
                 <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-instagram-white.svg")}}" alt="" /></a>
-                <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-pinterest-white.svg")}}" alt="" /></a>
-                <a href="#"><img src="{{asset("frontend/assets/imgs/theme/icons/icon-youtube-white.svg")}}" alt="" /></a>
             </div>
-            <div class="site-copyright">Copyright 2024 © Nest. All rights reserved. Powered by AliThemes.</div>
+            <div class="site-copyright">Copyright 2024 © Nest. All rights reserved. Powered by HMN.</div>
         </div>
     </div>
 </div>

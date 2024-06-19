@@ -330,11 +330,12 @@
 
 
                     {{-- start image  --}}
-                    <img src="
-                    {{ ( !empty(Auth::guard("admin")->user()->photo_profile )
-                                ? url("upload/admin.photo/".Auth::guard("admin")->user()->photo_profile)
-                                    :  url("upload/user.png") ) }}"
-                    class="user-img" alt="user avatar">
+
+                    @if(Auth::guard("admin")->user()->photo_profile)
+                        <img src="{{\Illuminate\Support\Facades\Storage::url(Auth::guard("admin")->user()->photo_profile)}}" class="user-img" alt="user avatar">
+                    @else
+                        <img src="{{\Illuminate\Support\Facades\Storage::url("public/upload/user-1.svg")}}" class="user-img" alt="user avatar">
+                    @endif
 
                     {{-- end  image  --}}
 

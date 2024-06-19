@@ -8,6 +8,7 @@ use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
 
 use App\Contracts\Backend\VendorInterface;
+use App\Contracts\Frontend\LandingPageInterface;
 use  App\Http\Controllers\backend\Admin\AdminProfileController;
 use App\Http\Controllers\backend\Admin\Banner\BannerController;
 use App\Http\Controllers\backend\Admin\Brand\BrandController;
@@ -22,6 +23,7 @@ use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorPro
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
 use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
+use App\Http\Controllers\Frontend\LandingPageController;
 use App\Repositories\AdminProfileRepo;
 
 use App\Repositories\Backend\BannerRepo;
@@ -31,6 +33,7 @@ use App\Repositories\Backend\ProductRepo;
 use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
 use App\Repositories\Backend\VendorRepo;
+use App\Repositories\Frontend\LandingPageRepo;
 use App\Repositories\VendorProfileRepo;
 use App\Services\Backend\AdminProfileService;
 use App\Services\Backend\VendorProfileService;
@@ -46,6 +49,12 @@ class servicePattrenServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
+        //--------------------------------------------------------------------------------
+        //--------------------for landing Page--------------------
+        $this->app->when(LandingPageController::class)
+                    ->needs(LandingPageInterface::class)
+                            ->give(LandingPageRepo::class);
         //--------------------------------------------------------------------------------
         //--------------------for Banner--------------------
         $this->app->when(SlideController::class)

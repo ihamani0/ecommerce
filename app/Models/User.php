@@ -54,4 +54,15 @@ class User extends Authenticatable implements IMustVerifyEmail
     {
         $this->notify(new VerifyEmailUser);
     }
+
+    //query Scope
+    public function scopeActive($query){
+        return $query->where('status', 1);
+    }
+
+    //relationship hasMany
+    public function products(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Product::class , "vendor_id" , 'id');
+    }
 }

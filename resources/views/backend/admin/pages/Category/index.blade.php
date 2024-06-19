@@ -48,10 +48,11 @@
 
                             <td> {{ $key+1 }} </td>
                             <td>{{ $item->category_name }}</td>
-                            <td> <img src="{{  Storage::url($item->category_img) }}" style="width: 70px; height:40px;" alt="Image" >  </td>
+                            <td><img src="{{  Storage::url($item->category_img) }}" style="width: 70px; height:40px;" alt="Image" >  </td>
                             <td>
-                                <a  href="{{route(\App\Constants\Constants::Admin_Category_EDIT,$item->uuid_category)}}" class="btn btn-outline-secondary" id="edit"><i class="bx bx-pen me-0"></i></a>
-                                <a href="{{route(Constants::Admin_Category_DESTORY,$item->uuid_category)}}"  type="button" class="btn btn-outline-danger" id="deleteBtn"><i class="bx bx-trash me-0"></i>
+                                <a  href="{{route(\App\Constants\Constants::Admin_Category_EDIT,$item->uuid_category)}}" class="btn btn-outline-secondary" id="edit"><i class="fa-duotone fa-pen-nib"></i>
+                                </a>
+                                <a href="{{route(Constants::Admin_Category_DESTORY,$item->uuid_category)}}"  type="button" class="btn btn-outline-danger" id="deleteBtn"><i class="fa-duotone fa-trash"></i>
                                 </a>
 
                             </td>

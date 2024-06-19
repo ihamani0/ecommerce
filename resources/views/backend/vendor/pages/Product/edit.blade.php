@@ -123,15 +123,17 @@
                                                 <input type="text" class="form-control" id="inputStarPoints" placeholder="00" name="product_Qty"
                                                         value="{{$product->product_Qty}}">
                                             </div>
-                                            <div class=" form-group col-12">
-                                                <label for="inputProductType" class="form-label">Product Brand</label>
-                                                <select name="brand_id" class="form-select" id="inputProductType">
-                                                    <option value="{{$product->brand->id}}" selected>{{$product->brand->brand_name}}</option>
-                                                    @foreach($Brands as $item)
-                                                        <option value="{{$item->id}}">{{$item->brand_name}}</option>
-                                                    @endforeach
-                                                </select>
-                                            </div>
+                                            @if($product->brand_id)
+                                                <div class=" form-group col-12">
+                                                    <label for="inputProductType" class="form-label">Product Brand</label>
+                                                    <select name="brand_id" class="form-select" id="inputProductType">
+                                                        <option value="{{$product->brand->id}}" selected>{{$product->brand->brand_name}}</option>
+                                                        @foreach($Brands as $item)
+                                                            <option value="{{$item->id}}">{{$item->brand_name}}</option>
+                                                        @endforeach
+                                                    </select>
+                                                </div>
+                                            @endif
 
                                             <div class="form-group col-12">
                                                 <label for="inputProductType" class="form-label">Product Category</label>

@@ -6,6 +6,8 @@ use App\Contracts\Backend\ProfileRepoInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Laravel\Facades\Image;
 
 class AdminProfileRepo implements ProfileRepoInterface {
 
@@ -13,20 +15,29 @@ class AdminProfileRepo implements ProfileRepoInterface {
     {
         $admin = $this->getUser();
 
-        if($request->file("photo")){
+        if ($request->hasFile('photo')) {
+            if($admin->photo_profile){
+                Storage::delete($admin->photo_profile);
+            }
+            $image = $request->file("photo");
+            $new_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $extension = $image->getClientOriginalExtension();
 
-            @unlink(public_path('upload/admin.photo/'.$admin->photo_profile));
+            $path = 'public/upload/admin/' . $new_name;
 
-            // to get extension of image example : png jpg
-            $file_extension = $request->file("photo")->getClientOriginalExtension();
-            //to rename image by data+extension
-            $file_name = date('YmdHi').".".$file_extension;
-            //to move file to public folder
-            $request->file("photo")->move(public_path('upload/admin.photo'),$file_name);
 
-            // to put name of file in database
-            $admin->photo_profile = $file_name;
-        }//end if file exists
+            if (strtolower($extension) == 'svg') {
+                // Store the SVG file directly
+                Storage::put($path, file_get_contents($image));
+            } else {
+                // Process and store other image files
+                error_reporting(E_ERROR | E_PARSE);
+                Image::make($image)->resize(120, 120)->save(storage_path('app/' . $path));
+                error_reporting(E_ALL);
+            }
+
+            $admin->photo_profile =  $path;
+        }
 
         $admin->name = $request->name;
         $admin->email = $request->email;

@@ -3,34 +3,31 @@
         {{--background Slide--}}
             <div class="home-slide-cover mt-30">
                 <div class="hero-slider-1 style-4 dot-style-1 dot-style-1-position-1">
-                    <div class="single-hero-slider single-animation-wrap" style="background-image: url({{asset("frontend/assets/imgs/slider/slider-1.png")}})">
-                        <div class="slider-content">
-                            <h1 class="display-2 mb-40">
-                                Don’t miss amazing<br />
-                                grocery deals
-                            </h1>
-                            <p class="mb-65">Sign up for the daily newsletter</p>
-                            {{--idont know wha--}}
-                            <form class="form-subcriber d-flex">
-                                <input type="email" placeholder="Your emaill address" />
-                                <button class="btn" type="submit">Subscribe</button>
-                            </form>
-                            {{----}}
+
+                    @if ($Slides->isEmpty())
+                        <div class="single-hero-slider single-animation-wrap"
+                             style="background-image: url('{{ Illuminate\Support\Facades\Storage::url('public/upload/no-image.svg') }}'); width: 300px; height: 150px;">
                         </div>
-                    </div>
-                    <div class="single-hero-slider single-animation-wrap" style="background-image: url({{asset("frontend/assets/imgs/slider/slider-2.png")}})">
-                        <div class="slider-content">
-                            <h1 class="display-2 mb-40">
-                                Fresh Vegetables<br />
-                                Big discount
-                            </h1>
-                            <p class="mb-65">Save up to 50% off on your first order</p>
-                            <form class="form-subcriber d-flex">
-                                <input type="email" placeholder="Your emaill address" />
-                                <button class="btn" type="submit">Subscribe</button>
-                            </form>
-                        </div>
-                    </div>
+                    @else
+                        @foreach ($Slides as $item)
+                            <div class="single-hero-slider single-animation-wrap"
+                                    style="background-image: url({{Illuminate\Support\Facades\Storage::url($item->slide_image)}})">
+                                <div class="slider-content">
+                                    <h1 class="display-2 mb-40">
+                                        {{$item->slide_title}}
+                                    </h1>
+                                    <p class="mb-65">{{$item->slide_text}}</p>
+                                    {{--idont know wha--}}
+                                    <form class="form-subcriber d-flex">
+                                        <input type="email" placeholder="Your emaill address" />
+                                        <button class="btn" type="submit">Subscribe</button>
+                                    </form>
+                                </div>
+                            </div>
+                        @endforeach
+                     @endif
+
+
                 </div>
                 <div class="slider-arrow hero-slider-1-arrow"></div>
             </div>

@@ -101,8 +101,9 @@
                     const setImageDiv = document.getElementById('setImage');
                     const imgElement = document.createElement('img');
 
-                    const svg = document.getElementById("svgIcon");
-                    svg.style.display = 'none';
+                    /*const svg = document.getElementById("svgIcon");
+                    svg.style.display = 'none';*/
+                    setImageDiv.innerHTML = '';
                     imgElement.src = event.target.result;
                     imgElement.style.width = '200px';  // Replace with desired width
                     imgElement.style.height = '100px';

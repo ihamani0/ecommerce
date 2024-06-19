@@ -1,4 +1,5 @@
 
+
 {{--tailwindcss--}}
 {{--<script src="https://cdn.tailwindcss.com"></script>--}}
 
@@ -13,6 +14,7 @@
 <script src="{{ asset("frontend/assets/js/plugins/wow.js") }}"></script>
 <script src="{{ asset("frontend/assets/js/plugins/perfect-scrollbar.js") }}"></script>
 <script src="{{ asset("frontend/assets/js/plugins/magnific-popup.js") }}"></script>
+<script src="{{ asset("frontend/assets/js/plugins/slider-range.js")}}"></script>
 <script src="{{ asset("frontend/assets/js/plugins/select2.min.js") }}"></script>
 <script src="{{ asset("frontend/assets/js/plugins/counterup.js") }}"></script>
 <script src="{{ asset("frontend/assets/js/plugins/jquery.countdown.min.js") }}"></script>
@@ -26,6 +28,15 @@
 <script src="{{ asset("frontend/assets/js/main.js?v=5.3") }}"></script>
 <script src="{{ asset("frontend/assets/js/shop.js?v=5.3") }}"></script>
 
+
+<script>
+    var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    $.ajaxSetup({
+        header:{
+            'X-CSRF-Token': csrfToken
+        }
+    })
+</script>
 
 
 @stack('script')

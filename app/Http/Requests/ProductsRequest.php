@@ -28,10 +28,10 @@ class ProductsRequest extends FormRequest
                 "selling_price" => ['required' , 'numeric' ],
                 "product_code" =>  ['required' , 'alpha_num' ],
                 "product_Qty" => ['required' , 'numeric' ],
-                "brand_id" => ['required'],
+                /*"brand_id" => ['required'],*/
                 "category_id" =>  ['required'],
                 "subcategory_id" =>  ['required'],
-                "vendor_id" =>  ['required'],
+                /*"vendor_id" =>  ['required'],*/
                 "product_thumbnail" =>  'required|image|mimes:jpeg,png|max:2048',
                 "multiple_images" => ['required']
         ];

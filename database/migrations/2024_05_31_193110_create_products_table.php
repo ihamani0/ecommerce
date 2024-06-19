@@ -15,10 +15,10 @@ return new class extends Migration
             $table->id();
 
             //forgiens key
-            $table->foreignId('brands_id')->references('id')->on("brands");
+            $table->foreignId('brands_id')->nullable()->constrained('brands');
             $table->foreignId('category_id')->references('id')->on("categories");
             $table->foreignId('subcategory_id')->references('id')->on("subcategories");
-            $table->foreignId('vendor_id')->references('id')->on("users")->nullable();
+            $table->foreignId('vendor_id')->nullable()->constrained('users');
             //---Product details--------
             $table->string("product_name");
             $table->string("product_slug");
