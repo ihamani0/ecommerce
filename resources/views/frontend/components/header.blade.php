@@ -12,7 +12,7 @@
                         <ul>
 
                             <li><a href="page-account.html">My Cart</a></li>
-                            <li><a href="shop-wishlist.html">Checkout</a></li>
+                            <li><a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}" >Checkout</a></li>
                             <li><a href="shop-order.html">Order Tracking</a></li>
                         </ul>
                     </div>
@@ -32,14 +32,14 @@
                     <div class="header-info header-info-right">
                         <ul>
 
-                            <li>
+                            {{--<li>
                                 <a class="language-dropdown-active" href="#">English <i class="fi-rs-angle-small-down"></i></a>
                                 <ul class="language-dropdown">
                                     <li>
                                         <a href="#"><img src="{{asset("frontend/assets/imgs/theme/flag-fr.png")}}" alt="" />Français</a>
                                     </li>
                                 </ul>
-                            </li>
+                            </li>--}}
 
                             <li>Need help? Call Us: <strong class="text-brand"> +213 000000000</strong></li>
 
@@ -53,7 +53,10 @@
         <div class="container">
             <div class="header-wrap">
                 <div class="logo logo-width-1">
-                    <a href="index.html"><img src="{{asset("frontend/assets/imgs/theme/logo.svg")}}" alt="logo" /></a>
+                    <a href="{{route(\App\Constants\Constants::WELCOME)}}">
+                        <img src="{{asset("frontend/assets/imgs/theme/cart.svg")}}"alt="logo" width="180" height="56" />
+                    </a>
+                    {{--<a> <i class="fa-solid fa-cart-shopping fa-2xl"></i> </a>--}}
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
@@ -98,48 +101,50 @@
                             </div>
 
                             <div class="header-action-icon-2">
-                                <a href="shop-wishlist.html">
-                                    <img class="svgInject" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-heart.svg")}}" />
-                                    <span class="pro-count blue">6</span>
+                                <a href="{{route(\App\Constants\Constants::USER_COMPARE_LIST)}}">
+                                    {{--<img class="svgInject" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-heart.svg")}}" />--}}
+                                    <i class="fa-duotone fa-shuffle fa-xs"></i>
+                                    @auth
+                                        <span class="pro-count blue" id="countCompareList">
+                                            {{count(auth()->user()->compare)}}
+                                        </span>
+                                    @endauth
+
                                 </a>
-                                <a href="shop-wishlist.html"><span class="lable">Wishlist</span></a>
+                                <a href="{{route(\App\Constants\Constants::USER_COMPARE_LIST)}}"><span class="lable">comapre</span></a>
                             </div>
+
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon" href="shop-cart.html">
-                                    <img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-cart.svg")}}" />
-                                    <span class="pro-count blue">2</span>
+                                <a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}">
+                                    {{--<img class="svgInject" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-heart.svg")}}" />--}}
+                                    <i class="fa-light fa-heart fa-xs"></i>
+                                    @auth
+                                        <span class="pro-count blue" id="countWishList">
+                                            {{count(auth()->user()->wishlist)}}
+                                        </span>
+                                    @endauth
+
+                                </a>
+                                <a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}"><span class="lable">Wishlist</span></a>
+                            </div>
+
+                            {{--Cart --}}
+                            <div class="header-action-icon-2">
+                                <a class="mini-cart-icon"  >
+                                    {{--<img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-cart.svg")}}" />--}}
+                                    <i class="fa-duotone fa-shopping-cart fa-xs"></i>
+                                    {{--<span class="pro-count blue" id="cart-count"></span>--}}
                                 </a>
                                 <a href="shop-cart.html"><span class="lable">Cart</span></a>
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                    <ul>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="{{asset("frontend/assets/imgs/shop/thumbnail-3.jpg")}}" /></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Daisy Casual Bag</a></h4>
-                                                <h4><span>1 × </span>$800.00</h4>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
-                                        <li>
-                                            <div class="shopping-cart-img">
-                                                <a href="shop-product-right.html"><img alt="Nest" src="{{asset("frontend/assets/imgs/shop/thumbnail-2.jpg")}}" /></a>
-                                            </div>
-                                            <div class="shopping-cart-title">
-                                                <h4><a href="shop-product-right.html">Corduroy Shirts</a></h4>
-                                                <h4><span>1 × </span>$3200.00</h4>
-                                            </div>
-                                            <div class="shopping-cart-delete">
-                                                <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                            </div>
-                                        </li>
+                                    <ul id="listCart">
+
+                                        {{--Her se set the cart shope using js --}}
+
                                     </ul>
-                                    <div class="shopping-cart-footer">
+                                    <div class="shopping-cart-footer" id="footer-cart">
                                         <div class="shopping-cart-total">
-                                            <h4>Total <span>$4000.00</span></h4>
+                                            <h4>Total<span id="cart-total" > </span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="shop-cart.html" class="outline">View cart</a>
@@ -148,14 +153,17 @@
                                     </div>
                                 </div>
                             </div>
-                            <a href="{{route(Constants::USER_LOGIN)}}">
-                                <img class="svgInject mr-1" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-user.svg")}}" />
-                            </a>
+                            {{--End Cart--}}
 
-                            @auth
-                                {{--List account info--}}
-                                <div class="header-action-icon-2">
-                                    <a href="{{route(Constants::USER_ACCOUNT)}}"><span class="lable ml-0">Account</span></a>
+
+                            {{--USER ACCOUNT--}}
+                            <div class="header-action-icon-2">
+                                @auth
+                                        <a href="{{route(Constants::USER_LOGIN)}}" >
+                                            {{--<img class="svgInject mr-1" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-user.svg")}}" />--}}
+                                            <i class="fa-solid fa-user fa-xs mr-1"></i>
+                                        </a>
+                                    <a href="{{route(Constants::USER_ACCOUNT)}}"><span class="lable ml-1">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li>
@@ -168,27 +176,22 @@
                                                 <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
                                             </li>
                                             <li>
-                                                <a href="shop-wishlist.html"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
+                                                <a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}"><i class="fi fi-rs-heart mr-10"></i>My Wishlist</a>
                                             </li>
                                             <li>
                                                 <a href="page-account.html"><i class="fi fi-rs-settings-sliders mr-10"></i>Setting</a>
                                             </li>
                                             <li>
-                                                <a href="{{route(Constants::USER_LOGOUT)}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
+                                                <a href="{{route(\App\Constants\Constants::USER_LOGOUT)}}"><i class="fi fi-rs-sign-out mr-10"></i>Sign out</a>
                                             </li>
                                         </ul>
                                     </div>
-                                </div>
-                            @else
-                              {{--  Redrect login Page--}}
-
-                                <a href="{{route(Constants::USER_LOGIN)}}"><span class="lable ml-5 font-weight-bold fs-6">Login</span></a>
-
-                                <b class="lable ml-10" >|</b>
-
-                                <a href="{{route(Constants::USER_Register)}}"><span class="lable ml-10 font-weight-bold fs-6">Register</span></a>
-                            @endauth
-
+                                @else
+                                    <a href="{{route(Constants::USER_LOGIN)}}"><span class="lable ml-5 font-weight-bold fs-6">Login</span></a>
+                                    <b class="lable ml-10" >|</b>
+                                    <a href="{{route(Constants::USER_Register)}}"><span class="lable ml-10 font-weight-bold fs-6">Register</span></a>
+                                @endauth
+                            </div>
 
                         </div>
                     </div>
@@ -200,9 +203,7 @@
 
 
 
-
-
-
+{{------------------------------------------------------------------------------------------------------------------------------------}}
 
     <div class="header-bottom header-bottom-bg-color sticky-bar">
         <div class="container">
@@ -425,6 +426,7 @@
                                 <span class="pro-count white">4</span>
                             </a>
                         </div>
+
                         <div class="header-action-icon-2">
                             <a class="mini-cart-icon" href="#">
                                 <img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-cart.svg")}}" />

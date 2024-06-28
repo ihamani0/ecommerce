@@ -11,6 +11,12 @@ class  Constants {
     public const WEB_All_Vendors = "web.all.vendors";
     public const WEB_Products_By_Category = "web.product.by.category";
     public const WEB_Products_By_Subcategory = "web.product.by.subcategory";
+    /********Cart shop Route**********************************************************************************/
+    public const ADD_TO_CART = "web.add.to.cart";
+    public const GET_CART = "web.get.cart";
+    public const  REMOVE_FROM__CART = "web.remove.from.cart";
+
+
     /*********************Route******************************************************************************************
     /******************************************************************************************/
     /********** Routes User **********************************************************************************************************/
@@ -30,6 +36,13 @@ class  Constants {
             public const USER_ACCOUNT = "user.account";
             public const USER_ACCOUNT_UPDATE  = "user.account.update";
             public const USER_ACCOUNT_DELETE = "user.account.delete";
+
+
+            //wishList
+            public const USER_WISH_LIST = 'user.wish.list' ;
+            public const USER_WISHLIST_DESTROY_PRODUCT = 'user.wish.list.destroy.product' ;
+            public const  USER_COMPARE_LIST = "user.compare.list";
+            public const  USER_COMPARE_DESTROY_PRODUCT = "user.compare.destroy.product";
 
 
 

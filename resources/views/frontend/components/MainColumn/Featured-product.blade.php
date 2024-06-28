@@ -25,16 +25,30 @@
                                 <div class="product-cart-wrap">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html">
+                                            <a href="{{route(\App\Constants\Constants::WEB_Products_Details , ['uuid'=> $item->products_uuid , 'slug' => $item->product_slug])}}">
                                                 <img class="default-img" src="{{\Illuminate\Support\Facades\Storage::url($item->product_thumbnail)}}"
                                                         alt="{{$item->product_slug}}" />
                                                 {{--<img class="hover-img" src="{{asset("frontend/assets/imgs/shop/product-1-2.jpg")}}" alt="" />--}}
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"> <i class="fi-rs-eye"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+
+                                            {{--Quick view--}}
+                                            <a aria-label="Quick view" class="action-btn small hover-up" data-uuid="{{ $item->products_uuid }}" onclick="fetchProduct(this)"
+                                               data-bs-toggle="modal" data-bs-target="#quickViewModal">
+                                                <i class="fi-rs-eye"></i></a>
+
+                                            {{--wish list--}}
+                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up"
+                                               data-id="{{$item->id}}" onclick="AddToWishList(this)">
+                                                <i class="fi-rs-heart"></i></a>
+
+                                            {{--Compare List--}}
+                                            <a aria-label="Compare" class="action-btn"
+                                               data-id="{{$item->id}}"  onclick="AddToCompareProducts(this)"
+                                            ><i class="fi-rs-shuffle"></i></a>
+
+
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
 
@@ -74,7 +88,11 @@
                                             </div>
                                             <span class="font-xs text-heading"> Sold: 60/120</span>
                                         </div>
-                                        <a href="shop-cart.html" class="btn w-100 hover-up"><i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+                                        @if($item->product_Qty > 0 )
+                                            <a class="btn w-100 hover-up" data-uuid="{{$item->products_uuid}}" onclick="addToCart(this)">
+                                                <i class="fi-rs-shopping-cart mr-5"></i>Add To Cart</a>
+                                        @endif
+
                                     </div>
                                 </div>
                                 <!--End product Wrap-->
@@ -95,3 +113,11 @@
         </div>
     </div>
 </section>
+{{--
+
+@push('script')
+    <script>
+
+    </script>
+@endpush
+--}}

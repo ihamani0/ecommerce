@@ -62,13 +62,8 @@
                                         </li>
 
                                         <li class="nav-item">
-                                            <form method="post" action="{{route(Constants::USER_LOGOUT)}}" id="logoutForm">
-                                                @csrf
-                                                <a class="nav-link" href="{{route(Constants::USER_LOGOUT)}}"
-                                                   onclick="event.preventDefault(); document.getElementById('logoutForm').submit();"
-                                                ><i class="fi-rs-sign-out mr-10"></i>Logout</a>
-                                            </form>
-
+                                            <a class="nav-link" href="{{route(\App\Constants\Constants::USER_LOGOUT)}}">
+                                                    <i class="fi-rs-sign-out mr-10"></i>Logout</a>
                                         </li>
                                     </ul>
                                 </div>

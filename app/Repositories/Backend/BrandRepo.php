@@ -42,16 +42,30 @@ class BrandRepo implements CrudInterface {
         $brand->brand_name=$request->brand_name;
         $brand->brand_slug=Str::slug($request->brand_name);
 
+
         if ($request->hasFile('brand_image')) {
             if($brand->brand_img){
                 Storage::delete($brand->brand_img);
             }
+
+
             $image = $request->file("brand_image");
             $new_name = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+            $extension = $image->getClientOriginalExtension();
+
 
             $path = 'public/upload/brands/' . $new_name;
 
-            Image::read($image)->resize(300,300)->save(storage_path('app/'.$path));
+            if (strtolower($extension) == 'svg') {
+                // Store the SVG file directly
+                Storage::put($path, file_get_contents($image));
+            } else {
+                // Process and store other image files
+                error_reporting(E_ERROR | E_PARSE);
+                Image::read($image)->resize(300, 300)->save(storage_path('app/' . $path));
+                error_reporting(E_ALL);
+            }
+
             $brand->brand_img =  $path;
         }
 

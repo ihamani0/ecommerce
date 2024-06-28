@@ -36,15 +36,21 @@
                                 <div class="product-img product-img-zoom">
                                     <a target="_blank" href="{{ route(\App\Constants\Constants::WEB_Products_Details , ['uuid'=>$item->products_uuid , 'slug'=>$item->product_slug ]  ) }}">
                                         <img  class="default-img" src="{{ \Illuminate\Support\Facades\Storage::url($item->product_thumbnail) }}" alt="" />
-                                        {{--<img class="hover-img" src="{{ \Illuminate\Support\Facades\Storage::url($item->product_thumbnail) }}" alt="" />--}}
+
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+
+                                    <a aria-label="Add To Wishlist" class="action-btn"
+                                       data-id="{{$item->id}}" onclick="AddToWishList(this)"
+                                    ><i class="fi-rs-heart"></i></a>
+
+                                    <a aria-label="Compare" class="action-btn"
+                                       data-id="{{$item->id}}"  onclick="AddToCompareProducts(this)"
+                                    ><i class="fi-rs-shuffle"></i></a>
 
                                     {{--Quick view button--}}
-                                    <a aria-label="Quick view" class="action-btn" id="{{$item->products_uuid}}" onclick="fetchProduct(this.id)"
+                                    <a aria-label="Quick view" class="action-btn" data-uuid="{{ $item->products_uuid }}" onclick="fetchProduct(this)"
                                        data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
@@ -88,9 +94,13 @@
                                             <span >{{$item->selling_price }} Dz</span>
                                         @endif
                                     </div>
-                                    <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                    </div>
+                                    @if($item->product_Qty > 0 )
+                                        <div class="add-cart">
+                                            <a class="add" data-uuid="{{$item->products_uuid}}" onclick="addToCart(this)"
+                                            ><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        </div>
+                                    @endif
+
                                 </div>
                             </div>
                         </div>
@@ -120,13 +130,22 @@
                                             </a>
                                         </div>
                                         <div class="product-action-1">
-                                            <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+
+                                            {{--Wishlist--}}
+                                            <a aria-label="Add To Wishlist" class="action-btn"
+                                               data-id="{{$product->id}}" onclick="AddToWishList(this)"
+                                            ><i class="fi-rs-heart"></i></a>
+
+                                            {{--Compare List--}}
+                                            <a aria-label="Compare" class="action-btn"
+                                               data-id="{{$product->id}}"  onclick="AddToCompareProducts(this)"
+                                            ><i class="fi-rs-shuffle"></i></a>
 
                                             {{--Quick view Button--}}
-                                            <a aria-label="Quick view" id="{{$product->products_uuid}}" onclick="fetchProduct(this.id)"
+                                            <a aria-label="Quick view" data-uuid="{{ $product->products_uuid }}" onclick="fetchProduct(this)"
                                                class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i>
                                             </a>
+
                                         </div>
                                         <div class="product-badges product-badges-position product-badges-mrg">
                                             @if($product->discount_price)
@@ -152,7 +171,8 @@
                                         <div>
 
                                             @if($product->vendor_id)
-                                                <span class="font-small text-muted">By <a href="vendor-details-1.html">
+                                                <span class="font-small text-muted">By
+                                                    <a href="{{route(\App\Constants\Constants::WEB_Vendor_Details,$product->vendor->id)}}">
                                                     {{$product->vendor->username}}
                                                 </a></span>
                                             @else
@@ -170,9 +190,13 @@
                                                     <span >{{$product->selling_price }} Dz</span>
                                                 @endif
                                             </div>
-                                            <div class="add-cart">
-                                                <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
-                                            </div>
+
+                                            @if($product->product_Qty > 0 )
+                                                <div class="add-cart">
+                                                    <a class="add" data-uuid="{{$product->products_uuid}}" onclick="addToCart(this)"
+                                                    ><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -188,130 +212,9 @@
                 </div>
                 <!--En tab each category-->
             @endforeach
-
-
-
         </div>
         <!--End tab-content-->
     </div>
 </section>
 
-@push('script')
-    <script>
-        function fetchProduct(id,slug='default'){
-            let baseUrl = '{{url('/Product-details/')}}' ;
-            let fullUrl = `${baseUrl}/${id}/${slug}`
-             $.ajax({
-                 type:'GET',
-                 dataType:'json' ,
-                 url :fullUrl ,
-                 success : (response)=>{
-                    //console.log(response)
-                     setData(response)
-                 } ,
-                 error : (error)=>{
-                     console.error(error);
-                 }
-             })
-        }
-        function setData(data){
-            let $img_url = {{\Illuminate\Support\Facades\Storage::url("+data.product.image_url+")}}
-            $('#slide_img').attr('src', data.url_img )
-            $('#thumbnail_img').attr('src', data.url_img )
-
-            $('#product_name').text(data.product.product_name)
-
-
-            let urlProductDetails = `/Product-details/${data.product.products_uuid}/default`
-            $('#product_name').attr('href',urlProductDetails )
-
-
-            if(data.product.product_Qty > 0){
-                $('#product_sale').addClass('stock-status in-stock');
-                $('#product_sale').text('in stock')
-            }else{
-                $('#product_sale').addClass('stock-status out-stock');
-                $('#product_sale').text('out stock');
-            }
-
-            if (data.discount_price) {
-                $("#product_price").text(data.discount_price)
-                $("#save_price").text("save "+ (100 - data.product.discount_price)+ "%")
-                $("#old_price").text(data.product.selling_price)
-            } else {
-                $("#product_price").text(data.product.selling_price)
-            }
-
-            if(data.vendor_name){
-                //vendor_name
-                $("#vendor_name").text(data.vendor_name)
-            }else{
-                $("#vendor_name").text("E comme")
-            }
-
-            $("#category_name").text(data.category_name)
-
-
-            // Color
-            if(!data.colors){ //if array is empty hide the choice of color
-                $("#Parent_div_display_color").hide();
-            }else{  // else is not empty
-
-                $("#Parent_div_display_color").show(); // show the dce of parent content
-                $("#child_div_display_color").empty(); // Clear any existing content
-
-                data.colors.forEach( (item, index) => {
-                    let colorId = "size_"+index
-                    let colorLabel = $("<label></label>").addClass('form-check-label fw-500').attr('for', colorId).text(item);
-                    let colorinput = $("<input/>").attr({
-                            type: 'checkbox',
-                            class: 'form-check-input',
-                            name: 'select_colors[]',
-                            id: colorId,
-                            value: item
-                        });
-
-                    let labelParent = $("<label></label>").addClass("form-check form-check-inline")
-                    labelParent.append(colorLabel)
-                    labelParent.append(colorinput)
-                    // Append the new elements to the div
-                    $("#child_div_display_color").append(labelParent);
-
-                })
-            }
-                // end Color
-            if(!data.sizes){
-                $("#Parent_div_display_size").hide();
-            }else{
-                $("#Parent_div_display_size").show();
-                $("#child_div_display_sizes").empty(); // Clear any existing content
-                data.sizes.forEach( (item, index) => {
-
-                    let sizeId = "size_"+index
-                    let sizeLabel = $("<label></label>").addClass('form-check-label fw-500').attr('for', sizeId).text(item);
-                    let sizeInput = $("<input/>").attr({
-                        type: 'checkbox',
-                        class: 'form-check-input',
-                        name: 'select_size[]',
-                        id: sizeId,
-                        value: item
-                    });
-                    let labelParnet = $("<label></label>").addClass("form-check form-check-inline")
-                    labelParnet.append(sizeLabel)
-                    labelParnet.append(sizeInput)
-                    // Append the new elements to the div
-                    $("#child_div_display_sizes").append(labelParnet);
-                })
-            }
-
-            //
-            if(data.tags){
-               $("#tags").text(data.tags)
-            }
-
-
-
-        }
-    </script>
-@endpush
 

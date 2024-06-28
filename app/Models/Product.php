@@ -87,4 +87,13 @@ class Product extends Model
     }
     /*--------------------------------------------------*/
 
+
+    /*--------------------------------------------------*/
+    //Relations Many to Many users and Products with table pivot wishList
+    /*--------------------------------------------------*/
+    public function wishlistedBy(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(User::class, 'wishlists', 'product_id', 'user_id')
+            ->withTimestamps();
+    }
 }

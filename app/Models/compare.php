@@ -6,11 +6,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * @method static where(string $string, $product)
+ * @method static where(string $string, mixed $userId)
  */
-class MultiImageProduct extends Model
+class compare extends Model
 {
     use HasFactory;
-
-    protected $guarded = [];
 }

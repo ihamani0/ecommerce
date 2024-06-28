@@ -5,6 +5,7 @@ namespace App\Repositories\Frontend;
 use App\Contracts\Frontend\LandingPageInterface;
 use App\Models\Banner;
 use App\Models\Category;
+use App\Models\MultiImageProduct;
 use App\Models\Product;
 use App\Models\slide;
 use App\Models\Subcategory;
@@ -48,13 +49,21 @@ class LandingPageRepo implements LandingPageInterface {
         return Product::active()->where("products_uuid" , $uuid)->firstOrFail();
     }
 
-    #[ArrayShape(["product" => "mixed","url_img" => "mixed" , "category_name" => "mixed", "vendor_name" => "mixed", "colors" => "mixed", "tags" => "mixed", "sizes" => "mixed" , "discount_price" => "mixed"])]
+    #[ArrayShape(["product" => "mixed","url_img" => "mixed" ,"urls_img" => "mixed" ,"category_name" => "mixed", "vendor_name" => "mixed", "colors" => "mixed", "tags" => "mixed", "sizes" => "mixed" , "discount_price" => "mixed"])]
     public function getProductWithAjax($uuid): array
     {
         $product = Product::active()->where("products_uuid" , $uuid)->firstOrFail();
+
+        $urls_Images = [];
+
+        foreach ($product->MultiplImg as $img){
+            $urls_Images[] = Storage::url($img->product_img_name);
+        }
+
         return [
             "product" =>$product ,
             "url_img" => Storage::url($product->product_thumbnail),
+            "urls_img" => $urls_Images ,
             "category_name" => $product->category->category_name,
             "vendor_name" => $product->vendor->username ?? null ,
             "colors" => $product->colors(),

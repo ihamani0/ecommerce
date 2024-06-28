@@ -71,7 +71,7 @@
                                                     <span class="old-price font-md ml-15">{{$Product->selling_price}} Dz</span>
                                             </span>
                                         @else
-                                            <span class="current-price text-brand">{{$Product->selling_price}}</span>
+                                            <span class="current-price text-brand">{{$Product->selling_price}} Dz</span>
                                         @endif
                                     </div>
                                 </div>
@@ -94,7 +94,7 @@
                                                     <div class="">
                                                         @foreach($Product->colors() as $color)
                                                             <label class="form-check form-check-inline">
-                                                                <input type="checkbox" class="form-check-input" name="select_color[]" value="{{ $color }}" >
+                                                                <input type="checkbox" class="form-check-input" name="select_colors[]" value="{{ $color }}" >
                                                                 <div class="form-check-label fw-500">{{ ucwords($color) }}</div>
                                                             </label>
                                                         @endforeach
@@ -111,7 +111,7 @@
                                                 <div class="">
                                                     @foreach($Product->sizes() as $size)
                                                         <label class="form-check form-check-inline">
-                                                            <input type="checkbox" class="form-check-input" name="select_size[]" value="{{ $size }}" >
+                                                            <input type="checkbox" class="form-check-input" name="select_sizes[]" value="{{ $size }}" >
                                                             <div class="form-check-label fw-500">{{ $size }}</div>
                                                         </label>
                                                     @endforeach
@@ -132,10 +132,21 @@
                                         <input type="text" name="quantity" class="qty-val" value="1" min="1">
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
+                                    <input type="hidden" id="Product_uuid" value="{{$Product->products_uuid }}"/>
                                     <div class="product-extra-link2">
-                                        <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
-                                        <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                        <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
+                                        {{--Add to Cart--}}
+                                        <button type="submit" class="button button-add-to-cart" onclick="addToCartDetails()"
+                                        ><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                        {{--WishList--}}
+                                        <a aria-label="Add To Wishlist" class="action-btn"
+                                           data-id="{{$Product->id}}" onclick="AddToWishList(this)"
+                                        ><i class="fi-rs-heart"></i></a>
+
+                                        {{--Compare List--}}
+                                        <a aria-label="Compare" class="action-btn"
+                                           data-id="{{$Product->id}}"  onclick="AddToCompareProducts(this)"
+                                        ><i class="fi-rs-shuffle"></i></a>
+
                                     </div>
                                 </div>
 
@@ -164,7 +175,11 @@
                                     <ul class="mr-50 float-start">
 
                                         @if($Product->vendor_id)
-                                            <li class="mb-5">Vendor: <span class="text-brand">{{$Product->vendor->username}}</span></li>
+                                            <li class="mb-5">Vendor:
+                                                <a href="{{route(\App\Constants\Constants::WEB_Vendor_Details,$Product->vendor->id)}}">
+                                                    <span class="text-brand">{{$Product->vendor->username}}</span>
+                                                </a>
+                                            </li>
                                         @else
                                             <li class="mb-5">Owner: <span class="text-brand">Ecomme</span></li>
                                         @endif
@@ -344,62 +359,9 @@
                                     <!--Comments-->
                                     <div class="comments-area">
                                         <div class="row">
-                                            <div class="col-lg-8">
-                                                <h4 class="mb-30">Customer questions & answers</h4>
-                                                <div class="comment-list">
 
-                                                    <div class="single-comment justify-content-between d-flex mb-30">
-                                                        <div class="user justify-content-between d-flex">
-                                                            <div class="thumb text-center">
-                                                                <img src="assets/imgs/blog/author-2.png" alt="" />
-                                                                <a href="#" class="font-heading text-brand">Sienna</a>
-                                                            </div>
-                                                            <div class="desc">
-                                                                <div class="d-flex justify-content-between mb-10">
-                                                                    <div class="d-flex align-items-center">
-                                                                        <span class="font-xs text-muted">December 4, 2022 at 3:12 pm </span>
-                                                                    </div>
-                                                                    <div class="product-rate d-inline-block">
-                                                                        <div class="product-rating" style="width: 100%"></div>
-                                                                    </div>
-                                                                </div>
-                                                                <p class="mb-10">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Delectus, suscipit exercitationem accusantium obcaecati quos voluptate nesciunt facilis itaque modi commodi dignissimos sequi repudiandae minus ab deleniti totam officia id incidunt? <a href="#" class="reply">Reply</a></p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+                                            {{--Commont Her Review--}}
 
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <h4 class="mb-30">Customer reviews</h4>
-                                                <div class="d-flex mb-30">
-                                                    <div class="product-rate d-inline-block mr-15">
-                                                        <div class="product-rating" style="width: 90%"></div>
-                                                    </div>
-                                                    <h6>4.8 out of 5</h6>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>5 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 50%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">50%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>4 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">25%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>3 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 45%" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100">45%</div>
-                                                </div>
-                                                <div class="progress">
-                                                    <span>2 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 65%" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100">65%</div>
-                                                </div>
-                                                <div class="progress mb-30">
-                                                    <span>1 star</span>
-                                                    <div class="progress-bar" role="progressbar" style="width: 85%" aria-valuenow="85" aria-valuemin="0" aria-valuemax="100">85%</div>
-                                                </div>
-                                                <a href="#" class="font-xs text-muted">How are ratings calculated?</a>
-                                            </div>
                                         </div>
                                     </div>
                                     <!--comment form-->
@@ -506,3 +468,98 @@
         </div>
     </div>
 @endsection
+
+@push('script')
+    <script>
+
+        function addToCartDetails(){
+            let id =  $("#Product_uuid").val()
+
+
+            let selectedColors = [];
+            let selectedSizes = [];
+
+            let  isColorVisible = {{ $Product->product_color ? 'true' : 'false' }};
+            let isSizeVisible = {{$Product->product_size ? 'true' : 'false'}};
+
+
+
+            let sizeChecked = isSizeVisible ? $('input[name="select_sizes[]"]:checked').length > 0 : true;
+            let colorChecked = isColorVisible ? $('input[name="select_colors[]"]:checked').length > 0 : true;
+
+
+            if (!sizeChecked ) {
+                Toast.fire({
+                    icon: "error",
+                    title: 'Error',
+                    text: 'Please select the size .'
+                });
+                return;
+            }
+            if(!colorChecked){
+                Toast.fire({
+                    icon: "error",
+                    title: 'Error',
+                    text: 'Please select the Color .'
+                });
+                return;
+            }
+
+
+
+            //Selected colors and value
+            $('input[name="select_sizes[]"]:checked').each(function() {
+                selectedSizes.push($(this).val());
+            });
+
+            $('input[name="select_colors[]"]:checked').each(function() {
+                selectedColors.push($(this).val());
+            });
+
+            let product_qty = $('input[name="quantity"]').val();
+
+            //send to save in cart session
+            let baseUrl = '{{url('/Add-To-Cart')}}' ;
+            let token = $('meta[name="csrf-token"]').attr('content');
+            $.ajax({
+                type:'POST',
+                dataType:'json' ,
+                url :baseUrl ,
+                headers: {
+                    'X-CSRF-TOKEN': token
+                },
+                data: {
+                    "id" : id,
+                    "colors" : selectedColors ,
+                    "sizes" : selectedSizes ,
+                    "qty" : product_qty
+                } ,
+                success : (response)=>{
+
+
+
+                    if ($.isEmptyObject(response.error)) {
+                        Toast.fire({
+                            icon: "success",
+                            title:  response.success
+                        });
+                    }else{
+                        Toast.fire({
+                            icon: "error",
+                            title:  'Try again something worng !'
+                        });
+                    }
+
+                    getCart();
+                    //getCart();
+                } ,
+                error : (error)=>{
+                    console.log(error)
+                }
+            })
+
+
+
+        }
+    </script>
+@endpush

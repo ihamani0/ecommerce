@@ -27,9 +27,22 @@
                                     </a>
                                 </div>
                                 <div class="product-action-1">
-                                    <a aria-label="Add To Wishlist" class="action-btn" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
-                                    <a aria-label="Compare" class="action-btn" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
-                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-eye"></i></a>
+
+                                    {{--Add to wish List--}}
+                                    <a aria-label="Add To Wishlist" class="action-btn"
+                                       data-id="{{$product->id}}" onclick="AddToWishList(this)">
+                                        <i class="fi-rs-heart"></i></a>
+
+                                    {{--Add to Compare List--}}
+                                    {{--Compare List--}}
+                                    <a aria-label="Compare" class="action-btn"
+                                       data-id="{{$product->id}}"  onclick="AddToCompareProducts(this)"
+                                    ><i class="fi-rs-shuffle"></i></a>
+
+                                    {{--QuickView--}}
+                                    <a aria-label="Quick view" class="action-btn" data-bs-toggle="modal" data-bs-target="#quickViewModal"
+                                       data-uuid="{{ $product->products_uuid }}" onclick="fetchProduct(this)">
+                                        <i class="fi-rs-eye"></i></a>
                                 </div>
                                 <div class="product-badges product-badges-position product-badges-mrg">
                                     @if($product->discount_price)
@@ -54,7 +67,8 @@
                                 </div>
                                 <div>
                                     @if($product->vendor_id)
-                                        <span class="font-small text-muted">By <a href="vendor-details-1.html">
+                                        <span class="font-small text-muted">By
+                                            <a href="{{route(\App\Constants\Constants::WEB_Vendor_Details,$product->vendor->id)}}">
                                                     {{$product->vendor->username}}
                                                 </a></span>
                                     @else
@@ -72,8 +86,12 @@
                                             <span >{{$product->selling_price }} Dz</span>
                                         @endif
                                     </div>
+                                    @if($product->product_Qty > 0 )
+
+                                    @endif
                                     <div class="add-cart">
-                                        <a class="add" href="shop-cart.html"><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                        <a data-uuid="{{$product->products_uuid}}" onclick="addToCart(this)"
+                                           class="btn btn-sm"><i class="fi-rs-shopping-bag mr-5"></i>Add</a>
                                     </div>
                                 </div>
                             </div>

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Contracts\Frontend\LandingPageInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
 use Illuminate\Http\RedirectResponse;
@@ -14,8 +15,13 @@ use Illuminate\View\View;
 class ProfileUserController extends Controller
 {
 
+    public function __construct(public LandingPageInterface $lPage)
+    {}
+
     public function index(){
-        return view("frontend.pages.account");
+        return view("frontend.pages.account" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
     }
     /**
      * Display the user's profile form.

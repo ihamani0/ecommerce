@@ -32,7 +32,7 @@ Route::middleware("guest.user")->group(function (){
 });//end middleware Guest
 
 
-//start middlware auth
+//start middleware auth
 Route::middleware("auth.user")->group(function (){
 
     //profile User Controller
@@ -52,9 +52,38 @@ Route::middleware("auth.user")->group(function (){
     });//end Controller User
 
 
+    Route::controller(\App\Http\Controllers\Frontend\WishListController::class)->group(function (){
+        Route::get('/user-wish-list' , 'index')
+                ->name(Constants::USER_WISH_LIST);
 
 
-    Route::post("logout" , [AuthenticatedSessionController::class , "destroy"])
+        Route::get('/user-wish-list-destroy/{id}' , 'destroy')
+            ->name(Constants::USER_WISHLIST_DESTROY_PRODUCT);
+
+
+
+        Route::get('/user-get-count-wish-list' , 'getCount');
+    });
+
+
+
+    /*USER_COMPARE_LIST*/
+
+    Route::controller(\App\Http\Controllers\Frontend\CompareProductsController::class)->group(function (){
+        Route::get('/user-compare-products' , 'index')
+            ->name(Constants::USER_COMPARE_LIST);
+
+        Route::get('/user-compare-list-destroy/{id}' , 'destroy')
+            ->name(Constants::USER_COMPARE_DESTROY_PRODUCT);
+
+        Route::get('/user-get-count-compare-list' , 'getCount');
+    });
+
+
+
+
+
+    Route::get("logout" , [AuthenticatedSessionController::class , "destroy"])
             ->name(Constants::USER_LOGOUT);
 
 

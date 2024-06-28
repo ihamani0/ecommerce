@@ -23,7 +23,10 @@ use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorPro
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
 use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
+use App\Http\Controllers\Frontend\CompareProductsController;
 use App\Http\Controllers\Frontend\LandingPageController;
+use App\Http\Controllers\Frontend\ProfileUserController;
+use App\Http\Controllers\Frontend\WishListController;
 use App\Repositories\AdminProfileRepo;
 
 use App\Repositories\Backend\BannerRepo;
@@ -49,13 +52,27 @@ class servicePattrenServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-
+        //--------------------------------------------------------------------------------
+        //--------------------for Compare Products --------------------
+        $this->app->when(CompareProductsController::class)
+            ->needs(LandingPageInterface::class)
+            ->give(LandingPageRepo::class);
         //--------------------------------------------------------------------------------
         //--------------------for landing Page--------------------
         $this->app->when(LandingPageController::class)
                     ->needs(LandingPageInterface::class)
                             ->give(LandingPageRepo::class);
+        //--------------------for  ProfileUser Controller--------------------
         //--------------------------------------------------------------------------------
+        $this->app->when(ProfileUserController::class)
+                    ->needs(LandingPageInterface::class)
+                            ->give(LandingPageRepo::class);
+        //-------------------------------------------------------------------------------- WishListController
+        //--------------------for  ProfileUser Controller--------------------
+        //--------------------------------------------------------------------------------
+        $this->app->when(WishListController::class)
+                    ->needs(LandingPageInterface::class)
+                        ->give(LandingPageRepo::class);
         //--------------------for Banner--------------------
         $this->app->when(SlideController::class)
                     ->needs(CrudInterface::class)

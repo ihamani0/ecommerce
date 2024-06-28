@@ -36,13 +36,44 @@ Route::controller(\App\Http\Controllers\Frontend\LandingPageController::class)->
     Route::get('/Products-by-Subcategory/{uuid}/{slug}', "ProductsBySubcategory")
         ->name(Constants::WEB_Products_By_Subcategory);
 
-    //href="{{route(\App\Constants\Constants::WEB_Products_By_Category ,['uuid'=>$item->uuid_category , 'slug' => $item->category_slug])}}"
-
-    //Route::get('/count', "countMax");
 });
 
 
+Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->group(function(){
 
+    Route::post('/Add-To-Cart', "addToCart")
+        ->name(Constants::ADD_TO_CART);
+
+    Route::get('/Get-Cart', "getTheCart")
+        ->name(Constants::GET_CART);
+
+    Route::post('/Remove-From-Cart', "removeFromCart")
+        ->name(Constants::REMOVE_FROM__CART);
+
+});
+
+    ///add-to-wish-list
+     Route::controller(\App\Http\Controllers\Frontend\WishListController::class)->group(function(){
+
+        Route::post("/add-to-wish-list" , 'store');
+
+    });
+
+     //add to compare two products
+
+    Route::controller(\App\Http\Controllers\Frontend\CompareProductsController::class)->group(function(){
+
+        Route::post("/add-to-compare-products" , 'store');
+
+    });
+
+
+
+
+    /*Route::get('/feature' , function (){
+        dd(\App\Models\Product::active()->where("featured" , 1)->get());
+
+    });*/
 
 
 

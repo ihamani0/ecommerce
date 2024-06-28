@@ -11,6 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
+/**
+ * @property mixed $id
+ */
 class User extends Authenticatable implements IMustVerifyEmail
 {
     use HasApiTokens, HasFactory, Notifiable , MustVerifyEmail;
@@ -65,4 +68,20 @@ class User extends Authenticatable implements IMustVerifyEmail
     {
         return $this->hasMany(Product::class , "vendor_id" , 'id');
     }
+
+
+    //Relations Many to Many users and Products with table pivot wishList
+    public function wishlist(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'wishlists' , 'user_id'  , 'product_id')
+            ->withTimestamps();
+    }
+
+    //Relations Many to Many users and Products with table pivot wishList
+    public function compare(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'compares' , 'user_id'  , 'product_id')
+            ->withTimestamps();
+    }
+
 }
