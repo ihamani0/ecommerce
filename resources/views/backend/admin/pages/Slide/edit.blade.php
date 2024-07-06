@@ -172,4 +172,47 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
 
 @endpush
+@push('script')
+    <script>
+        $(document).ready(function (){
+            $('#myForm').validate({
+                rules: {
+                    coupon_name: {
+                        required : true,
+                    },
+                    coupon_discount: {
+                        required : true,
+                    },
+                    coupon_validate: {
+                        required : true,
+                    },
+                },
+                messages :{
+                    coupon_name: {
+                        required : 'Please Enter Name of the slider',
+                    },
+                    coupon_discount: {
+                        required : 'Please Enter discount of the slider',
+                    },
+                    coupon_validate: {
+                        required : 'Please Enter Time of expired ',
+                    },
 
+                },
+                errorElement : 'span',
+                errorPlacement: function (error,element) {
+                    error.addClass('invalid-feedback');
+                    element.closest('.form-group').append(error);
+                },
+                highlight : function(element, errorClass, validClass){
+                    $(element).addClass('is-invalid');
+                },
+                unhighlight : function(element, errorClass, validClass){
+                    $(element).removeClass('is-invalid');
+                },
+            });
+        });
+
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.3/jquery.validate.min.js"></script>
+@endpush

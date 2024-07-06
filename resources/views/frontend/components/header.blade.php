@@ -147,7 +147,7 @@
                                             <h4>Total<span id="cart-total" > </span></h4>
                                         </div>
                                         <div class="shopping-cart-button">
-                                            <a href="shop-cart.html" class="outline">View cart</a>
+                                            <a href="{{route(\App\Constants\Constants::CART_INDEX)}}" class="outline">View cart</a>
                                             <a href="shop-checkout.html">Checkout</a>
                                         </div>
                                     </div>

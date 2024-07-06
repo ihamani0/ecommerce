@@ -22,6 +22,7 @@
 
     <!--Font awesome-->
     <link   rel="stylesheet" href="{{ asset("backend/assets/font-awosome/css/all.css") }}" />
+
     @stack('style')
 </head>
 

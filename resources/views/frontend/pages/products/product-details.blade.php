@@ -6,7 +6,7 @@
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+                <a href="{{route(\App\Constants\Constants::WELCOME)}}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
                 <span></span> <a href="shop-grid-right.html">{{$Product->category->category_name}}</a> <span></span> {{$Product->subcategory->subcategory_name}}
             </div>
         </div>
@@ -132,7 +132,11 @@
                                         <input type="text" name="quantity" class="qty-val" value="1" min="1">
                                         <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                     </div>
+
                                     <input type="hidden" id="Product_uuid" value="{{$Product->products_uuid }}"/>
+
+                                    <input type="hidden" id="Vendor_id" value="{{$Product->vendor_id }}"/>
+
                                     <div class="product-extra-link2">
                                         {{--Add to Cart--}}
                                         <button type="submit" class="button button-add-to-cart" onclick="addToCartDetails()"
@@ -474,7 +478,7 @@
 
         function addToCartDetails(){
             let id =  $("#Product_uuid").val()
-
+            let vendor_id =  $("#Vendor_id").val()
 
             let selectedColors = [];
             let selectedSizes = [];
@@ -519,7 +523,7 @@
             let product_qty = $('input[name="quantity"]').val();
 
             //send to save in cart session
-            let baseUrl = '{{url('/Add-To-Cart')}}' ;
+            let baseUrl = '{{route(\App\Constants\Constants::ADD_TO_CART)}}' ;
             let token = $('meta[name="csrf-token"]').attr('content');
             $.ajax({
                 type:'POST',
@@ -532,11 +536,10 @@
                     "id" : id,
                     "colors" : selectedColors ,
                     "sizes" : selectedSizes ,
-                    "qty" : product_qty
+                    "qty" : product_qty,
+                    'vendor_id' : vendor_id ,
                 } ,
                 success : (response)=>{
-
-
 
                     if ($.isEmptyObject(response.error)) {
                         Toast.fire({

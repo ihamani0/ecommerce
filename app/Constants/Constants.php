@@ -12,9 +12,10 @@ class  Constants {
     public const WEB_Products_By_Category = "web.product.by.category";
     public const WEB_Products_By_Subcategory = "web.product.by.subcategory";
     /********Cart shop Route**********************************************************************************/
-    public const ADD_TO_CART = "web.add.to.cart";
-    public const GET_CART = "web.get.cart";
-    public const  REMOVE_FROM__CART = "web.remove.from.cart";
+    public const CART_INDEX = "web.cart.index" ;
+    public const ADD_TO_CART = "api.add.to.cart";
+    public const GET_CART = "api.get.cart";
+    public const  REMOVE_FROM_CART = "api.remove.from.cart";
 
 
     /*********************Route******************************************************************************************
@@ -44,7 +45,13 @@ class  Constants {
             public const  USER_COMPARE_LIST = "user.compare.list";
             public const  USER_COMPARE_DESTROY_PRODUCT = "user.compare.destroy.product";
 
+            //checkout
+            public const USER_INDEX_CHECKOUT_CART= "user.checkout.index";
+            public const USER_STORE_CHECKOUT_CART= "user.checkout.store";
 
+            //payment
+            public const CASH_PAYMENT_INDEX= "user.cashOnDelivery.index";
+            public const CASH_PAYMENT_STORE= "user.cashOnDelivery.store";
 
     /*********************************************/
     /********** Route Admins **********************************************************************************************************/
@@ -118,8 +125,16 @@ class  Constants {
     public const Admin_Banner_UPDATE = "admin.banner.update";
     public const Admin_Banner_DESTORY = "admin.banner.destroy";
     /*****************************************************/
+    /*****************Coupons Route****************/
     /*********************************************/
-
+    public const Admin_Coupon_INDEX = "admin.coupon.index";
+    public const Admin_Coupon_ADD = "admin.coupon.add";
+    public const Admin_Coupon_EDIT = "admin.coupon.edit";
+    public const Admin_Coupon_STORE = "admin.coupon.store";
+    public const Admin_Coupon_UPDATE = "admin.coupon.update";
+    public const Admin_Coupon_DESTORY = "admin.coupon.destroy";
+    public const Admin_Coupon_STATUS = "admin.coupon.status";
+    /*****************************************************/
 
 
 

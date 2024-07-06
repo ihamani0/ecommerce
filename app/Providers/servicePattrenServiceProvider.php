@@ -2,13 +2,15 @@
 
 namespace App\Providers;
 
+use App\Contracts\Backend\CouponInterface;
 use App\Contracts\Backend\CrudInterface;
 use App\Contracts\Backend\ProductInterface;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
-
 use App\Contracts\Backend\VendorInterface;
+
 use App\Contracts\Frontend\LandingPageInterface;
+use App\Contracts\Frontend\OrderInterface;
 use  App\Http\Controllers\backend\Admin\AdminProfileController;
 use App\Http\Controllers\backend\Admin\Banner\BannerController;
 use App\Http\Controllers\backend\Admin\Brand\BrandController;
@@ -16,33 +18,38 @@ use App\Http\Controllers\backend\Admin\Category\CategoryController;
 use App\Http\Controllers\backend\Admin\Category\SubcategoryController;
 /*use App\Http\Controllers\backend\Admin\Products\ProductsController;*/
 
+use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
 use App\Http\Controllers\backend\Admin\Products\ProductsController as adminProductsController;
 use App\Http\Controllers\backend\Admin\Slide\SlideController;
 use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorProductsController;
 
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
-use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
+use App\Http\Controllers\Frontend\CartShopController;
+use App\Http\Controllers\Frontend\CashOnDeliveryController;
 use App\Http\Controllers\Frontend\CompareProductsController;
 use App\Http\Controllers\Frontend\LandingPageController;
 use App\Http\Controllers\Frontend\ProfileUserController;
+use App\Http\Controllers\Frontend\StripePaymentController;
 use App\Http\Controllers\Frontend\WishListController;
 use App\Repositories\AdminProfileRepo;
 
 use App\Repositories\Backend\BannerRepo;
 use App\Repositories\Backend\BrandRepo;
 use App\Repositories\Backend\CategoryRepo;
+use App\Repositories\Backend\CouponRepo;
 use App\Repositories\Backend\ProductRepo;
 use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
 use App\Repositories\Backend\VendorRepo;
 use App\Repositories\Frontend\LandingPageRepo;
+use App\Repositories\Frontend\OrderRepo;
 use App\Repositories\VendorProfileRepo;
 use App\Services\Backend\AdminProfileService;
 use App\Services\Backend\VendorProfileService;
 
 
-
+use App\Services\Frontend\OrderService;
 use Illuminate\Support\ServiceProvider;
 
 class servicePattrenServiceProvider extends ServiceProvider
@@ -52,6 +59,36 @@ class servicePattrenServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+
+        //-------------------- Payment--------------------
+        //---------------------------for Cash on delivery -----------------------------------------------------
+        $this->app->bind(OrderService::class, function ($app) {
+            return new OrderService($app->make(OrderRepo::class));
+                });
+
+        //--------------------------------------------------------------------------------
+        $this->app->when(CashOnDeliveryController::class)
+                        ->needs(LandingPageInterface::class)
+                                ->give(LandingPageRepo::class);
+        //--------------------------------------------------------------------------------
+        //---------------------------for Stripe -----------------------------------------------------
+
+            /*$this->app->when(StripePaymentController::class)
+                            ->needs(OrderInterface::class)
+                                ->give(OrderRepo::class);*/
+
+        //--------------------for Cart Products --------------------
+
+            /*$this->app->when(CartShopController::class)
+                        ->needs(OrderInterface::class)
+                            ->give(OrderRepo::class);*/
+
+        //--------------------------------------------------------------------------------
+        ////--------------------------------------------------------------------------------
+        //--------------------for Cart Products --------------------
+        $this->app->when(CartShopController::class)
+                        ->needs(LandingPageInterface::class)
+                            ->give(LandingPageRepo::class);
         //--------------------------------------------------------------------------------
         //--------------------for Compare Products --------------------
         $this->app->when(CompareProductsController::class)
@@ -67,18 +104,25 @@ class servicePattrenServiceProvider extends ServiceProvider
         $this->app->when(ProfileUserController::class)
                     ->needs(LandingPageInterface::class)
                             ->give(LandingPageRepo::class);
-        //-------------------------------------------------------------------------------- WishListController
-        //--------------------for  ProfileUser Controller--------------------
+        //--------------------------------------------------------------------------------
+        //--------------------for  WishListController --------------------
         //--------------------------------------------------------------------------------
         $this->app->when(WishListController::class)
                     ->needs(LandingPageInterface::class)
                         ->give(LandingPageRepo::class);
-        //--------------------for Banner--------------------
+
+        //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
+        //--------------------for Coupon--------------------
+        $this->app->when(CouponsController::class)
+                        ->needs(CouponInterface::class)
+                                ->give(CouponRepo::class);
+        //--------------------------------------------------------------------------------
+        //--------------------for Slide--------------------
         $this->app->when(SlideController::class)
                     ->needs(CrudInterface::class)
                         ->give(SlideRepo::class);
         //--------------------------------------------------------------------------------
-        //--------------------for Slide--------------------
+        //--------------------for  Banner--------------------
         $this->app->when(BannerController::class)
                     ->needs(CrudInterface::class)
                         ->give(BannerRepo::class);

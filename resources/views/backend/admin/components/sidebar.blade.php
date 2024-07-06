@@ -90,6 +90,22 @@
             </ul>
         </li>
 
+        {{--Coupons System--}}
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="fa-duotone fa-badge-percent"></i>
+                </div>
+                <div class="menu-title">Coupons</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Coupon_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>List Coupon</a>
+                </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Coupon_ADD)}}"><i class="bx bx-right-arrow-alt"></i>Add Coupon</a>
+                </li>
+            </ul>
+        </li>
+
 
         {{--Vendors Status--}}
         <li>

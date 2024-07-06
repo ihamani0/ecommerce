@@ -96,7 +96,8 @@
                                     </div>
                                     @if($item->product_Qty > 0 )
                                         <div class="add-cart">
-                                            <a class="add" data-uuid="{{$item->products_uuid}}" onclick="addToCart(this)"
+                                            <a aria-label="Quick view" class="add" data-uuid="{{ $item->products_uuid }}" onclick="fetchProduct(this)"
+                                               data-bs-toggle="modal" data-bs-target="#quickViewModal"
                                             ><i class="fi-rs-shopping-cart mr-5"></i>Add </a>
                                         </div>
                                     @endif

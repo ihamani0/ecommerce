@@ -62,6 +62,8 @@
 
                             {{--Hiddin inpute to set id Product--}}
                             <input type="hidden" id="product_uuid">
+                            {{--Hiddin inpute to set id Vendor--}}
+                            <input type="hidden" id="vendor_id">
 
                             <div class="detail-extralink mb-30">
                                 <div class="detail-qty border radius">
@@ -78,6 +80,7 @@
                                 <ul>
                                     <li class="mb-5">Vendor: <span class="text-brand" id="vendor_name"></span></li>
                                     <li class="mb-5">Category:<span class="text-brand" id="category_name"></span></li>
+
                                 </ul>
                                 <ul>
                                     <li class="mb-5">tags: <span class="text-brand" id="tags"></span></li>

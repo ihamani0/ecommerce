@@ -158,6 +158,7 @@ Route::middleware('auth.admin')->group(function (){
     });//end controller vendor status
 
 
+    //Product Controller
     Route::controller(\App\Http\Controllers\backend\Admin\Products\ProductsController::class)->group(function (){
             Route::get("/admin/Products-List" , "index")
                 ->name(Constants::Admin_Products_INDEX);
@@ -197,6 +198,35 @@ Route::middleware('auth.admin')->group(function (){
             Route::get("/api/admin/subcategory/{id}" , "getSubCategories");
     });//end products  controller
 
+
+    //Coupon Controller
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Coupon\CouponsController::class)->group(function (){
+
+        Route::prefix('admin')->group(function(){
+            Route::get("/Coupon-List" , "index")
+                ->name(Constants::Admin_Coupon_INDEX);
+
+            Route::get("/Coupon-Add" , "create")
+                ->name(Constants::Admin_Coupon_ADD);
+
+            Route::post("/Coupon-Store" , "store")
+                ->name(Constants::Admin_Coupon_STORE);
+
+            Route::get("/Coupon-Edit/{uuid}" , "edit")
+                ->name(Constants::Admin_Coupon_EDIT);
+
+            Route::post("/Coupon-update" , "update")
+                ->name(Constants::Admin_Coupon_UPDATE);
+
+            Route::get("/Coupon-Destroy/{id}" , "destroy")
+                ->name(Constants::Admin_Coupon_DESTORY);
+
+            Route::get("/Coupon-status/{id}" , "status")
+                ->name(Constants::Admin_Coupon_STATUS);
+
+        }); // end prefix admin
+    });//end Coupon Controller
 
 
     //Slide Panel

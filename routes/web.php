@@ -41,39 +41,98 @@ Route::controller(\App\Http\Controllers\Frontend\LandingPageController::class)->
 
 Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->group(function(){
 
-    Route::post('/Add-To-Cart', "addToCart")
-        ->name(Constants::ADD_TO_CART);
+    Route::get('/index-Cart', "index")
+        ->name(Constants::CART_INDEX);
 
-    Route::get('/Get-Cart', "getTheCart")
-        ->name(Constants::GET_CART);
 
-    Route::post('/Remove-From-Cart', "removeFromCart")
-        ->name(Constants::REMOVE_FROM__CART);
+    /*-----for ajax----------*/
+    Route::prefix('api')->group(function (){
+
+        Route::get('/Get-Cart', "getTheCart")
+            ->name(Constants::GET_CART);
+
+        Route::post('/Add-To-Cart', "addToCart")
+            ->name(Constants::ADD_TO_CART);
+
+        Route::post('/Remove-From-Cart', "removeFromCart")
+            ->name(Constants::REMOVE_FROM_CART);
+
+        Route::get('/Get-Cart-index', "getTheCart")
+            ->name('api.get.cart.index');
+
+        Route::post('/qty-decrement', "QtyDecrement")
+            ->name('api.qty.decrement');
+
+        Route::post('/qty-increment', "QtyIncrement")
+            ->name('api.qty.increment');
+
+        //coupons
+        Route::post('/apply-coupon', "applyCoupon")
+            ->name('api.apply.coupon');
+
+        Route::get('/get-coupon-apply', "getCoupon")
+            ->name('api.get.coupon.apply');
+
+        Route::get('/remove-coupon-apply', "removeCoupon")
+            ->name('api.remove.coupon.apply');
+
+        Route::get('/Clear-Cart', "clearCart")
+            ->name('api.clear.cart');
+
+    });
+
+
+    Route::middleware('auth.user')->group(function(){
+
+        Route::get('/index-check-out-cart' , 'indexCheckOutCart')
+            ->name(Constants::USER_INDEX_CHECKOUT_CART);
+
+        Route::post('/store-check-out-cart' , 'storeCheckOutCart')
+            ->name(Constants::USER_STORE_CHECKOUT_CART);
+
+    });//end auth user middleware
+
 
 });
 
     ///add-to-wish-list
      Route::controller(\App\Http\Controllers\Frontend\WishListController::class)->group(function(){
 
+         Route::get('/user-wish-list' , 'index')
+             ->name(Constants::USER_WISH_LIST);
+
+
+         Route::get('/user-wish-list-destroy/{id}' , 'destroy')
+             ->name(Constants::USER_WISHLIST_DESTROY_PRODUCT);
+
+
+
+         Route::get('/user-get-count-wish-list' , 'getCount');
+
         Route::post("/add-to-wish-list" , 'store');
 
-    });
+    })->middleware('auth.user');
 
      //add to compare two products
 
     Route::controller(\App\Http\Controllers\Frontend\CompareProductsController::class)->group(function(){
 
+        Route::get('/user-compare-products' , 'index')
+            ->name(Constants::USER_COMPARE_LIST);
+
+        Route::get('/user-compare-list-destroy/{id}' , 'destroy')
+            ->name(Constants::USER_COMPARE_DESTROY_PRODUCT);
+
+        Route::get('/user-get-count-compare-list' , 'getCount');
+
         Route::post("/add-to-compare-products" , 'store');
 
-    });
+    })->middleware('auth.user');
 
 
 
 
-    /*Route::get('/feature' , function (){
-        dd(\App\Models\Product::active()->where("featured" , 1)->get());
 
-    });*/
 
 
 

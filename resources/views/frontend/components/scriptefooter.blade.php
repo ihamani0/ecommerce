@@ -58,6 +58,7 @@
 {{--Quick View--}}
 <script>
     function fetchProduct(element,slug='default'){
+        $("#vendor_id").val('');
         const uuid = element.getAttribute('data-uuid');
 
         let baseUrl = '{{url('/Product-details/')}}' ;
@@ -178,6 +179,9 @@
             $("#tags").text(data.tags)
         }
 
+        if(data.product.vendor_id){
+            $("#vendor_id").val(data.product.vendor_id);
+        }
 
 
     }
@@ -188,6 +192,7 @@
 <script>
     function addToCartQuickView(){
         let product_uuid =  $("#product_uuid").val()
+        let vendor_id = $('#vendor_id').val();
         let selectedColors = [];
         let selectedSizes = [];
 
@@ -232,8 +237,10 @@
 
         let product_qty = $('input[name="product_qty"]').val();
 
+
+
         //send to save in cart session
-        let baseUrl = '{{url('/Add-To-Cart')}}' ;
+        let baseUrl = '{{route(\App\Constants\Constants::ADD_TO_CART)}}' ;
         let token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type:'POST',
@@ -246,11 +253,14 @@
                 "id" : product_uuid,
                 "colors" : selectedColors ,
                 "sizes" : selectedSizes ,
-                "qty" : product_qty
+                "qty" : product_qty,
+                'vendor_id' : vendor_id ,
             } ,
             success : (response)=>{
 
                 $('#closeModal').click();
+
+                console.log(response)
 
                 if ($.isEmptyObject(response.error)) {
                     Toast.fire({
@@ -280,7 +290,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url :'{{urL('/Get-Cart')}}',
+            url :'{{route(\App\Constants\Constants::GET_CART)}}',
             success : function (response){
 
                 //console.log(response)
@@ -333,7 +343,7 @@
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url :'{{urL('/Remove-From-Cart')}}',
+            url :'{{route(\App\Constants\Constants::REMOVE_FROM_CART)}}',
             data : {
                 'rowId' : rowId
             },
@@ -496,7 +506,7 @@
         let id =  element.getAttribute('data-uuid')
 
         //send to save in cart session
-        let baseUrl = '{{url('/Add-To-Cart')}}' ;
+        let baseUrl = '{{route(\App\Constants\Constants::ADD_TO_CART)}}' ;
         let token = $('meta[name="csrf-token"]').attr('content');
         $.ajax({
             type:'POST',
@@ -508,8 +518,9 @@
             data: {
                 "id" : id,
                 "qty" : 1 ,
-                "colors" : "N/A",
-                "sizes" : "N/A" ,
+                "colors" : null,
+                "sizes" : null ,
+                "vendor_id" : null ,
             } ,
             success : (response)=>{
 

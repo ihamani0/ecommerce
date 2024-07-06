@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Contracts\Frontend\LandingPageInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfileUpdateRequest;
+use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -48,6 +49,7 @@ class ProfileUserController extends Controller
                 $request->user()->email_verified_at = null;
             }
 
+            event(new Registered($request->user()));
             $request->user()->save();
 
             return redirect()->intended(route('user.account'))->with(["success"=> "The Profile Has been update Successfully"]);

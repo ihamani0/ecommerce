@@ -4,6 +4,7 @@ use App\Constants\Constants;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Frontend\ProfileUserController;
+use App\Http\Controllers\Frontend\StripePaymentController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -52,40 +53,41 @@ Route::middleware("auth.user")->group(function (){
     });//end Controller User
 
 
-    Route::controller(\App\Http\Controllers\Frontend\WishListController::class)->group(function (){
-        Route::get('/user-wish-list' , 'index')
-                ->name(Constants::USER_WISH_LIST);
-
-
-        Route::get('/user-wish-list-destroy/{id}' , 'destroy')
-            ->name(Constants::USER_WISHLIST_DESTROY_PRODUCT);
-
-
-
-        Route::get('/user-get-count-wish-list' , 'getCount');
-    });
-
-
-
-    /*USER_COMPARE_LIST*/
-
-    Route::controller(\App\Http\Controllers\Frontend\CompareProductsController::class)->group(function (){
-        Route::get('/user-compare-products' , 'index')
-            ->name(Constants::USER_COMPARE_LIST);
-
-        Route::get('/user-compare-list-destroy/{id}' , 'destroy')
-            ->name(Constants::USER_COMPARE_DESTROY_PRODUCT);
-
-        Route::get('/user-get-count-compare-list' , 'getCount');
-    });
-
-
-
 
 
     Route::get("logout" , [AuthenticatedSessionController::class , "destroy"])
             ->name(Constants::USER_LOGOUT);
 
+
+
+    //payment
+    Route::prefix('payment')->group(function(){
+        //Stripe Payment Controller
+        Route::controller(StripePaymentController::class)->group(function(){
+
+                Route::get('/success' , function(){
+                    return redirect()->route(App\Constants\Constants::USER_ACCOUNT)
+                        ->with(['success' => "The Order Place Successfully"]);
+                });
+
+                Route::get('/failed' , function(){
+                    return redirect()->route(App\Constants\Constants::USER_ACCOUNT)
+                        ->with(['error' => "There is Error please Try Again "]);
+                });
+        });
+
+        Route::controller(\App\Http\Controllers\Frontend\CashOnDeliveryController::class)->group(function(){
+
+            Route::get('/cashOnDelivery-payment' , 'index')
+                ->name(Constants::CASH_PAYMENT_INDEX);
+
+            Route::post('/cashOnDelivery-payment' , 'store')
+                ->name(Constants::CASH_PAYMENT_STORE);
+
+        }); // end CashOnDelivery payment
+
+
+    }); //end prefix Payment
 
 
 
