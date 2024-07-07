@@ -5,6 +5,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Frontend\ProfileUserController;
 use App\Http\Controllers\Frontend\StripePaymentController;
+use App\Repositories\Frontend\LandingPageRepo;
 use Illuminate\Support\Facades\Route;
 
 
@@ -37,20 +38,48 @@ Route::middleware("guest.user")->group(function (){
 Route::middleware("auth.user")->group(function (){
 
     //profile User Controller
-    Route::controller(ProfileUserController::class)->group(function (){
+    Route::prefix('customer')->group(function (){
+        Route::controller(ProfileUserController::class)->group(function (){
 
-        Route::get('/dashboard' , 'index')
+            Route::get('/account-customer' , 'index')
                 ->name(Constants::USER_ACCOUNT);
 
-        Route::post('account/update' , 'update')
+
+
+            Route::get('/dashboard' , 'dashboard_index')
+                ->name(Constants::USER_ACCOUNT_DASHBOARD);
+
+            Route::get('/orders-list' , 'orders_index')
+                ->name(Constants::USER_ACCOUNT_Orders);
+
+            Route::get('/track-orders' , 'track_orders_index')
+                ->name(Constants::USER_ACCOUNT_Track_Orders);
+
+            Route::get('/address-details' , 'address_index')
+                ->name(Constants::USER_ACCOUNT_ADDRESS_DETAILS);
+
+            Route::get('/change-password' , 'change_password_index')
+                ->name(Constants::USER_ACCOUNT_CHANGE_PASSWORD);
+
+            //Update Account Details
+            Route::get('account-update' , 'account_detail_index')
+                ->name(Constants::USER_ACCOUNT_UPDATE_INDEX);
+
+            Route::post('account-update' , 'update')
                 ->name(Constants::USER_ACCOUNT_UPDATE);
 
-        //Delete account
 
-        Route::post('account/delete' , 'destroy')
+
+            Route::get('account-delete' , 'delete_account_index')
+                ->name(Constants::USER_ACCOUNT_DELETE_INDEX);
+            //Delete account
+            Route::post('account-delete' , 'destroy')
                 ->name(Constants::USER_ACCOUNT_DELETE);
 
-    });//end Controller User
+        });//end Controller User
+    }); // end prefix customer
+
+
 
 
 
@@ -88,8 +117,6 @@ Route::middleware("auth.user")->group(function (){
 
 
     }); //end prefix Payment
-
-
 
 
 });//end middlware auth.user

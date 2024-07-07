@@ -18,12 +18,12 @@
     <ul class="metismenu" id="menu">
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-home-circle'></i>
+                <div class="parent-icon"><i class="fa-duotone fa-house fa-xs"></i>
                 </div>
                 <div class="menu-title">Dashboard</div>
             </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Default</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_DASHBOARD)}}"><i class="bx bx-right-arrow-alt"></i>Default</a>
                 </li>
             </ul>
         </li>
@@ -31,7 +31,7 @@
         {{--Brand --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-bookmark-heart'></i>
+                <div class="parent-icon"><i class="fa-sharp fa-solid fa-bookmark fa-xs"></i>
                 </div>
                 <div class="menu-title">Brand</div>
             </a>
@@ -47,7 +47,7 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bxs-category'></i>
+                <div class="parent-icon"><i class="fa-solid fa-rectangle-vertical-history fa-xs"></i>
                 </div>
                 <div class="menu-title">Category</div>
             </a>
@@ -62,7 +62,7 @@
         {{--SubCategory --}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-duplicate' ></i>
+                <div class="parent-icon"><i class="fa-duotone fa-clone fa-xs"></i>
                 </div>
                 <div class="menu-title">SubCategory</div>
             </a>
@@ -78,7 +78,7 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-store-alt'></i>
+                <div class="parent-icon"><i class="fa-duotone fa-shop fa-xs"></i>
                 </div>
                 <div class="menu-title">Products</div>
             </a>
@@ -94,7 +94,7 @@
 
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="fa-duotone fa-badge-percent"></i>
+                <div class="parent-icon"><i class="fa-duotone fa-badge-percent fa-xs"></i>
                 </div>
                 <div class="menu-title">Coupons</div>
             </a>
@@ -110,7 +110,7 @@
         {{--Vendors Status--}}
         <li>
             <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class='bx bx-user-pin'></i>
+                <div class="parent-icon"><i class="fa-duotone fa-users fa-xs"></i>
                 </div>
                 <div class="menu-title">Vendors</div>
             </a>
@@ -122,6 +122,22 @@
             </ul>
         </li>
 
+        <li class="menu-label">Orders </li>
+
+        {{--Orders Status--}}
+        <li class="">
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="fa-solid fa-bag-shopping fa-xs"></i>
+                </div>
+                <div class="menu-title">Orders</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Order_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Order List</a>
+                </li>
+            </ul>
+        </li>
+
+
 
 
         <li class="menu-label">Landing Page</li>
@@ -129,7 +145,7 @@
         {{--Slide Panel--}}
         <li>
             <a class="has-arrow" href="javascript:;" >
-                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-sm"></i>
+                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-xs"></i>
                 </div>
                 <div class="menu-title">Slide Panel</div>
             </a>
@@ -144,7 +160,7 @@
         {{--Banner Panel--}}
         <li>
             <a class="has-arrow" href="javascript:;" >
-                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-sm"></i>
+                <div class="parent-icon"><i class="fa-duotone fa-layer-group fa-xs"></i>
                 </div>
                 <div class="menu-title">Banner Panel</div>
             </a>

@@ -19,12 +19,18 @@ use App\Http\Controllers\backend\Admin\Category\SubcategoryController;
 /*use App\Http\Controllers\backend\Admin\Products\ProductsController;*/
 
 use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
+
+use App\Http\Controllers\backend\Admin\Order\OrderController;
+use App\Http\Controllers\backend\Admin\Order\OrderController as OrderControllerAdmin;
+use App\Http\Controllers\backend\Vendor\Order\OrderController as OrderControllerVendor;
+
 use App\Http\Controllers\backend\Admin\Products\ProductsController as adminProductsController;
 use App\Http\Controllers\backend\Admin\Slide\SlideController;
 use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorProductsController;
 
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
+use App\Http\Controllers\Frontend\_404PageController;
 use App\Http\Controllers\Frontend\CartShopController;
 use App\Http\Controllers\Frontend\CashOnDeliveryController;
 use App\Http\Controllers\Frontend\CompareProductsController;
@@ -61,7 +67,7 @@ class servicePattrenServiceProvider extends ServiceProvider
     {
 
         //-------------------- Payment--------------------
-        //---------------------------for Cash on delivery -----------------------------------------------------
+        //---------------------------for Cash on delivery ---- for Stripe-----------------------------------------------------
         $this->app->bind(OrderService::class, function ($app) {
             return new OrderService($app->make(OrderRepo::class));
                 });
@@ -70,19 +76,6 @@ class servicePattrenServiceProvider extends ServiceProvider
         $this->app->when(CashOnDeliveryController::class)
                         ->needs(LandingPageInterface::class)
                                 ->give(LandingPageRepo::class);
-        //--------------------------------------------------------------------------------
-        //---------------------------for Stripe -----------------------------------------------------
-
-            /*$this->app->when(StripePaymentController::class)
-                            ->needs(OrderInterface::class)
-                                ->give(OrderRepo::class);*/
-
-        //--------------------for Cart Products --------------------
-
-            /*$this->app->when(CartShopController::class)
-                        ->needs(OrderInterface::class)
-                            ->give(OrderRepo::class);*/
-
         //--------------------------------------------------------------------------------
         ////--------------------------------------------------------------------------------
         //--------------------for Cart Products --------------------
@@ -111,7 +104,21 @@ class servicePattrenServiceProvider extends ServiceProvider
                     ->needs(LandingPageInterface::class)
                         ->give(LandingPageRepo::class);
 
+        $this->app->when(_404PageController::class)
+                            ->needs(LandingPageInterface::class)
+                                ->give(LandingPageRepo::class);
+
         //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
+
+        //--------------------for Order--------------------
+        $this->app->when(\App\Http\Controllers\backend\Admin\Order\OrderController::class)
+                    ->needs(\App\Contracts\Backend\OrderInterface::class)
+                            ->give(\App\Repositories\Backend\OrderRepo::class);
+
+        //--------------------for Order Admin--------------------
+        $this->app->when(\App\Http\Controllers\backend\Vendor\Order\OrderController::class)
+                    ->needs(\App\Contracts\Backend\OrderInterface::class)
+                            ->give(\App\Repositories\Backend\OrderRepo::class);
         //--------------------for Coupon--------------------
         $this->app->when(CouponsController::class)
                         ->needs(CouponInterface::class)

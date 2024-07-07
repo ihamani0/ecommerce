@@ -94,7 +94,7 @@
                                                     <div class="">
                                                         @foreach($Product->colors() as $color)
                                                             <label class="form-check form-check-inline">
-                                                                <input type="checkbox" class="form-check-input" name="select_colors[]" value="{{ $color }}" >
+                                                                <input type="radio" class="form-check-input" name="select_color" value="{{ $color }}" >
                                                                 <div class="form-check-label fw-500">{{ ucwords($color) }}</div>
                                                             </label>
                                                         @endforeach
@@ -111,7 +111,7 @@
                                                 <div class="">
                                                     @foreach($Product->sizes() as $size)
                                                         <label class="form-check form-check-inline">
-                                                            <input type="checkbox" class="form-check-input" name="select_sizes[]" value="{{ $size }}" >
+                                                            <input type="radio" class="form-check-input" name="select_size" value="{{ $size }}" >
                                                             <div class="form-check-label fw-500">{{ $size }}</div>
                                                         </label>
                                                     @endforeach
@@ -480,45 +480,47 @@
             let id =  $("#Product_uuid").val()
             let vendor_id =  $("#Vendor_id").val()
 
-            let selectedColors = [];
-            let selectedSizes = [];
+            let selectedColor = "";
+            let selectedSize = "";
+
+            function isOptionSelected(selector, isVisible) {
+                return isVisible ? $(selector + ':checked').length > 0 : true;
+            }
+
+            // Show error message using Toast
+            function showError(message) {
+                Toast.fire({
+                    icon: "error",
+                    title: 'Error',
+                    text: message
+                });
+            }
 
             let  isColorVisible = {{ $Product->product_color ? 'true' : 'false' }};
             let isSizeVisible = {{$Product->product_size ? 'true' : 'false'}};
 
+            let sizeChecked = isOptionSelected('input[name="select_size"]', isSizeVisible);
+            let colorChecked = isOptionSelected('input[name="select_color"]', isColorVisible);
 
 
-            let sizeChecked = isSizeVisible ? $('input[name="select_sizes[]"]:checked').length > 0 : true;
-            let colorChecked = isColorVisible ? $('input[name="select_colors[]"]:checked').length > 0 : true;
 
 
             if (!sizeChecked ) {
-                Toast.fire({
-                    icon: "error",
-                    title: 'Error',
-                    text: 'Please select the size .'
-                });
+                showError('Please select a size.');
                 return;
             }
             if(!colorChecked){
-                Toast.fire({
-                    icon: "error",
-                    title: 'Error',
-                    text: 'Please select the Color .'
-                });
+                showError('Please select a color.');
                 return;
             }
 
 
 
-            //Selected colors and value
-            $('input[name="select_sizes[]"]:checked').each(function() {
-                selectedSizes.push($(this).val());
-            });
+            selectedSize = $('input[name="select_size"]:checked').val();
+            selectedColor = $('input[name="select_color"]:checked').val();
 
-            $('input[name="select_colors[]"]:checked').each(function() {
-                selectedColors.push($(this).val());
-            });
+
+
 
             let product_qty = $('input[name="quantity"]').val();
 
@@ -534,8 +536,8 @@
                 },
                 data: {
                     "id" : id,
-                    "colors" : selectedColors ,
-                    "sizes" : selectedSizes ,
+                    "colors" : selectedColor ,
+                    "sizes" : selectedSize ,
                     "qty" : product_qty,
                     'vendor_id' : vendor_id ,
                 } ,

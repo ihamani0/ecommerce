@@ -24,6 +24,50 @@ class ProfileUserController extends Controller
             'Categories' => $this->lPage->getAllCategories(),
         ]);
     }
+
+    public function dashboard_index(){
+        return view("frontend.pages.Profile.dashboard" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+    public function orders_index(){
+        return view("frontend.pages.Profile.orders" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+    public function track_orders_index(){
+        return view("frontend.pages.Profile.track-orders" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+    public function address_index(){
+        return view("frontend.pages.Profile.address-details" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+
+    public function account_detail_index(){
+        return view("frontend.pages.Profile.account-details" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+    public function change_password_index(){
+        return view("frontend.pages.Profile.change-password" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
+    public function delete_account_index(){
+        return view("frontend.pages.Profile.delete-account" , [
+            'Categories' => $this->lPage->getAllCategories(),
+        ]);
+    }
+
     /**
      * Display the user's profile form.
      */

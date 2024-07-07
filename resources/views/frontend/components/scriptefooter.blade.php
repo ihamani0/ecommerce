@@ -133,9 +133,9 @@
                 let colorId = "size_"+index
                 let colorLabel = $("<label></label>").addClass('form-check-label fw-500').attr('for', colorId).text(item);
                 let colorinput = $("<input/>").attr({
-                    type: 'checkbox',
+                    type: 'radio',
                     class: 'form-check-input',
-                    name: 'select_colors[]',
+                    name: 'select_color',
                     id: colorId,
                     value: item
                 });
@@ -150,7 +150,7 @@
         } // end Color
 
         // Sizes
-        if(!data.sizes){
+        if(!data.sizes){ //if array is empty hide the choice of color
             $("#Parent_div_display_size").hide();
         }else{
             $("#Parent_div_display_size").show();
@@ -160,9 +160,9 @@
                 let sizeId = "size_"+index
                 let sizeLabel = $("<label></label>").addClass('form-check-label fw-500').attr('for', sizeId).text(item);
                 let sizeInput = $("<input/>").attr({
-                    type: 'checkbox',
+                    type: 'radio',
                     class: 'form-check-input',
-                    name: 'select_sizes[]',
+                    name: 'select_size',
                     id: sizeId,
                     value: item
                 });
@@ -193,8 +193,23 @@
     function addToCartQuickView(){
         let product_uuid =  $("#product_uuid").val()
         let vendor_id = $('#vendor_id').val();
-        let selectedColors = [];
-        let selectedSizes = [];
+        let selectedColor = "";
+        let selectedSize = "";
+
+        // Validation function to check if an option is selected
+        function isOptionSelected(selector, isVisible) {
+            return isVisible ? $(selector + ':checked').length > 0 : true;
+        }
+
+        // Show error message using Toast
+        function showError(message) {
+            Toast.fire({
+                icon: "error",
+                title: 'Error',
+                text: message
+            });
+        }
+
 
         //validation
         let isSizeVisible = $('#Parent_div_display_size').is(':visible');
@@ -203,36 +218,27 @@
         //if isSizeVisible is true he throws to check now if the user check the box or not if not he return false if check he
         //return true ,and it true by default if the isSizeVisible is false so is mean the color and the size isn,t show
         // so next check if the default is true (! sizeChecked=ture) he wont go throw toaster to show the error becuse no div of color or size
-        let sizeChecked = isSizeVisible ? $('input[name="select_sizes[]"]:checked').length > 0 : true;
-        let colorChecked = isColorVisible ? $('input[name="select_colors[]"]:checked').length > 0 : true;
+        // Check if a size is selected
+        // Validate selection
+        let sizeChecked = isOptionSelected('input[name="select_size"]', isSizeVisible);
+        let colorChecked = isOptionSelected('input[name="select_color"]', isColorVisible);
+
+
+
 
         if (!sizeChecked ) {
-            Toast.fire({
-                icon: "error",
-                title: 'Error',
-                text: 'Please select thw size .'
-            });
+            showError('Please select a size.');
             return;
         }
         if(!colorChecked){
-            Toast.fire({
-                icon: "error",
-                title: 'Error',
-                text: 'Please select the Color .'
-            });
+            showError('Please select a color.');
             return;
         }
 
 
 
-        //Selected colors and value
-        $('input[name="select_sizes[]"]:checked').each(function() {
-            selectedSizes.push($(this).val());
-        });
-
-        $('input[name="select_colors[]"]:checked').each(function() {
-            selectedColors.push($(this).val());
-        });
+        selectedSize = $('input[name="select_size"]:checked').val();
+        selectedColor = $('input[name="select_color"]:checked').val();
 
 
         let product_qty = $('input[name="product_qty"]').val();
@@ -251,8 +257,8 @@
             },
             data: {
                 "id" : product_uuid,
-                "colors" : selectedColors ,
-                "sizes" : selectedSizes ,
+                "colors" : selectedColor ,
+                "sizes" : selectedSize ,
                 "qty" : product_qty,
                 'vendor_id' : vendor_id ,
             } ,

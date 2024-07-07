@@ -228,6 +228,18 @@ Route::middleware('auth.admin')->group(function (){
         }); // end prefix admin
     });//end Coupon Controller
 
+    //Order Controller
+    Route::controller(\App\Http\Controllers\backend\Admin\Order\OrderController::class)->group(function (){
+
+        Route::prefix('admin')->group(function(){
+
+                Route::get('/order-list' , 'index')
+                    ->name(Constants::Admin_Order_INDEX);
+        }); //end prefix
+
+
+    }); // end Order controller
+
 
     //Slide Panel
     Route::controller(\App\Http\Controllers\backend\Admin\Slide\SlideController::class)->group(function (){

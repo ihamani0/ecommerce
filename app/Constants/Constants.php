@@ -35,7 +35,18 @@ class  Constants {
 
             //Profile User
             public const USER_ACCOUNT = "user.account";
+            public const USER_ACCOUNT_DASHBOARD = "user.account.dashboard";
+            public const USER_ACCOUNT_Orders = "user.account.orders.index ";
+            public const USER_ACCOUNT_Track_Orders = "user.account.track.orders.index";
+            public const USER_ACCOUNT_ADDRESS_DETAILS = "user.account.address.index";
+            public const USER_ACCOUNT_CHANGE_PASSWORD = "user.account.change.password";
+
+
+
+    public const USER_ACCOUNT_UPDATE_INDEX = "user.account.index.update";
             public const USER_ACCOUNT_UPDATE  = "user.account.update";
+
+            public const USER_ACCOUNT_DELETE_INDEX = "user.account.index.delete";
             public const USER_ACCOUNT_DELETE = "user.account.delete";
 
 
@@ -135,7 +146,7 @@ class  Constants {
     public const Admin_Coupon_DESTORY = "admin.coupon.destroy";
     public const Admin_Coupon_STATUS = "admin.coupon.status";
     /*****************************************************/
-
+    public const Admin_Order_INDEX = "admin.order.index";
 
 
 
@@ -170,7 +181,8 @@ class  Constants {
     public const Vendor_Products_Add_MultiImg = "vendor.products.add.MultiImg";
     public const Vendor_Products_DESTORY_MultiImg = "vendor.products.destroy.MultiImg";
     public const Vendor_Products_Status  = "vendor.products.status";
-
+    /*****************************************************/
+    public const Vendor_ORDER_INDEX = "vendor.order.index";
 
 
 }

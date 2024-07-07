@@ -43,22 +43,23 @@
             </li>
 
             {{--Orders Manag--}}
-            <li  >
-                <a href="javascript:;" class="has-arrow" aria-expanded="false">
+            <li>
+                <a href="javascript:;" class="has-arrow">
                     <div class="parent-icon"><i class="fa-sm fa-light fa-truck-fast"></i>
                     </div>
-                    <div class="menu-title">Orders Manag </div>
+                    <div class="menu-title">Orders</div>
                 </a>
-                <ul class="mm-collapse" style="height: 1.6px;">
-                    <li> <a href="ecommerce-products.html"><i class="bx bx-right-arrow-alt"></i>Orders List</a>
+                <ul>
+                    <li> <a href="{{route("vendor.order.index")}}"><i class="bx bx-right-arrow-alt"></i>List Orders</a>
                     </li>
+
                 </ul>
             </li>
         @endcan
 
 
 
-
+        <li class="menu-label">Support Pages</li>
 
         {{--Profile --}}
         <li>

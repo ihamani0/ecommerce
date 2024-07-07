@@ -35,7 +35,7 @@ class CashOnDeliveryController extends Controller
         //session
         $sessionData = (object)[
             'payment_method_types' => ['card'],
-            'currency' => 'Dzd',
+            'currency' => 'dzd',
             'amount_total' => $order->get('total_cart') ,
             'metadata' => (object)['order_id' => uniqid('Od')],
         ];

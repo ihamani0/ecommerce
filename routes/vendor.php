@@ -75,7 +75,7 @@ Route::middleware(['auth' ,'verified'])->group(function (){
     });
 
 
-        Route::controller(\App\Http\Controllers\backend\Vendor\Products\ProductsController::class)->group(function (){
+    Route::controller(\App\Http\Controllers\backend\Vendor\Products\ProductsController::class)->group(function (){
             Route::prefix("vendor")->group(function (){
                 Route::get("/Products-List" , "index")
                     ->name(Constants::Vendor_Products_INDEX);
@@ -118,5 +118,14 @@ Route::middleware(['auth' ,'verified'])->group(function (){
         });//end product controller
 
 
+    //Order Controller
+    Route::controller(\App\Http\Controllers\backend\Vendor\Order\OrderController::class)->group(function (){
+        Route::prefix('vendor')->group(function(){
+            Route::get('/order-list' , 'index')
+                ->name(Constants::Vendor_ORDER_INDEX);
+        }); //end prefix
+
+
+    }); // end Order controller
 });//end middleware auth and verified
 

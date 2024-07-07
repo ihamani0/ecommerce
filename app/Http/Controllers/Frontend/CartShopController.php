@@ -76,7 +76,7 @@ class CartShopController extends Controller
                 default => redirect()->route(Constants::WELCOME),
             };
         } catch (\Exception $e) {
-            return throwException($e->getMessage());
+             throw new \Exception($e->getMessage());
         }
     }
 

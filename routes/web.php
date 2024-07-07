@@ -16,6 +16,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+/*404 page not found*/
+
+Route::fallback([\App\Http\Controllers\Frontend\_404PageController::class , 'handle']);
+
+
 Route::controller(\App\Http\Controllers\Frontend\LandingPageController::class)->group(function(){
 
     Route::get('/', "index")

@@ -36,7 +36,7 @@ class OrderService{
             Log::error('Order placement failed: ' . $exception->getMessage());
             Log::error('Stack trace: ' . $exception->getTraceAsString());
             // Rethrow the exception with the original message for further handling if needed
-            throw new \Exception("An error occurred while placing the order: " . $exception->getMessage());
+            throw new \Exception("An error occurred while placing the order (OrderService): " . $exception->getMessage());
 
         }
 

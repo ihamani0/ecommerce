@@ -42,7 +42,7 @@
                                         @endif
 
                                         {{--Start Form--}}
-                                        <form method="post" action="{{route(Constants::USER_LOGIN_STORE)}}">
+                                        <form method="post" action="{{route(\App\Constants\Constants::USER_LOGIN_STORE)}}">
                                             @csrf
                                             <div class="form-group">
                                                 <input type="text" required="" name="email" placeholder="Username or Email *" />

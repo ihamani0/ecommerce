@@ -19,4 +19,9 @@ class OrderItem extends Model
         return $this->belongsTo(Product::class , 'product_uuid' , 'products_uuid');
     }
 
+    public function order(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Order::class , 'order_id' , 'id');
+    }
+
 }

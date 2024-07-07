@@ -32,6 +32,7 @@ class StripePaymentController extends Controller
 
     public function createCheckoutSession(Collection $cart){
 
+        try {
         Stripe::setApiKey(config('stripe.api_key.secret_key'));
 
         $lineItems = $this->getLineItems($cart->get('cart_content'));
@@ -46,8 +47,6 @@ class StripePaymentController extends Controller
         $session = $this->createStripeSession($lineItems, $coupon);
 
         //database
-        try {
-
             //Insert the record Order in DataBase
             $this->order_service->storeOrder($cart,$session);
 
@@ -91,7 +90,7 @@ class StripePaymentController extends Controller
     }
 
     private function createStripeSession($lineItems , $coupon = null){
-
+        try {
         $sessionData = [
             'payment_method_types' => ['card'],
             'line_items' => $lineItems,
@@ -107,7 +106,7 @@ class StripePaymentController extends Controller
             ]];
         }
 
-        try {
+
             return $this->stripe->checkout->sessions->create($sessionData);
         } catch (ApiErrorException $e) {
             Log::error('Error In Api :' . $e->getMessage());
