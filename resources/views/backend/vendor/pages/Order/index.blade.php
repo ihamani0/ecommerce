@@ -27,38 +27,76 @@
     <div class="card">
         <div class="card-body">
             <div class="table-responsive">
-                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                <table id="MyTable"  class="table table-striped table-bordered" style="width:100%">
                     <thead>
                     <tr>
-                        <td>Num</td>
+                        <th>Order#</th>
+                        <th> Name </th>
+                        <th>Status </th>
+                        <th>Total </th>
                         <th>Date </th>
-                        <th>Invoice </th>
-                        <th>Amount </th>
-                        <th>Payment </th>
-                        <th>State </th>
-                        <th>Action</th>
+                        <th>View Details</th>
                     </tr>
                     </thead>
                     <tbody>
                     @foreach($OrderItems as  $item)
                         <tr>
 
-                            <td> {{ $loop->iteration }} </td>
-                            <td>  {{$item->order->created_at->format('Y-m-d') }} </td>
-                            <td>{{ $item->order->invoice_number }}</td>
+                            <td>#{{$item->order->order_number }} </td>
+                            <td>{{$item->order->name }} </td>
+
+                            <td>
+
+                                @switch($item->order->status)
+                                    @case('pending')
+                                    <div class="badge rounded-pill text-secondary bg-light-primary p-2 text-uppercase px-3">
+                                        <i class="bx bxs-circle me-1"></i>
+                                        {{ $item->order->status }}
+                                    </div>
+                                    @break
+
+                                    @case('processing')
+                                    <div class="badge rounded-pill text-warning bg-light-warning p-2 text-uppercase px-3">
+                                        <i class="bx bxs-circle me-1"></i>
+                                        {{ $item->order->status }}
+                                    </div>
+                                    @break
+
+                                    @case('delivered')
+                                    <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3">
+                                        <i class="bx bxs-circle me-1"></i>
+                                        {{ $item->order->status }}
+                                    </div>
+                                    @break
+
+                                    @case('confirmed')
+                                    <div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
+                                        <i class="bx bxs-circle me-1"></i>
+                                        {{ $item->order->status  }}
+                                    </div>
+                                    @break
+
+                                    @default
+                                    <p>Unknown status</p>
+                                @endswitch
+
+                            </td>
+
                             <td>{{ $item->order->amount }} {{ $item->order->currency }}</td>
-                            <td>{{ $item->order->payment_method }}</td>
-                            <td>
-                                <span class="badge rounded-pill bg-danger">
-                                    {{ $item->order->status }}</span>
-                            </td>
+                            <td>  {{$item->order->created_at->format('l , d-m-Y') }} </td>
 
                             <td>
-                                <a  href="#" class="btn btn-outline-secondary" id="details">
-                                    <i class="fa-duotone fa-eye"></i></a>
-
+                                <a href="{{route(App\Constants\Constants::Vendor_ORDER_VIEW , $item->order->order_number)}}"
+                                   class="btn btn-outline-secondary btn-sm radius-30 px-4">
+                                    <i class="fa-duotone fa-eye"></i>
+                                    Details</a>
+                                @if($item->order->status == 'confirmed')
+                                    <a href="{{route(App\Constants\Constants::DOWNLOAD_INVOICE , $item->order->order_number)}}"
+                                       class="btn btn-outline-danger btn-sm radius-30 px-4">
+                                        <i class="fa-duotone fa-download"></i>
+                                        Invoice</a>
+                                @endif
                             </td>
-
                         </tr>
                     @endforeach
 
@@ -67,13 +105,12 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <th>Num</th>
+                        <th>Order#</th>
+                        <th> Name </th>
+                        <th>Status </th>
+                        <th>Total </th>
                         <th>Date </th>
-                        <th>Invoice </th>
-                        <th>Amount </th>
-                        <th>Payment </th>
-                        <th>State </th>
-                        <th>Action</th>
+                        <th>View Details</th>
                     </tr>
                     </tfoot>
                 </table>
@@ -88,37 +125,4 @@
 
 
 @endsection
-
-@push('script')
-    <script>
-        $(function(){
-            $(document).on('click','#deleteBtn',function(e){
-                e.preventDefault();
-                const link = $(this).attr("href");
-
-                Swal.fire({
-                    title: 'Are you sure?',
-                    text: "Delete This Data?",
-                    icon: 'warning',
-                    showCancelButton: true,
-                    confirmButtonColor: '#3085d6',
-                    cancelButtonColor: '#d33',
-                    confirmButtonText: 'Yes, delete it!'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        window.location.href = link
-                        Swal.fire(
-                            'Deleted!',
-                            'Your file has been deleted.',
-                            'success'
-                        )
-                    }
-                })
-
-
-            });
-
-        });
-    </script>
-@endpush
 

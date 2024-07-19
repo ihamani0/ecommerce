@@ -29,7 +29,7 @@ Route::middleware('guest')->group(function () {
         ->name('password.store');
 });
 
-Route::middleware('auth.user')->group(function () {
+Route::middleware(['auth.user' , "activity"])->group(function () {
 
 
 

@@ -68,11 +68,27 @@
                                 </div>
                                 <h2><a target="_blank" href="{{route(\App\Constants\Constants::WEB_Products_Details , ['uuid'=>$item->products_uuid , 'slug'=>$item->product_slug ] )}}">{{$item->short_description}}</a></h2>
                                 <div class="product-rate-cover">
+
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        @if($item->avgRating() == 0)
+                                            <div class="product-rating" style="width: 0%"></div>
+                                        @elseif($item->avgRating() < 1)
+                                            <div class="product-rating" style="width: 10%"></div>
+                                        @elseif($item->avgRating() < 2)
+                                            <div class="product-rating" style="width: 20%"></div>
+                                        @elseif($item->avgRating() < 3)
+                                            <div class="product-rating" style="width: 40%"></div>
+                                        @elseif($item->avgRating() < 4)
+                                            <div class="product-rating" style="width: 60%"></div>
+                                        @elseif($item->avgRating() < 5)
+                                            <div class="product-rating" style="width: 80%"></div>
+                                        @else
+                                            <div class="product-rating" style="width: 100%"></div>
+                                        @endif
+
                                     </div>
                                     {{--Start Rate--}}
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                    <span class="font-small ml-5 text-muted"> ({{ count($item->comments) }} reviews) </span>
                                 </div>
                                 <div>
                                     @if($item->vendor_id)

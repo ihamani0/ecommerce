@@ -4,6 +4,10 @@ namespace App\Constants;
 
 class  Constants {
 
+    /********App**********************************************************************************/
+    public const CreatedApp = "2024";
+
+    //******** Route *********************************************************************************/
     /********Web PAGe Route**********************************************************************************/
     public const WELCOME = "web.welcome";
     public const WEB_Products_Details = "web.product.details";
@@ -37,10 +41,12 @@ class  Constants {
             public const USER_ACCOUNT = "user.account";
             public const USER_ACCOUNT_DASHBOARD = "user.account.dashboard";
             public const USER_ACCOUNT_Orders = "user.account.orders.index ";
+            public const USER_ACCOUNT_Orders_Return = "user.account.orders.return ";
+            public const USER_ACCOUNT_INDEX_Return_Orders = "user.account.index.return.orders";
             public const USER_ACCOUNT_Track_Orders = "user.account.track.orders.index";
             public const USER_ACCOUNT_ADDRESS_DETAILS = "user.account.address.index";
             public const USER_ACCOUNT_CHANGE_PASSWORD = "user.account.change.password";
-
+            public const DOWNLOAD_INVOICE = "user.create.invoice";
 
 
     public const USER_ACCOUNT_UPDATE_INDEX = "user.account.index.update";
@@ -147,9 +153,29 @@ class  Constants {
     public const Admin_Coupon_STATUS = "admin.coupon.status";
     /*****************************************************/
     public const Admin_Order_INDEX = "admin.order.index";
-
-
-
+    public const Admin_Order_Return_INDEX = "admin.order.return.index";
+    public const Admin_Order_VIEW = "admin.order.view";
+    public const Admin_Order_Change_Status = "admin.order.change.status";
+    /*****************************************************/
+    public const Admin_Report_Index = "admin.report.index";
+    public const Admin_Report_SearchByDate = "admin.report.search.by.date";
+    public const Admin_Report_SearchByWeek = "admin.report.search.by.week";
+    public const Admin_Report_SearchByMonth = "admin.report.search.by.month";
+    public const Admin_Report_SearchByYear = "admin.report.search.by.year";
+    /*********************************************/
+    public const Admin_Register_Users = "admin.register.users";
+    public const Admin_Register_Vendor = "admin.register.vendor";
+    /*********************************************/
+    public const Admin_Review_List = "admin.review.list";
+    public const Admin_Review_Approve = "admin.review.approve";
+    /*********************************************/
+    /*********************************************/
+    public const Admin_Setting_Index = "admin.setting.index";
+    public const Admin_Setting_Add = "admin.setting.add";
+    public const Admin_Setting_Store = "admin.setting.store";
+    public const Admin_Setting_Edite = "admin.setting.edite";
+    public const Admin_Setting_Update = "admin.setting.update";
+    public const Admin_Setting_Delete = "admin.setting.delete";
     /*********************************************/
     /********** Route Vendors **********************************************************************************************************/
     /*********************************************/
@@ -183,6 +209,12 @@ class  Constants {
     public const Vendor_Products_Status  = "vendor.products.status";
     /*****************************************************/
     public const Vendor_ORDER_INDEX = "vendor.order.index";
+    public const Vendor_ORDER_VIEW = "vendor.order.view";
+    public const Vendor_ORDER_RETURN = "vendor.order.return";
+    public const Vendor_Order_Change_Status  = "vendor.order.change.status";
+    /*****************************************************/
 
+    public const Vendor_Review_List = "vendor.review.list";
+    public const Vendor_Review_Approve = "vendor.review.approve";
 
 }

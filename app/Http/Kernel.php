@@ -64,14 +64,16 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
-        //my middelware
+        //my middleware
         'auth.admin' => \App\Http\Middleware\AdminMiddleware::class,
         'auth.user' => \App\Http\Middleware\UserAuthnticate::class,
         'guest.admin'=> \App\Http\Middleware\Admin_RedirectIfAuthenticated::class,
         'guest.user'=> \App\Http\Middleware\UserRedirectIfAuthenticated::class,
+        'activity' =>  \App\Http\Middleware\LastActivity::class,
 
         'role' => \App\Http\Middleware\RoleMiddleware::class,
-        'VerifyEmail' => \App\Http\Middleware\VerifyEmail::class
+        'VerifyEmail' => \App\Http\Middleware\VerifyEmail::class ,
+
     ];
 
 }

@@ -30,7 +30,7 @@
             {{--Product Manag--}}
             <li>
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="fa-sm fa-light fa-shop"></i>
+                    <div class="parent-icon"><i class="fa-duotone fa-shop"></i>
                     </div>
                     <div class="menu-title">Products</div>
                 </a>
@@ -45,12 +45,27 @@
             {{--Orders Manag--}}
             <li>
                 <a href="javascript:;" class="has-arrow">
-                    <div class="parent-icon"><i class="fa-sm fa-light fa-truck-fast"></i>
+                    <div class="parent-icon"><i class="fa-sm fa-duotone fa-truck-fast"></i>
                     </div>
                     <div class="menu-title">Orders</div>
                 </a>
                 <ul>
-                    <li> <a href="{{route("vendor.order.index")}}"><i class="bx bx-right-arrow-alt"></i>List Orders</a>
+                    <li> <a href="{{route(\App\Constants\Constants::Vendor_ORDER_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>List Orders</a>
+                    </li>
+                    <li> <a href="{{route(\App\Constants\Constants::Vendor_ORDER_RETURN)}}"><i class="bx bx-right-arrow-alt"></i>Return List</a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="">
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="fa-duotone fa-comment fa-xs"></i>
+                    </div>
+                    <div class="menu-title">Review Mange</div>
+                </a>
+                <ul>
+                    <li> <a href="{{route(\App\Constants\Constants::Vendor_Review_List)}}"><i class="bx bx-right-arrow-alt"></i>Review List</a>
                     </li>
 
                 </ul>

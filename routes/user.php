@@ -35,8 +35,10 @@ Route::middleware("guest.user")->group(function (){
 
 
 //start middleware auth
-Route::middleware("auth.user")->group(function (){
+Route::middleware(["auth.user" , 'activity'])->group(function (){
 
+    Route::get("logout" , [AuthenticatedSessionController::class , "destroy"])
+        ->name(Constants::USER_LOGOUT);
     //profile User Controller
     Route::prefix('customer')->group(function (){
         Route::controller(ProfileUserController::class)->group(function (){
@@ -44,13 +46,21 @@ Route::middleware("auth.user")->group(function (){
             Route::get('/account-customer' , 'index')
                 ->name(Constants::USER_ACCOUNT);
 
-
-
             Route::get('/dashboard' , 'dashboard_index')
                 ->name(Constants::USER_ACCOUNT_DASHBOARD);
 
             Route::get('/orders-list' , 'orders_index')
                 ->name(Constants::USER_ACCOUNT_Orders);
+
+            //Return order Route
+
+            Route::get('/orders-return-list' , 'orders_return_index')
+                ->name(Constants::USER_ACCOUNT_INDEX_Return_Orders);
+
+
+            Route::post('/order-return' , 'orders_return')
+                ->name(Constants::USER_ACCOUNT_Orders_Return);
+
 
             Route::get('/track-orders' , 'track_orders_index')
                 ->name(Constants::USER_ACCOUNT_Track_Orders);
@@ -68,26 +78,24 @@ Route::middleware("auth.user")->group(function (){
             Route::post('account-update' , 'update')
                 ->name(Constants::USER_ACCOUNT_UPDATE);
 
-
-
             Route::get('account-delete' , 'delete_account_index')
                 ->name(Constants::USER_ACCOUNT_DELETE_INDEX);
             //Delete account
             Route::post('account-delete' , 'destroy')
                 ->name(Constants::USER_ACCOUNT_DELETE);
 
+
+            Route::get('download-invoice/{orderID}' , 'CreateInvoice')
+                ->name(Constants::DOWNLOAD_INVOICE);
+
+                //----------------Ajax------------------------
+                    Route::prefix('api')->group(function(){
+                        Route::post('get-order-details' , 'getOrderDetails')
+                                ->name('api.get.order.details');
+                    }); // end prefix api
+
         });//end Controller User
     }); // end prefix customer
-
-
-
-
-
-
-    Route::get("logout" , [AuthenticatedSessionController::class , "destroy"])
-            ->name(Constants::USER_LOGOUT);
-
-
 
     //payment
     Route::prefix('payment')->group(function(){
@@ -117,6 +125,12 @@ Route::middleware("auth.user")->group(function (){
 
 
     }); //end prefix Payment
+
+
+    Route::controller(\App\Http\Controllers\Frontend\ReviewController::class)->group(function (){
+        Route::post('/comment-store' , 'store')
+                ->name('store.comment');
+    });
 
 
 });//end middlware auth.user

@@ -45,6 +45,12 @@ class Product extends Model
         return $this->hasMany(MultiImageProduct::class , "product_id" , "id");
     }
 
+    //Comment
+    public function comments() : \Illuminate\Database\Eloquent\Relations\hasMany
+    {
+        return $this->hasMany(review::class , "product_id" , "id")->where('status' , 1);
+    }
+
 
     /*-----------Section of Query's---------------------------------------*/
     //query Scope
@@ -58,6 +64,11 @@ class Product extends Model
             return $this->subcategory->products->where('products_uuid', '!=', $this->products_uuid);
         }
         return collect(); // Return an empty collection if no subcategory
+    }
+
+    public function avgRating($decimals=2): float
+    {
+        return round($this->comments()->avg('rating'), $decimals);
     }
 
 

@@ -5,7 +5,8 @@
     <div>
         <div class="card">
             <div class="card-header">
-                <h3 class="mb-0">{{\Illuminate\Support\Facades\Auth::user()->name}}</h3>
+                <h3 class="mb-0">Welcome back
+                <a href="#">{{\Illuminate\Support\Facades\Auth::user()->name}}</a></h3>
             </div>
             <div class="card-body">
                 <p>

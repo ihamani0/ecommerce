@@ -60,10 +60,24 @@
                                 <h2><a href="{{route(\App\Constants\Constants::WEB_Products_Details , ['uuid'=>$product->products_uuid , 'slug'=>$product->product_slug ] )}}">
                                         {{$product->short_description}}</a></h2>
                                 <div class="product-rate-cover">
+
+
+                                    {{--Rating--}}
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        @switch($product->avgRating())
+                                            @case(1 || $product->avgRating() < 2 ) <div class="product-rating" style="width: 20%"></div> @break
+                                            @case( 2 || $product->avgRating() < 3)  <div class="product-rating" style="width: 40%"></div> @break
+                                            @case(3 || $product->avgRating() < 4)  <div class="product-rating" style="width: 60%"></div> @break
+                                            @case(4 || $product->avgRating() < 5)  <div class="product-rating" style="width: 80%"></div>@break
+                                            @case(5) <div class="product-rating" style="width: 100%"></div> @break
+                                            @default <div class="product-rating" style="width: 2%"></div> @break
+                                        @endswitch
+
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+
+
+                                    {{--Start Rate--}}
+                                    <span class="font-small ml-5 text-muted"> ({{$product->avgRating()}})</span>
                                 </div>
                                 <div>
                                     @if($product->vendor_id)

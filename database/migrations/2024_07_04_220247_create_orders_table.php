@@ -38,7 +38,8 @@ return new class extends Migration
             $table->string('cancel_date')->nullable();
             $table->string('return_date')->nullable();
             $table->string('return_reason')->nullable();
-            $table->string('status');
+            $table->boolean('return_status')->default(false);
+            $table->enum('status' , ['pending' , 'processing' , 'delivered' , 'confirmed' , 'completed']);
 
 
 

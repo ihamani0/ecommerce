@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Notifications\Auth\VerifyEmailUser;
+use Carbon\Carbon;
 use Illuminate\Auth\MustVerifyEmail;
 use Illuminate\Auth\Notifications\VerifyEmail;
 use Illuminate\Contracts\Auth\MustVerifyEmail as IMustVerifyEmail;
@@ -13,6 +14,7 @@ use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @property mixed $id
+ * @method static where(string $string, string $string1, Carbon $subMinutes)
  */
 class User extends Authenticatable implements IMustVerifyEmail
 {
@@ -51,6 +53,7 @@ class User extends Authenticatable implements IMustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        'last_activity' => 'datetime',
     ];
 
     public function sendEmailVerificationNotification()
@@ -84,4 +87,10 @@ class User extends Authenticatable implements IMustVerifyEmail
             ->withTimestamps();
     }
 
+
+    //check user is online
+    public function isOnline(): bool
+    {
+        return $this->last_activity && $this->last_activity->gt(Carbon::now()->subMinutes(5));
+    }
 }

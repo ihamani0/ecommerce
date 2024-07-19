@@ -3,6 +3,7 @@
 use App\Constants\Constants;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Frontend\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -87,7 +88,7 @@ Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->gro
     });
 
 
-    Route::middleware('auth.user')->group(function(){
+    Route::middleware(['auth.user' , 'activity'])->group(function(){
 
         Route::get('/index-check-out-cart' , 'indexCheckOutCart')
             ->name(Constants::USER_INDEX_CHECKOUT_CART);
@@ -116,7 +117,7 @@ Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->gro
 
         Route::post("/add-to-wish-list" , 'store');
 
-    })->middleware('auth.user');
+    })->middleware(['auth.user' , 'activity']);
 
      //add to compare two products
 
@@ -132,11 +133,11 @@ Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->gro
 
         Route::post("/add-to-compare-products" , 'store');
 
-    })->middleware('auth.user');
+    })->middleware(['auth.user' , 'activity']);
 
 
 
-
+Route::get('order-pdf' , [ProfileUserController::class ,'CreateInvoice']);
 
 
 

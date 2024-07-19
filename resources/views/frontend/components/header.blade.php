@@ -163,11 +163,11 @@
                                             {{--<img class="svgInject mr-1" alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-user.svg")}}" />--}}
                                             <i class="fa-solid fa-user fa-xs mr-1"></i>
                                         </a>
-                                    <a href="{{route(Constants::USER_ACCOUNT)}}"><span class="lable ml-1">Account</span></a>
+                                    <a href="{{route(\App\Constants\Constants::USER_ACCOUNT_DASHBOARD)}}"><span class="lable ml-1">Account</span></a>
                                     <div class="cart-dropdown-wrap cart-dropdown-hm2 account-dropdown">
                                         <ul>
                                             <li>
-                                                <a href="{{route(Constants::USER_ACCOUNT)}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
+                                                <a href="{{route(\App\Constants\Constants::USER_ACCOUNT_DASHBOARD)}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                                             </li>
                                             <li>
                                                 <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>

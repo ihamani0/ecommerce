@@ -68,12 +68,25 @@
                                         </div>
                                         <h2><a href="{{route(\App\Constants\Constants::WEB_Products_Details , ['uuid'=>$item->products_uuid , 'slug'=>$item->product_slug ] )}}">
                                                 {{$item->product_name}}</a></h2>
+
+                                        {{--Rating--}}
+
                                         <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 80%"></div>
+                                            @switch($item->avgRating())
+                                                @case(1 || $item->avgRating() < 2 ) <div class="product-rating" style="width: 20%"></div> @break
+                                                @case( 2 || $item->avgRating() < 3)  <div class="product-rating" style="width: 40%"></div> @break
+                                                @case(3 || $item->avgRating() < 4)  <div class="product-rating" style="width: 60%"></div> @break
+                                                @case(4 || $item->avgRating() < 5)  <div class="product-rating" style="width: 80%"></div>@break
+                                                @case(5) <div class="product-rating" style="width: 100%"></div> @break
+                                                @default <div class="product-rating" style="width: 2%"></div> @break
+                                            @endswitch
+
                                         </div>
+
+
+
                                         <div class="product-price mt-10">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
+
                                             @if($item->discount_price)
                                                 <span> {{ ($item->selling_price * $item->discount_price) / 100 }} Dz</span>
                                                 <span class="old-price">{{$item->selling_price }} Dz</span>

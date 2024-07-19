@@ -117,9 +117,25 @@
                                     <h2><a href="shop-product-right.html">{{$product->product_name}}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
-                                            <div class="product-rating" style="width: 90%"></div>
+                                            @if($product->avgRating() == 0)
+                                                <div class="product-rating" style="width: 0%"></div>
+                                            @elseif($product->avgRating() < 1)
+                                                <div class="product-rating" style="width: 10%"></div>
+                                            @elseif($product->avgRating() < 2)
+                                                <div class="product-rating" style="width: 20%"></div>
+                                            @elseif($product->avgRating() < 3)
+                                                <div class="product-rating" style="width: 40%"></div>
+                                            @elseif($product->avgRating() < 4)
+                                                <div class="product-rating" style="width: 60%"></div>
+                                            @elseif($product->avgRating() < 5)
+                                                <div class="product-rating" style="width: 80%"></div>
+                                            @else
+                                                <div class="product-rating" style="width: 100%"></div>
+                                            @endif
+
                                         </div>
-                                        <span class="font-small ml-5 text-muted"> (4.0)</span>
+                                        {{--Start Rate--}}
+                                        <span class="font-small ml-5 text-muted"> ({{ count($product->comments) }} reviews) </span>
                                     </div>
                                     <div>
                                         @if($product->vendor_id)

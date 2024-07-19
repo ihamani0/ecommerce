@@ -235,6 +235,16 @@ Route::middleware('auth.admin')->group(function (){
 
                 Route::get('/order-list' , 'index')
                     ->name(Constants::Admin_Order_INDEX);
+
+                Route::get('/order-return-list' , 'return_index')
+                    ->name(Constants::Admin_Order_Return_INDEX);
+
+                Route::get('/order-view/{orderId}' , 'view')
+                    ->name(Constants::Admin_Order_VIEW);
+
+                Route::get('/order-change-status/{orderID}/{status}' , 'changeStatus')
+                    ->name(Constants::Admin_Order_Change_Status);
+
         }); //end prefix
 
 
@@ -285,5 +295,63 @@ Route::middleware('auth.admin')->group(function (){
                 ->name(Constants::Admin_Banner_DESTORY);
         }); //end prefix admin
     });//end BannerController
+
+    //Report Controller
+    Route::controller(\App\Http\Controllers\backend\Admin\Report\ReportController::class)->group(function(){
+        Route::prefix("admin")->group(function(){
+
+            Route::get('/report-search' , 'index')
+                    ->name(Constants::Admin_Report_Index);
+
+            Route::post('report-search-by-date' , 'searchByDate')
+                    ->name(Constants::Admin_Report_SearchByDate);
+            Route::post('report-search-by-week' , 'searchByWeek')
+                ->name(Constants::Admin_Report_SearchByWeek);
+            Route::post('report-search-by-month' , 'searchByMonth')
+                ->name(Constants::Admin_Report_SearchByMonth);
+            Route::post('report-search-by-year' , 'searchByYear')
+                ->name(Constants::Admin_Report_SearchByYear);
+        });//end prefix
+    });//end Report Controller
+
+
+    Route::controller(\App\Http\Controllers\backend\Admin\UsersManagementController::class)->group(function(){
+        Route::prefix('admin')->group(function(){
+            Route::get('users-management' , 'users_index')
+                    ->name(Constants::Admin_Register_Users);
+            Route::get('vendor-management' , 'vendor_index')
+                ->name(Constants::Admin_Register_Vendor);
+        }) ; // end prefix
+    });// end controller
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Review\ReviewController::class)->group(function(){
+
+        Route::prefix('admin')->group(function(){
+            Route::get('review-list' , 'index')
+                ->name(Constants::Admin_Review_List);
+            Route::get('comment-change-status/{id}' , 'changeStatus')
+                ->name(Constants::Admin_Review_Approve);
+        }) ; // end prefix
+    });// end controller
+
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Setting\SettingController::class)->group(function(){
+
+        Route::prefix('admin')->group(function(){
+            Route::get('setting-page' , 'index')
+                ->name(Constants::Admin_Setting_Index);
+            Route::get('add-setting' , 'create')
+                ->name(Constants::Admin_Setting_Add);
+            Route::post('store-setting' , 'store')
+                ->name(Constants::Admin_Setting_Store);
+            Route::get('edite-setting' , 'edit')
+                ->name(Constants::Admin_Setting_Edite);
+            Route::post('edite-setting' , 'update')
+                ->name(Constants::Admin_Setting_Update);
+            Route::get('delete-setting' , 'delete')
+                ->name(Constants::Admin_Setting_Delete);
+        }) ; // end prefix
+    });// end controller
 });//end auth admin middleware
+
 

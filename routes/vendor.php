@@ -39,7 +39,7 @@ Route::middleware('guest')->group(function (){
 /*---------------------------------------------------------------------------*/
 /*---------------------- Vendor Route -------------------------------------*/
 /*---------------------------------------------------------------------------*/
-Route::middleware(['auth' ,'verified'])->group(function (){
+Route::middleware(['auth' ,'verified' , 'activity'])->group(function (){
 
     //Logout
     Route::post("vendor/logout" ,[VendorAuthController::class,'logout'])
@@ -120,12 +120,35 @@ Route::middleware(['auth' ,'verified'])->group(function (){
 
     //Order Controller
     Route::controller(\App\Http\Controllers\backend\Vendor\Order\OrderController::class)->group(function (){
+
         Route::prefix('vendor')->group(function(){
+
             Route::get('/order-list' , 'index')
                 ->name(Constants::Vendor_ORDER_INDEX);
-        }); //end prefix
+
+            Route::get('/order-view/{orderId}' , 'viewDetails')
+                ->name(Constants::Vendor_ORDER_VIEW);
+
+            Route::get('/order-return-list' , 'return')
+                ->name(Constants::Vendor_ORDER_RETURN);
+
+            Route::get('/order-change-status/{orderID}/{status}' , 'changeStatus')
+                ->name(Constants::Vendor_Order_Change_Status);
+
+        }); //end vendor prefix
 
 
     }); // end Order controller
+
+    Route::controller(\App\Http\Controllers\backend\Vendor\Review\ReviewController::class)->group(function(){
+
+        Route::prefix('vendor')->group(function(){
+            Route::get('review-list' , 'index')
+                ->name(Constants::Vendor_Review_List);
+            Route::get('comment-change-status/{id}' , 'changeStatus')
+                ->name(Constants::Vendor_Review_Approve);
+        }) ; // end prefix
+    });// end controller
+
 });//end middleware auth and verified
 

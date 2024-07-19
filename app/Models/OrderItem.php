@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static create(array $array)
+ * @method static where(string $string, $uuid)
+ * @method static whereHas(string $string, \Closure $param)
  */
 class OrderItem extends Model
 {

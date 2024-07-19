@@ -19,9 +19,21 @@
                             </h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
+                                    @switch($product->avgRating())
+                                        @case(1 || $product->avgRating() < 2 ) <div class="product-rating" style="width: 20%"></div> @break
+                                        @case( 2 || $product->avgRating() < 3)  <div class="product-rating" style="width: 40%"></div> @break
+                                        @case(3 || $product->avgRating() < 4)  <div class="product-rating" style="width: 60%"></div> @break
+                                        @case(4 || $product->avgRating() < 5)  <div class="product-rating" style="width: 80%"></div>@break
+                                        @case(5) <div class="product-rating" style="width: 100%"></div> @break
+                                        @default <div class="product-rating" style="width: 2%"></div> @break
+                                    @endswitch
+
                                 </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+
+
+                                {{--Start Rate--}}
+                                <span class="font-small ml-5 text-muted"> ({{$product->avgRating()}})</span>
+
                             </div>
                             <div class="product-price">
                                 @if($product->discount_price)
@@ -55,10 +67,23 @@
                                         {{$product->category->category_name}}</a>
                                 </h6>
                                 <div class="product-rate-cover">
+
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        @switch($product->avgRating())
+                                            @case(1 || $product->avgRating() < 2 ) <div class="product-rating" style="width: 20%"></div> @break
+                                            @case( 2 || $product->avgRating() < 3)  <div class="product-rating" style="width: 40%"></div> @break
+                                            @case(3 || $product->avgRating() < 4)  <div class="product-rating" style="width: 60%"></div> @break
+                                            @case(4 || $product->avgRating() < 5)  <div class="product-rating" style="width: 80%"></div>@break
+                                            @case(5) <div class="product-rating" style="width: 100%"></div> @break
+                                            @default <div class="product-rating" style="width: 2%"></div> @break
+                                        @endswitch
+
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (4.0)</span>
+
+
+                                    {{--Start Rate--}}
+                                    <span class="font-small ml-5 text-muted"> ({{$product->avgRating()}})</span>
+
                                 </div>
                                 <div class="product-price">
                                     @if($product->discount_price)
@@ -91,9 +116,24 @@
                                         {{$product->category->category_name}}</a>
                                 </h6>
                                 <div class="product-rate-cover">
+
+
                                     <div class="product-rate d-inline-block">
-                                        <div class="product-rating" style="width: 90%"></div>
+                                        @switch($product->avgRating())
+                                            @case(1 || $product->avgRating() < 2 ) <div class="product-rating" style="width: 20%"></div> @break
+                                            @case( 2 || $product->avgRating() < 3)  <div class="product-rating" style="width: 40%"></div> @break
+                                            @case(3 || $product->avgRating() < 4)  <div class="product-rating" style="width: 60%"></div> @break
+                                            @case(4 || $product->avgRating() < 5)  <div class="product-rating" style="width: 80%"></div>@break
+                                            @case(5) <div class="product-rating" style="width: 100%"></div> @break
+                                            @default <div class="product-rating" style="width: 2%"></div> @break
+                                        @endswitch
+
                                     </div>
+
+
+                                    {{--Start Rate--}}
+                                    <span class="font-small ml-5 text-muted"> ({{$product->avgRating()}})</span>
+
                                     <span class="font-small ml-5 text-muted"> (4.0)</span>
                                 </div>
                                 <div class="product-price">

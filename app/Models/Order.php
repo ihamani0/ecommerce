@@ -9,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
  * @method static insertGetId(array $array)
  * @method static find($orderId)
  * @method static where(string $string, $orderId)
+ * @method static orderBy(string $string, string $string1)
  */
 class Order extends Model
 {
@@ -26,6 +27,11 @@ class Order extends Model
         return $this->orderItems->sum(function ($item){
             return $item->price * $item->qty;
         });
+    }
+
+    public function  user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class , 'costumer_id' , 'id');
     }
 
 }

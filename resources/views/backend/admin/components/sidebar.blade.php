@@ -129,12 +129,57 @@
             <a href="javascript:;" class="has-arrow">
                 <div class="parent-icon"><i class="fa-solid fa-bag-shopping fa-xs"></i>
                 </div>
-                <div class="menu-title">Orders</div>
+                <div class="menu-title">Orders Mange</div>
             </a>
             <ul>
-                <li> <a href="{{route(\App\Constants\Constants::Admin_Order_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Order List</a>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Order_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Orders List</a>
+                </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Order_Return_INDEX)}}"><i class="bx bx-right-arrow-alt"></i>Return List</a>
                 </li>
             </ul>
+        </li>
+
+
+        {{--Register --}}
+        <li class="menu-label">Register</li>
+
+        <li class="">
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="fa-duotone fa-book-user fa-xs"></i>
+                </div>
+                <div class="menu-title">Register Users</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Users)}}"><i class="bx bx-right-arrow-alt"></i>Client List</a>
+                </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Vendor)}}"><i class="bx bx-right-arrow-alt"></i>Vendor List</a>
+                </li>
+            </ul>
+        </li>
+
+
+        <li class="">
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="fa-duotone fa-comment fa-xs"></i>
+                </div>
+                <div class="menu-title">Review Mange</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Review_List)}}"><i class="bx bx-right-arrow-alt"></i>Review List</a>
+                </li>
+
+            </ul>
+        </li>
+
+        <hr>
+        {{--Report Status--}}
+        <li class="">
+            <a href="{{route(\App\Constants\Constants::Admin_Report_Index)}}" >
+                <div class="parent-icon"><i class="fa-duotone fa-file-spreadsheet fa-xs"></i>
+                </div>
+                <div class="menu-title">Report Mange</div>
+            </a>
+
         </li>
 
 
@@ -182,6 +227,14 @@
                 <div class="parent-icon"><i class="bx bx-user-circle"></i>
                 </div>
                 <div class="menu-title">User Profile</div>
+            </a>
+        </li>
+
+        <li>
+            <a href="{{ route(\App\Constants\Constants::Admin_Setting_Index) }}">
+                <div class="parent-icon"><i class="fa-duotone fa-solid fa-gear"></i>
+                </div>
+                <div class="menu-title">Config WebSite</div>
             </a>
         </li>
 

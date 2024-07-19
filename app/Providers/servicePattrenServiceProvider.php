@@ -7,6 +7,7 @@ use App\Contracts\Backend\CrudInterface;
 use App\Contracts\Backend\ProductInterface;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
+use App\Contracts\Backend\UsersRegistersInterface;
 use App\Contracts\Backend\VendorInterface;
 
 use App\Contracts\Frontend\LandingPageInterface;
@@ -22,6 +23,7 @@ use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
 
 use App\Http\Controllers\backend\Admin\Order\OrderController;
 use App\Http\Controllers\backend\Admin\Order\OrderController as OrderControllerAdmin;
+use App\Http\Controllers\backend\Admin\UsersManagementController;
 use App\Http\Controllers\backend\Vendor\Order\OrderController as OrderControllerVendor;
 
 use App\Http\Controllers\backend\Admin\Products\ProductsController as adminProductsController;
@@ -47,6 +49,7 @@ use App\Repositories\Backend\CouponRepo;
 use App\Repositories\Backend\ProductRepo;
 use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
+use App\Repositories\Backend\UsersRegistersRepo;
 use App\Repositories\Backend\VendorRepo;
 use App\Repositories\Frontend\LandingPageRepo;
 use App\Repositories\Frontend\OrderRepo;
@@ -108,7 +111,17 @@ class servicePattrenServiceProvider extends ServiceProvider
                             ->needs(LandingPageInterface::class)
                                 ->give(LandingPageRepo::class);
 
+        //-------------------Order for dashboard User
+        $this->app->when(ProfileUserController::class)
+            ->needs(\App\Contracts\Backend\OrderInterface::class)
+            ->give(\App\Repositories\Backend\OrderRepo::class);
+
         //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
+
+        //--------------------for All Users and Vendors Register--------------------
+        $this->app->when(UsersManagementController::class)
+                    ->needs(UsersRegistersInterface::class)
+                            ->give(UsersRegistersRepo::class);
 
         //--------------------for Order--------------------
         $this->app->when(\App\Http\Controllers\backend\Admin\Order\OrderController::class)

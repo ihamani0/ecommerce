@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('color')->nullable();
             $table->string('size')->nullable();
             $table->string('qty');
+            $table->boolean('return_status')->default(false);
             $table->timestamps();
         });
     }
