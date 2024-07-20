@@ -13,6 +13,10 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{route(Constants::Admin_DASHBOARD)}}"><i class="bx bx-home-alt"></i></a>
                         </li>
+                        <li class="breadcrumb-item active" aria-current="page">
+                            <a href="{{route(\App\Constants\Constants::Admin_Setting_Index)}}">Setting</a>
+                        </li>
+                        <li class="breadcrumb-item active" aria-current="page">Add</li>
                     </ol>
                 </nav>
             </div>
@@ -66,45 +70,72 @@
                                 <div class="header"><h4>Add Social Media</h4> </div>
                                 <hr>
                                 {{--strat Row--}}
-                                <div id="social_media">
-                                    <div class="social_media mb-3">
+
                                         <div class="card">
                                             <div class="card-body">
                                                 <div class="row" >
-                                                    <div class="col-md-3 mb-3">
-                                                        <label for="name" class="form-label">Secial Media</label>
-                                                        <input type="text" class="form-control" name="name[]" required>
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="email" class="form-label">Facebook</label>
+                                                        <input type="text" class="form-control" name="facebook" >
                                                     </div>
                                                     <div class="col-md-3 mb-3">
-                                                        <label for="email" class="form-label">Url</label>
-                                                        <input type="text" class="form-control" name="url[]" required>
+                                                        <img src="{{asset('backend/assets/images/icons/facebook.svg')}}" width="40px" height="40px" >
                                                     </div>
-                                                    <div class="col-md-4">
-                                                        <label for="inputProductDescription" class="form-label">Logo svg<span class="text-danger">*</span></label>
-                                                        <div class="text-secondary">
-                                                            <input type="file" class="form-control" id="image" name="logo[]" accept="image/*" required="">
-                                                        </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row" >
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="email" class="form-label">Instagram</label>
+                                                        <input type="text" class="form-control" name="instagram" >
                                                     </div>
-                                                    <div class="col-md-2 d-flex align-items-end mb-3">
-                                                        <button type="button" class="btn btn-outline-danger remove-member"><i class="fa-duotone fa-trash"></i></button>
+                                                    <div class="col-md-3 mb-3">
+                                                        <img src="{{asset('backend/assets/images/icons/instagram.svg')}}" width="40px" height="40px" >
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row" >
+
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="email" class="form-label">Youtube</label>
+                                                        <input type="text" class="form-control" name="youtube" >
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <img src="{{asset('backend/assets/images/icons/youtube.svg')}}" width="40px" height="40px" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="card">
+                                            <div class="card-body">
+                                                <div class="row" >
+                                                    <div class="col-md-6 mb-3">
+                                                        <label for="email" class="form-label">Twitter</label>
+                                                        <input type="text" class="form-control" name="twitter" >
+                                                    </div>
+                                                    <div class="col-md-3 mb-3">
+                                                        <img src="{{asset('backend/assets/images/icons/twitter.svg')}}" width="40px" height="40px" >
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
 
                                 {{--end Row--}}
 
                             </div>
-
-                            <div class="row mb-3">
-                                <div class="col-12 d-flex justify-content-center">
-                                    <button type="button" class="btn btn-outline-secondary " id="addMember">Add Other Social</button>
-                                </div>
-                            </div>
-
-
 
                         </div>
                     </div>
@@ -112,7 +143,7 @@
 
             <div class="row">
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-warning mt-3">Config</button>
+                    <button type="submit" class="btn btn-warning mt-3">Config Site</button>
                 </div>
             </div>
 
@@ -175,20 +206,5 @@
 
             </script>
 
-            <script>
-                $("#addMember").click(function() {
-                    let newMember = $(".social_media:first").clone();
-                    newMember.find("input").val("");
-                    $("#social_media").append(newMember);
-                });
 
-                // Remove team member
-                    $(document).on("click", ".remove-member", function() {
-                    if ($(".social_media").length > 1) {
-                    $(this).closest(".social_media").remove();
-                    } else {
-                    alert("You must have at least one team member.");
-                    }
-                    });
-            </script>
     @endpush

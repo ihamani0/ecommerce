@@ -13,6 +13,8 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{route(Constants::Admin_DASHBOARD)}}"><i class="bx bx-home-alt"></i></a>
                         </li>
+                        <li class="breadcrumb-item active" aria-current="page"><a href="{{route(\App\Constants\Constants::Admin_Setting_Index)}}">Setting</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Edit</li>
                     </ol>
                 </nav>
             </div>
@@ -33,6 +35,9 @@
                                 <input type="text" class="form-control" name="company_name"
                                        id="inputProductTitle" placeholder="Enter product title" value="{{$Setting->company_name}}"  required="">
                             </div>
+
+
+
                             <div class="mb-3 form-group">
                                 <label for="inputProductTitle" class="form-label">Support Phone</label>
                                 <input type="text" class="form-control" name="support_phone" id="inputProductTitle"
@@ -51,7 +56,7 @@
                             <div class="mb-3">
                                 <label for="inputProductDescription" class="form-label">Logo<span class="text-danger">*</span></label>
                                 <div class="text-secondary">
-                                    <input type="file" class="form-control" id="image" name="logo_website" accept="image/*" required="">
+                                    <input type="file" class="form-control" id="image" name="logo_website" accept="image/*" >
                                 </div>
                             </div>
                             <div class="mb-3 text-secondary " id="setImage">
@@ -75,47 +80,78 @@
                             <hr>
                             {{--strat Row--}}
 
-                            @foreach($Setting->social as $social)
-                                <div id="social_media">
-                                    <div class="social_media mb-3">
-                                        <div class="card">
-                                            <div class="card-body">
-                                                <div class="row" >
-                                                    <div class="col-md-3 mb-3">
-                                                        <label for="name" class="form-label">Social Media</label>
-                                                        <input type="text" class="form-control" value="{{$social->name}}" name="name[]" required>
-                                                    </div>
-                                                    <div class="col-md-3 mb-3">
-                                                        <label for="email" class="form-label">Url</label>
-                                                        <input type="text" class="form-control" value="{{$social->url}}" name="url[]" required>
-                                                    </div>
-                                                    <div class="col-md-4">
-                                                        <label for="inputProductDescription" class="form-label">Logo svg<span class="text-danger">*</span></label>
-                                                        <div class="text-secondary">
-                                                            <input type="file" class="form-control" id="image" name="logo[]" accept="image/*" required="">
-                                                        </div>
-                                                    </div>
+                            {{--strat Row--}}
 
-                                                    <div class="col-md-2 d-flex align-items-end mb-3">
-                                                        <button type="button" class="btn btn-outline-danger remove-member"><i class="fa-duotone fa-trash"></i></button>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" >
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">facebook</label>
+                                            <input type="text" class="form-control" name="facebook" value="{{$Setting->facebook}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <img src="{{asset('backend/assets/images/icons/facebook.svg')}}" width="40px" height="40px" >
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" >
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">instagram</label>
+                                            <input type="text" class="form-control" name="instagram" value="{{$Setting->instagram}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <img src="{{asset('backend/assets/images/icons/instagram.svg')}}" width="40px" height="40px" >
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
+                            </div>
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" >
+
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">youtube</label>
+                                            <input type="text" class="form-control" name="youtube"  value="{{$Setting->youtube}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <img src="{{asset('backend/assets/images/icons/youtube.svg')}}" width="40px" height="40px" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row" >
+                                        <div class="col-md-6 mb-3">
+                                            <label for="email" class="form-label">twitter</label>
+                                            <input type="text" class="form-control" name="twitter" value="{{$Setting->twitter}}">
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <img src="{{asset('backend/assets/images/icons/twitter.svg')}}" width="40px" height="40px" >
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            {{--end Row--}}
 
 
                             {{--end Row--}}
 
                         </div>
 
-                        <div class="row mb-3">
-                            <div class="col-12 d-flex justify-content-center">
-                                <button type="button" class="btn btn-outline-secondary " id="addMember">Add Other Social</button>
-                            </div>
-                        </div>
+
 
 
 
@@ -125,7 +161,7 @@
 
             <div class="row">
                 <div class="col-12 d-flex justify-content-end">
-                    <button type="submit" class="btn btn-warning mt-3">Config</button>
+                    <button type="submit" class="btn btn-warning mt-3">Update</button>
                 </div>
             </div>
 

@@ -16,7 +16,8 @@ class SettingController extends Controller
 {
     public function index(){
 
-        return view('backend.admin.pages.Setting.index' , ['Setting' =>Setting::all()->first()]);
+
+        return view('backend.admin.pages.Setting.index' , ['Setting' =>Setting::firstOrNew()]);
     }
 
     public function create(){
@@ -24,29 +25,44 @@ class SettingController extends Controller
         return view('backend.admin.pages.Setting.add' );
     }
     public function edit(){
-
-        return view('backend.admin.pages.Setting.edite' , ['Setting' =>Setting::all()->first()] );
+        return view('backend.admin.pages.Setting.edite' , ['Setting' =>Setting::firstOrNew()] );
     }
 
     public function store(Request $request){
-        return $this->extracted($request);
+        $setting = new Setting();
+        $this->saveOrUpdate($setting,$request);
+        return redirect()->route(Constants::Admin_Setting_Index)->with(['success' => 'The Setting Store Successfully']);
     }
 
 
     public function update(Request $request){
-        return $this->extracted($request);
+        $setting =Setting::firstOrNew() ;
+        $this->saveOrUpdate($setting,$request);
+        return redirect()->route(Constants::Admin_Setting_Index)->with(['success' => 'The Setting Update Successfully']);
     }
+
+
+    public function delete(){
+        try {
+            DB::beginTransaction();
+            Setting::first()->delete();
+            DB::commit();
+            return redirect()->route(Constants::Admin_Setting_Index)->with(['warning' => 'The Setting Was Delete it']);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            dd($exception->getMessage());
+        }
+    }
+
 
     /**
      * @param Request $request
      * @return \Illuminate\Http\RedirectResponse|void
      */
-    public function extracted(Request $request)
+    public function saveOrUpdate($setting,Request $request)
     {
         try {
             DB::beginTransaction();
-            //save in setting Table
-            $setting = new Setting();
 
             if ($request->hasFile('logo_website')) {
                 if ($setting->logo) {
@@ -60,10 +76,6 @@ class SettingController extends Controller
 
                 if (strtolower($extension) == 'svg') {
                     // Store the SVG file directly
-                    if ($setting->logo) {
-                        Storage::delete($setting->logo);
-                    }
-
                     Storage::put($path, file_get_contents($image));
                 } else {
                     // Process and store other image files
@@ -78,46 +90,12 @@ class SettingController extends Controller
             $setting->support_phone = $request->support_phone;
             $setting->address = $request->address;
             $setting->email = $request->email;
+            $setting->facebook = $request->facebook;
+            $setting->instagram = $request->instagram;
+            $setting->youtube = $request->youtube;
+            $setting->twitter = $request->twitter;
             $setting->save();
 
-
-            //save in social Media Table
-            $request->validate([
-                'name.*' => ['string', 'max:255'],
-                'url.*' => ['url'],
-                'logo.*' => ['file', 'mimes:svg']
-            ]);
-
-
-            if (!empty($request->name) && !empty($request->logo) && !empty($request->url)) {
-
-                $Names = $request->name;
-                $Urls = $request->input('url');
-                $Logos = $request->file('logo');
-
-                foreach ($Names as $index => $name) {
-                    $logo = $Logos[$index];
-                    $new_name = $name . '.' . $logo->getClientOriginalExtension();
-
-                    $extension = $logo->getClientOriginalExtension();
-                    $path = 'public/upload/' . $new_name;
-                    if (strtolower($extension) == 'svg') {
-                        // Store the SVG file directly
-                        Storage::put($path, file_get_contents($logo));
-                    } else {
-                        throw new ExtensionFileException("The Extension mismatch must be Svg");
-                    }
-
-                    SocialMedia::create([
-                        "config_id" => $setting->id,
-                        "name" => $name,
-                        "logo" => $path,
-                        "url" => $Urls[$index],
-                    ]);
-                } //endforeach
-            }//end if condition
-
-            return redirect()->route(Constants::Admin_Setting_Index)->with(['success' => 'The Setting Store Successfully']);
             DB::commit();
         } catch (\Exception $exception) {
             DB::rollBack();

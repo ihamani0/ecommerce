@@ -13,14 +13,15 @@
                     <ol class="breadcrumb mb-0 p-0">
                         <li class="breadcrumb-item"><a href="{{route(Constants::Admin_DASHBOARD)}}"><i class="bx bx-home-alt"></i></a>
                         </li>
+                        <li class="breadcrumb-item active" aria-current="page">Setting</li>
                     </ol>
                 </nav>
             </div>
-            @if($Setting)
+            @if($Setting->exists)
             <div class="ms-auto">
                 <div class="btn-group">
                     <a  href="{{route(\App\Constants\Constants::Admin_Setting_Edite)}}" class="btn btn-outline-warning">Edit Config</a>
-                    <a  href="" class="btn btn-outline-danger">Delete</a>
+                    <a  href="{{route(\App\Constants\Constants::Admin_Setting_Delete)}}" class="btn btn-outline-danger">Delete</a>
                 </div>
             </div>
             @else
@@ -38,29 +39,40 @@
                     <div class="card-body">
                         <div class="header"><h4>Config Details</h4> </div>
                         <hr>
+
                         <div class="table-responsive">
-                            <table class="table" style="background:#F4F6FA;font-weight: 600;">
+                            <table class="table table-hover p-3" style="background:rgba(243,243,243,0.58);font-weight: 600;">
                                 <tr>
                                     <th>Company Name:</th>
-                                    <th>{{ $Setting->company_name }}</th>
+                                    <th>{{ $Setting?->company_name }}</th>
                                 </tr>
+
+                                <tr>
+                                    <th>Company Email:</th>
+                                    <th>{{ $Setting?->email }}</th>
+                                </tr>
+
                                 <tr>
                                     <th>Logo:</th>
-                                    <th><img src="{{\Illuminate\Support\Facades\Storage::url($Setting->logo)}}" style="width: 80px;height: 80px"></th>
+                                    @if($Setting?->logo)
+                                    <th><img src="{{\Illuminate\Support\Facades\Storage::url($Setting?->logo)}}" style="width: 80px;height: 80px"></th>
+                                    @endif
                                 </tr>
 
                                 <tr>
                                     <th>Phone Support:</th>
-                                    <th>{{ $Setting->support_phone }}</th>
+                                    <th>{{ $Setting?->support_phone }}</th>
                                 </tr>
 
                                 <tr>
                                     <th>Address:</th>
-                                    <th>{{ $Setting->address }}</th>
+                                    <th>{{ $Setting?->address }}</th>
                                 </tr>
 
                             </table>
                         </div>
+
+
                     </div>
                 </div>
             </div>
@@ -70,25 +82,28 @@
                     <div class="card-body">
                         <div class="header"><h4>Social Media</h4> </div>
                         <hr>
-                        @foreach($Setting->social as $social)
-                        <div class="table-responsive">
-                            <table class="table" style="background:#F4F6FA;font-weight: 600;">
-                                <tr>
-                                    <th>Name:</th>
-                                    <th>{{ $social->name }}</th>
-                                </tr>
-                                <tr>
-                                    <th>Url:</th>
-                                    <th>{{ $social->url }}</th>
-                                </tr>
 
-                                <tr>
-                                    <th>Logo:</th>
-                                    <th><img src="{{\Illuminate\Support\Facades\Storage::url($social->logo)}}" style="width: 40px;height: 40px"  ></th>
-                                </tr>
-                            </table>
-                        </div>
-                        @endforeach
+                        <table class="table table-hover p-3" style="background:rgba(243,243,243,0.58);font-weight: 600;">
+                            <tr class="mb-3 p-2">
+                                <th>Facebook:</th>
+                                <th>{{ $Setting?->facebook }}</th>
+                            </tr>
+                            <tr>
+                                <th>instagram:</th>
+                                <th>{{ $Setting?->instagram }}</th>
+                            </tr>
+
+                            <tr>
+                                <th>youtube:</th>
+                                <th>{{ $Setting?->youtube }}</th>
+                            </tr>
+
+                            <tr>
+                                <th>twitter:</th>
+                                <th>{{ $Setting?->twitter }}</th>
+                            </tr>
+
+                        </table>
 
                     </div>
                 </div>
