@@ -13,10 +13,8 @@ use Illuminate\Validation\ValidationException;
 
 class AdminAuthController extends Controller
 {
-    public function index(){
 
-        return view("backend.admin.pages.dashboard");
-    }
+
 
     public function showLogin()
     {

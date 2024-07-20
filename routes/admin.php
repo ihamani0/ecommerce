@@ -53,14 +53,20 @@ Route::middleware('auth.admin')->group(function (){
     //controller Admin
 
     Route::controller(AdminAuthController::class)->group(function (){
-
-        Route::get("admin/dashboard" ,'index')
-            ->name(Constants::Admin_DASHBOARD); //end dashboard
-
         Route::post("admin/logout" ,'logout')
             ->name('admin.logout'); // logout
 
     });
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Dashboard\DashboardController::class)->group(function (){
+        Route::prefix("admin" ,'logout')->group(function (){
+            Route::get("dashboard" ,'index')
+                ->name(Constants::Admin_DASHBOARD); //end dashboard
+        });
+    });
+
+
+
 
 
     //Brand Route

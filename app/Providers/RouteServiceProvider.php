@@ -32,7 +32,7 @@ class RouteServiceProvider extends ServiceProvider
                 ->prefix('api')
                 ->group(base_path('routes/api.php'));
 
-            Route::middleware('web')
+            Route::middleware(['web', 'visit_log'])
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
@@ -41,7 +41,7 @@ class RouteServiceProvider extends ServiceProvider
             Route::middleware('web')
                 ->group(base_path('routes/vendor.php'));
 
-            Route::middleware('web')
+            Route::middleware(['web', 'visit_log'])
                 ->group(base_path('routes/user.php'));
         });
     }
