@@ -22,12 +22,12 @@ class UserAuthnticate
     {
 
         if (Auth::guest()) {
-            //$request->expectsJson() -> header of request is => application/json
-            if ($request->expectsJson()) {
-                return response()->json(['error' => 'Unauthorized'], 401);
-            }
+                //$request->expectsJson() -> header of request is => application/json
+                if ($request->expectsJson()) {
+                    return response()->json(['error' => 'Unauthorized'], 401);
+                }
+                return redirect()->route(Constants::USER_LOGIN);
 
-            return redirect()->route(Constants::USER_LOGIN);
         }
         return $next($request);
     }

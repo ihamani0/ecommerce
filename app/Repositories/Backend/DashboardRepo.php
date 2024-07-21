@@ -6,6 +6,7 @@ use App\Contracts\Backend\DashboardInterface;
 use App\Models\Order;
 use App\Models\VisitorLog;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\DB;
 
 class DashboardRepo implements DashboardInterface {
     // Define your class methods here
@@ -17,7 +18,7 @@ class DashboardRepo implements DashboardInterface {
         $this->order = Order::query();
     }
 
-    public function getCountOrders(): int
+    public function getCountOrders()
     {
         return  count($this->order->get());
     }
@@ -25,20 +26,26 @@ class DashboardRepo implements DashboardInterface {
 
     public function getAllOrders(): \Illuminate\Database\Eloquent\Collection|array
     {
-         return $this->order->get();
+        //dd($this->order->with("user")->with("orderItems")->get());
+         return $this->order->with("user")->with("orderItems")->latest()->get();
     }
 
-    public function totalRevenue(): \Illuminate\Database\Eloquent\Collection|array
+    public function totalRevenue()
     {
-        return $this->order->where('created_at' , Carbon::today())->sum('amount');
+        return Order::where('created_at' , Carbon::today())->sum('amount');
     }
 
-    public function Visitor()
+    public function Visitor() : int
     {
         return VisitorLog::select(DB::raw('DATE(created_at) as date'), DB::raw('COUNT(DISTINCT ip_address) as count'))
             ->whereDate('created_at', Carbon::today())
             ->groupBy('date')
             ->orderBy('date', 'desc')
-            ->get();
+            ->get()->count();
+    }
+
+    public function orderDelivered() : int
+    {
+        return count(Order::where("status" , "delivered")->get());
     }
 }

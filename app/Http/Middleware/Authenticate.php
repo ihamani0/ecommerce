@@ -14,12 +14,6 @@ class Authenticate extends Middleware
      */
     protected function redirectTo(Request $request): ?string
     {
-        if(Auth::check()){
-            $user = Auth::user();
-            $user->last_activity=  Carbon::now()->subMinute(5) ;
-            $user->save();
-        }
-
         return $request->expectsJson() ? null : route('vendor.login');
     }
 }

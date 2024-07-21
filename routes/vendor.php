@@ -11,7 +11,7 @@ use App\Http\Controllers\backend\Vendor\VendorProfileController;
 /*---------------------------------------------------------------------------*/
 /*---------------------- Vendor Auth Route -------------------------------------*/
 /*---------------------------------------------------------------------------*/
-Route::middleware('guest')->group(function (){
+Route::middleware('guest.vendor')->group(function (){
 
 
         Route::controller(VendorAuthController::class)->group(function (){
@@ -39,7 +39,7 @@ Route::middleware('guest')->group(function (){
 /*---------------------------------------------------------------------------*/
 /*---------------------- Vendor Route -------------------------------------*/
 /*---------------------------------------------------------------------------*/
-Route::middleware(['auth' ,'verified' , 'activity'])->group(function (){
+Route::middleware(['auth' ,'verified' , 'activity' , "role:vendor"])->group(function (){
 
     //Logout
     Route::post("vendor/logout" ,[VendorAuthController::class,'logout'])

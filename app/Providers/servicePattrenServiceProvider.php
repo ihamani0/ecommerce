@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Contracts\Backend\CouponInterface;
 use App\Contracts\Backend\CrudInterface;
+use App\Contracts\Backend\DashboardInterface;
 use App\Contracts\Backend\ProductInterface;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
@@ -21,6 +22,7 @@ use App\Http\Controllers\backend\Admin\Category\SubcategoryController;
 
 use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
 
+use App\Http\Controllers\backend\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\backend\Admin\Order\OrderController;
 use App\Http\Controllers\backend\Admin\Order\OrderController as OrderControllerAdmin;
 use App\Http\Controllers\backend\Admin\UsersManagementController;
@@ -46,6 +48,7 @@ use App\Repositories\Backend\BannerRepo;
 use App\Repositories\Backend\BrandRepo;
 use App\Repositories\Backend\CategoryRepo;
 use App\Repositories\Backend\CouponRepo;
+use App\Repositories\Backend\DashboardRepo;
 use App\Repositories\Backend\ProductRepo;
 use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
@@ -118,6 +121,10 @@ class servicePattrenServiceProvider extends ServiceProvider
 
         //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
 
+        //--------------------for Dashboard--------------------
+        $this->app->when(DashboardController::class)
+                    ->needs(DashboardInterface::class)
+                        ->give(DashboardRepo::class);
         //--------------------for All Users and Vendors Register--------------------
         $this->app->when(UsersManagementController::class)
                     ->needs(UsersRegistersInterface::class)

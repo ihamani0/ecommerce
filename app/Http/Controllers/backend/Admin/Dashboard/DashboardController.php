@@ -12,6 +12,13 @@ class DashboardController extends Controller
     {}
 
     public function index(){
-        return view("backend.admin.pages.dashboard");
+        return view("backend.admin.pages.dashboard" , [
+            "AllOrders" => $this->dashboard->getAllOrders(),
+            "TotalOrders" => $this->dashboard->getCountOrders(),
+            "TotalRevenue" =>$this->dashboard->totalRevenue(),
+            "Visit" => $this->dashboard->Visitor(),
+            "OrderDelivered" => $this->dashboard->orderDelivered(),
+
+        ]);
     }
 }

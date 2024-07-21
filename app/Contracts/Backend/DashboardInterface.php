@@ -9,4 +9,5 @@ interface DashboardInterface{
     public function getCountOrders();
     public function totalRevenue();
     public function Visitor();
+    public function orderDelivered();
 }
