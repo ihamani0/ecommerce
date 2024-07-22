@@ -2,6 +2,8 @@
 
 namespace App\Contracts\Backend;
 
+use Illuminate\Http\Request;
+
 interface ProductInterface{
 
     //get one product
@@ -42,5 +44,8 @@ interface ProductInterface{
 
     //simple validation for image
     public function validateImgsExtns($request);
+
+    //change stocks
+    public function ChangeStock(Request $request);
 
 }

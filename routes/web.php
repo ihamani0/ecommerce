@@ -101,43 +101,9 @@ Route::controller(\App\Http\Controllers\Frontend\CartShopController::class)->gro
 
 });
 
-    ///add-to-wish-list
-     Route::controller(\App\Http\Controllers\Frontend\WishListController::class)->group(function(){
-
-         Route::get('/user-wish-list' , 'index')
-             ->name(Constants::USER_WISH_LIST);
-
-
-         Route::get('/user-wish-list-destroy/{id}' , 'destroy')
-             ->name(Constants::USER_WISHLIST_DESTROY_PRODUCT);
 
 
 
-         Route::get('/user-get-count-wish-list' , 'getCount');
-
-        Route::post("/add-to-wish-list" , 'store');
-
-    })->middleware(['auth.user' , 'activity']);
-
-     //add to compare two products
-
-    Route::controller(\App\Http\Controllers\Frontend\CompareProductsController::class)->group(function(){
-
-        Route::get('/user-compare-products' , 'index')
-            ->name(Constants::USER_COMPARE_LIST);
-
-        Route::get('/user-compare-list-destroy/{id}' , 'destroy')
-            ->name(Constants::USER_COMPARE_DESTROY_PRODUCT);
-
-        Route::get('/user-get-count-compare-list' , 'getCount');
-
-        Route::post("/add-to-compare-products" , 'store');
-
-    })->middleware(['auth.user' , 'activity']);
-
-
-
-Route::get('order-pdf' , [ProfileUserController::class ,'CreateInvoice']);
 
 
 

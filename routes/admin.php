@@ -358,6 +358,20 @@ Route::middleware('auth.admin')->group(function (){
                 ->name(Constants::Admin_Setting_Delete);
         }) ; // end prefix
     });// end controller
+
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Products\StockController::class)->group(function(){
+
+        Route::prefix('admin')->group(function(){
+            Route::get('stock-list' , 'index')
+                ->name(Constants::Admin_Stock_Index);
+
+            Route::post('stock-change' , 'changeStock')
+                ->name(Constants::Admin_Stock_Change);
+        }) ; // end prefix
+    });// end controller
+
+
 });//end auth admin middleware
 
 

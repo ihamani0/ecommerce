@@ -11,19 +11,21 @@
         </div>
     </div>
     <div class="container mb-80 mt-50">
-        <div class="row">
-            <div class="col-lg-8 mb-40">
-                <h1 class="heading-2 mb-10">Your Cart</h1>
-                <div class="d-flex justify-content-between">
 
-                    <h6 class="text-body">There are
+        <div class="row">
+            <div class="col-lg-8 mb-40 ">
+                <h1 class="heading-2 mb-10">Your Cart</h1>
+                <div class="d-flex flex-column flex-sm-row justify-content-sm-between  align-items-center">
+
+                    <h6 class="text-body mb-2 mb-sm-0">There are
                         <span class="text-brand" id="productsInCart"></span>
                         products in your cart</h6>
-
-                    <h6 class="text-body"><a class="text-muted" onclick="ClearCart()"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
+                    <h6 class="text-body mt-3 mt-sm-0"><a class="text-muted" onclick="ClearCart()"><i class="fi-rs-trash mr-5"></i>Clear Cart</a></h6>
                 </div>
+
             </div>
         </div>
+
         <div class="row">
             <div class="col-lg-12">
                 <div class="table-responsive shopping-summery">
@@ -52,7 +54,7 @@
                 <div class="row mt-50">
 
                     @if(! \Illuminate\Support\Facades\Session::has('coupon'))
-                        <div class="col-lg-5" id="CouponField">
+                        <div class="col-sm-4 col-lg-5" id="CouponField">
                             <div class="p-40">
                                 <h4 class="mb-10">Apply Coupon</h4>
                                 <p class="mb-30"><span class="font-lg text-muted">Using A Promo Code?</span></p>

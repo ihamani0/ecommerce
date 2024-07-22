@@ -90,6 +90,16 @@
             </ul>
         </li>
 
+        {{--Stock Managmnet--}}
+
+        <li>
+            <a href="{{route(\App\Constants\Constants::Admin_Stock_Index)}}" >
+                <div class="parent-icon"><i class="fa-duotone fa-stocking fa-xs"></i>
+                </div>
+                <div class="menu-title">Stock Manage</div>
+            </a>
+        </li>
+
         {{--Coupons System--}}
 
         <li>

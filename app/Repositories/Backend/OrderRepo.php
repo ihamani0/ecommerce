@@ -5,6 +5,7 @@ namespace App\Repositories\Backend;
 use App\Contracts\Backend\OrderInterface;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\Product;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Mockery\Exception;
@@ -30,7 +31,7 @@ class OrderRepo implements OrderInterface {
             $query->where('return_status', 0)->where('status', '!=' , 'completed');
         })->with('order')
             ->where('vendor_id',$vendor_id)
-                                    ->orderBy('id','DESC')->get();
+            ->orderBy('id','DESC')->get();
     }
 
 
@@ -76,9 +77,21 @@ class OrderRepo implements OrderInterface {
     {
         try {
             DB::beginTransaction();
-            Order::where("order_number" , $orderId)->first()->update([
-                'status' => $status
-            ]);
+
+            if ($status=="delivered"){
+                $order = Order::where("order_number" , $orderId)->first();
+                foreach ($order->orderItems as $orderItem){
+                     Product::where('products_uuid', $orderItem->product_uuid)
+                         ->decrement('product_Qty', $orderItem->qty);
+                }
+                $order->update([
+                    'status' => $status
+                ]);
+            }else{
+                Order::where("order_number" , $orderId)->first()->update([
+                    'status' => $status
+                ]);
+            }
             DB::commit();
         }catch (Exception $exception){
             DB::rollBack();

@@ -1,9 +1,12 @@
 
 <!-- Header  -->
 <header class="header-area header-style-1 header-height-2">
+
     <div class="mobile-promotion">
         <span>Grand opening, <strong>up to 15%</strong> off all items. Only <strong>3 days</strong> left</span>
     </div>
+
+
     <div class="header-top header-top-ptb-1 d-none d-lg-block">
         <div class="container">
             <div class="row align-items-center">
@@ -11,7 +14,7 @@
                     <div class="header-info">
                         <ul>
 
-                            <li><a href="page-account.html">My Cart</a></li>
+                            <li><a href="{{route(\App\Constants\Constants::CART_INDEX)}}">My Cart</a></li>
                             <li><a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}" >Checkout</a></li>
                             <li><a href="shop-order.html">Order Tracking</a></li>
                         </ul>
@@ -63,16 +66,10 @@
                         <form action="#">
                             <select class="select-active">
                                 <option>All Categories</option>
-                                <option>Milks and Dairies</option>
-                                <option>Wines & Alcohol</option>
-                                <option>Clothing & Beauty</option>
-                                <option>Pet Foods & Toy</option>
-                                <option>Fast food</option>
-                                <option>Baking material</option>
-                                <option>Vegetables</option>
-                                <option>Fresh Seafood</option>
-                                <option>Noodles & Rice</option>
-                                <option>Ice cream</option>
+                                @foreach($Categories as $category)
+                                    <option>{{$category->category_name}}</option>
+                                @endforeach
+
                             </select>
                             <input type="text" placeholder="Search for items..." />
                         </form>
@@ -130,12 +127,13 @@
 
                             {{--Cart --}}
                             <div class="header-action-icon-2">
-                                <a class="mini-cart-icon"  >
+                                <a class="mini-cart-icon" href="{{route(\App\Constants\Constants::CART_INDEX)}}" >
                                     {{--<img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-cart.svg")}}" />--}}
                                     <i class="fa-duotone fa-shopping-cart fa-xs"></i>
                                     {{--<span class="pro-count blue" id="cart-count"></span>--}}
                                 </a>
-                                <a href="shop-cart.html"><span class="lable">Cart</span></a>
+                                <a href="{{route(\App\Constants\Constants::CART_INDEX)}}"><span class="lable">Cart</span></a>
+
                                 <div class="cart-dropdown-wrap cart-dropdown-hm2">
                                     <ul id="listCart">
 
@@ -148,7 +146,7 @@
                                         </div>
                                         <div class="shopping-cart-button">
                                             <a href="{{route(\App\Constants\Constants::CART_INDEX)}}" class="outline">View cart</a>
-                                            <a href="shop-checkout.html">Checkout</a>
+                                            <a href="{{route(\App\Constants\Constants::USER_INDEX_CHECKOUT_CART)}}">Checkout</a>
                                         </div>
                                     </div>
                                 </div>
@@ -208,8 +206,9 @@
     <div class="header-bottom header-bottom-bg-color sticky-bar">
         <div class="container">
             <div class="header-wrap header-space-between position-relative">
+                {{--Phone Grid--}}
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a href="index.html"><img src="{{asset("frontend/assets/imgs/theme/logo.svg")}}" alt="logo" /></a>
+                    <a href="{{route(\App\Constants\Constants::CART_INDEX)}}"><img src="{{asset('/frontend/assets/imgs/theme/cart.svg')}}" alt="logo" width="50" height="50"></a>
                 </div>
 
 
@@ -418,60 +417,54 @@
                         <span class="burger-icon-bottom"></span>
                     </div>
                 </div>
+
+
+                {{--Phone Grid--}}
                 <div class="header-action-right d-block d-lg-none">
                     <div class="header-action-2">
                         <div class="header-action-icon-2">
-                            <a href="shop-wishlist.html">
+                            <a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}">
+
                                 <img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-heart.svg")}}" />
-                                <span class="pro-count white">4</span>
+                                @auth
+                                    <span class="pro-count white" id="countWishList">
+                                            {{count(auth()->user()->wishlist)}}
+                                    </span>
+                                @endauth
+
                             </a>
                         </div>
 
                         <div class="header-action-icon-2">
-                            <a class="mini-cart-icon" href="#">
+                            <a class="mini-cart-icon" >
                                 <img alt="Nest" src="{{asset("frontend/assets/imgs/theme/icons/icon-cart.svg")}}" />
-                                <span class="pro-count white">2</span>
+
+                               {{-- <span class="pro-count white">2</span>--}}
                             </a>
                             <div class="cart-dropdown-wrap cart-dropdown-hm2">
-                                <ul>
-                                    <li>
-                                        <div class="shopping-cart-img">
-                                            <a href="shop-product-right.html"><img alt="Nest" src="{{asset("frontend/assets/imgs/shop/thumbnail-3.jpg")}}" /></a>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                                            <h3><span>1 × </span>$800.00</h3>
-                                        </div>
-                                        <div class="shopping-cart-delete">
-                                            <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                        </div>
-                                    </li>
-                                    <li>
-                                        <div class="shopping-cart-img">
-                                            <a href="shop-product-right.html"><img alt="Nest" src="{{asset("frontend/assets/imgs/shop/thumbnail-4.jpg")}}" /></a>
-                                        </div>
-                                        <div class="shopping-cart-title">
-                                            <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
-                                            <h3><span>1 × </span>$3500.00</h3>
-                                        </div>
-                                        <div class="shopping-cart-delete">
-                                            <a href="#"><i class="fi-rs-cross-small"></i></a>
-                                        </div>
-                                    </li>
+
+                                <ul id="listCart">
+
+                                    {{--Her se set the cart shope using js --}}
+
                                 </ul>
+
                                 <div class="shopping-cart-footer">
                                     <div class="shopping-cart-total">
-                                        <h4>Total <span>$383.00</span></h4>
+                                        <h4>Total<span id="cart-total" > </span></h4>
                                     </div>
                                     <div class="shopping-cart-button">
-                                        <a href="shop-cart.html">View cart</a>
-                                        <a href="shop-checkout.html">Checkout</a>
+                                        <a href="{{route(\App\Constants\Constants::CART_INDEX)}}" class="outline">View cart</a>
+                                        <a href="{{route(\App\Constants\Constants::USER_INDEX_CHECKOUT_CART)}}">Checkout</a>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+
+
             </div>
         </div>
     </div>

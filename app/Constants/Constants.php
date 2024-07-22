@@ -177,6 +177,12 @@ class  Constants {
     public const Admin_Setting_Update = "admin.setting.update";
     public const Admin_Setting_Delete = "admin.setting.delete";
     /*********************************************/
+    public const Admin_Stock_Index = "admin.stock.index";
+    public const Admin_Stock_Change= "admin.stock.change";
+
+
+
+    /*********************************************/
     /********** Route Vendors **********************************************************************************************************/
     /*********************************************/
     public const VENDOR_DASHBOARD = 'vendor.dashboard';

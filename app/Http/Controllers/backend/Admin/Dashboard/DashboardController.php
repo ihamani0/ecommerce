@@ -15,10 +15,10 @@ class DashboardController extends Controller
         return view("backend.admin.pages.dashboard" , [
             "AllOrders" => $this->dashboard->getAllOrders(),
             "TotalOrders" => $this->dashboard->getCountOrders(),
-            "TotalRevenue" =>$this->dashboard->totalRevenue(),
+            "TotalRevenue" =>number_format($this->dashboard->totalRevenue() , 2),
             "Visit" => $this->dashboard->Visitor(),
             "OrderDelivered" => $this->dashboard->orderDelivered(),
-
+            "OrderReturn" => $this->dashboard->orderReturn(),
         ]);
     }
 }

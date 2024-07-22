@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\Subcategory;
 use App\Models\User;
 use Exception;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Intervention\Image\Laravel\Facades\Image;
@@ -278,5 +279,22 @@ class ProductRepo implements ProductInterface {
                 'multiple_images.*' => "The Image Is allowed is Jpeg/jpg/png"
             ]
         );
+    }
+
+    public function ChangeStock($request)
+    {
+
+        try {
+            DB::BeginTransaction();
+
+            Product::where('products_uuid' , $request->product_uuid)->update([
+                "product_Qty" => $request->qty
+            ]);
+
+            DB::commit();
+        }catch (Exception $exception){
+            throw new Exception($exception->getMessage());
+        }
+
     }
 }

@@ -25,6 +25,7 @@ use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
 use App\Http\Controllers\backend\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\backend\Admin\Order\OrderController;
 use App\Http\Controllers\backend\Admin\Order\OrderController as OrderControllerAdmin;
+use App\Http\Controllers\backend\Admin\Products\StockController;
 use App\Http\Controllers\backend\Admin\UsersManagementController;
 use App\Http\Controllers\backend\Vendor\Order\OrderController as OrderControllerVendor;
 
@@ -33,6 +34,7 @@ use App\Http\Controllers\backend\Admin\Slide\SlideController;
 use App\Http\Controllers\backend\Vendor\Products\ProductsController as vendorProductsController;
 
 use App\Http\Controllers\backend\Admin\Vendor\VendorStatus;
+use App\Http\Controllers\backend\Vendor\VendorController;
 use App\Http\Controllers\backend\Vendor\VendorProfileController;
 use App\Http\Controllers\Frontend\_404PageController;
 use App\Http\Controllers\Frontend\CartShopController;
@@ -121,7 +123,7 @@ class servicePattrenServiceProvider extends ServiceProvider
 
         //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
 
-        //--------------------for Dashboard--------------------
+        //--------------------for Dashboard Admin--------------------
         $this->app->when(DashboardController::class)
                     ->needs(DashboardInterface::class)
                         ->give(DashboardRepo::class);
@@ -155,6 +157,11 @@ class servicePattrenServiceProvider extends ServiceProvider
                         ->give(BannerRepo::class);
         //--------------------------------------------------------------------------------
         //--------------------for Product--------------------
+        $this->app->when(StockController::class)
+                        ->needs(ProductInterface::class)
+                            ->give(ProductRepo::class);
+        //--------------------------------------------------------------------------------
+        //--------------------for Product--------------------
         $this->app->when(adminProductsController::class)
                         ->needs(ProductInterface::class)
                             ->give(ProductRepo::class);
@@ -186,6 +193,12 @@ class servicePattrenServiceProvider extends ServiceProvider
 
         //--------------------------------------------------------------------------------
         //--------------------for vendor--------------------
+
+        //--------------------for Dashboard Admin--------------------
+        $this->app->when(VendorController::class)
+                    ->needs(DashboardInterface::class)
+                        ->give(DashboardRepo::class);
+        //------------------------------------------------------------
                 $this->app->when(VendorProfileController::class)
                         ->needs(ProfileRepoInterface::class)
                             ->give(VendorProfileRepo::class);

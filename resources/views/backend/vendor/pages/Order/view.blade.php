@@ -16,8 +16,8 @@
                         <li class="breadcrumb-item"><a href="{{route(\App\Constants\Constants::VENDOR_DASHBOARD)}}"><i class="bx bx-home-alt"></i></a>
                         </li>
 
-                        <li class="breadcrumb-item" aria-current="page"><a href="">
-                                Orders View</a></li>
+                        <li class="breadcrumb-item" aria-current="page"><a href="{{route(\App\Constants\Constants::Vendor_ORDER_RETURN)}}">
+                                 Return List</a></li>
 
                         <li class="breadcrumb-item active" aria-current="page">Orders View</li>
                     </ol>
@@ -171,7 +171,7 @@
 
                                         @if($order->return_status)
                                             @if($order->status!='completed')
-                                                <a href="{{route(\App\Constants\Constants::Admin_Order_Change_Status ,
+                                                <a href="{{route(\App\Constants\Constants::Vendor_Order_Change_Status ,
                                                     ['orderID' => $order->order_number , 'status' => 'completed'])}}"
                                                    class="btn btn-outline-primary">Completed Order</a>
                                             @endif

@@ -5,9 +5,11 @@ namespace App\Contracts\Backend;
 interface DashboardInterface{
     // Define your interface methods here
 
-    public function getAllOrders();
-    public function getCountOrders();
-    public function totalRevenue();
+    public function getAllOrders($vendorId = null);
+    public function getCountOrders($vendorId = null);
+    public function totalRevenue($vendorId = null);
     public function Visitor();
-    public function orderDelivered();
+    public function orderDelivered($vendorId = null);
+
+    public function orderReturn($vendorId = null);
 }

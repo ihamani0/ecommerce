@@ -12,6 +12,15 @@
 @section("admin")
 <div class="page-content">
 
+    <div class="row">
+        <div class="col">
+            <div class="d-flex justify-content-end">
+                <span class="display-5 fs-5 fw-bold">Today : {{\Carbon\Carbon::today()->format('Y-m-d')}}</span>
+            </div>
+        </div>
+    </div>
+
+    <hr>
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
 
         <div class="col">
@@ -40,7 +49,7 @@
                 <div class="d-flex align-items-center">
                     <h5 class="mb-0 text-white">{{$TotalRevenue}}</h5>
                     <div class="ms-auto">
-                        <i class='bx bx-dollar fs-3 text-white'></i>
+                        <i class='fa-solid fa-d fs-5 text-white'></i><i class='fa-solid fa-z fs-5 text-white'></i>
                     </div>
                 </div>
                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -55,12 +64,12 @@
         </div>
 
         <div class="col">
-            <div class="card radius-10 bg-gradient-ohhappiness">
+            <div class="card radius-10 bg-gradient-moonlit">
             <div class="card-body">
                 <div class="d-flex align-items-center">
                     <h5 class="mb-0 text-white">{{$Visit}}</h5>
                     <div class="ms-auto">
-                        <i class='bx bx-group fs-3 text-white'></i>
+                        <i class='fa-light fa-eye fs-3 text-white'></i>
                     </div>
                 </div>
                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -68,19 +77,19 @@
                 </div>
                 <div class="d-flex align-items-center text-white">
                     <p class="mb-0">Visitors(day)</p>
-                    <p class="mb-0 ms-auto">+5.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>
+
                 </div>
             </div>
         </div>
         </div>
 
         <div class="col">
-            <div class="card radius-10 bg-gradient-ibiza">
+            <div class="card radius-10 bg-gradient-ohhappiness">
              <div class="card-body">
                 <div class="d-flex align-items-center">
                     <h5 class="mb-0 text-white">{{$OrderDelivered}}</h5>
                     <div class="ms-auto">
-                        <i class='bx bx-envelope fs-3 text-white'></i>
+                        <i class='fa-light fa-truck-fast fs-3 text-white'></i>
                     </div>
                 </div>
                 <div class="progress my-3 bg-light-transparent" style="height:3px;">
@@ -94,9 +103,32 @@
          </div>
         </div>
 
-    </div><!--end row-->
+    </div>
+    <!--end row-->
+    <div class="row  row-cols-1 row-cols-md-2 row-cols-xl-4 mt-3">
 
+        <div class="col">
+            <div class="card radius-10 bg-gradient-ibiza">
+                <div class="card-body">
+                    <div class="d-flex align-items-center">
+                        <h5 class="mb-0 text-white">{{$OrderReturn}}</h5>
+                        <div class="ms-auto">
+                            <i class="fa-solid fa-box-open-full fs-3 text-light"></i>
+                        </div>
+                    </div>
+                    <div class="progress my-3 bg-light-transparent" style="height:3px;">
+                        <div class="progress-bar bg-white" role="progressbar" style="width: 55%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="d-flex align-items-center text-white">
+                        <p class="mb-0">Orders Returned</p>
+                        {{--<p class="mb-0 ms-auto">+2.2%<span><i class='bx bx-up-arrow-alt'></i></span></p>--}}
+                    </div>
+                </div>
+            </div>
+        </div>
 
+    </div>
+    <!--end row-->
       <div class="card radius-10">
         <div class="card-body">
             <div class="d-flex align-items-center">
