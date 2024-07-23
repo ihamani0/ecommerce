@@ -20,11 +20,9 @@ class LandingPageController extends Controller
 
     public function index(){
 
-        //dd($this->lPage->getAllProducts()->take(20)->first()->products_uuid);
         return view("frontend.components.main" ,
                 [
                     'Vendors' => $this->lPage->getAllVendors(),
-                    'Categories' => $this->lPage->getAllCategories(),
                     'Slides' => $this->lPage->getAllSlides(),
                     'Banners' => $this->lPage->getAllBanners(),
                     'Products' => $this->lPage->getAllProducts(),
@@ -33,7 +31,6 @@ class LandingPageController extends Controller
                     'SpecialOffer'=> $this->lPage->getProductsSpecialOffer() ,
                     'SpecialDeals'=> $this->lPage->getProductsSpecialDeals() ,
                     'MaxCategories'=> $this->lPage->countMaxCategories() ,
-
                 ]);
     }
 
@@ -47,20 +44,15 @@ class LandingPageController extends Controller
 
         return view("frontend.pages.products.product-details" ,
             [
-                'Categories' => $this->lPage->getAllCategories(),
+                /*'Categories' => $this->lPage->getAllCategories(),*/
                 'Product' => $this->lPage->getProduct($uuid),
             ]);
     }
 
     public function VendorDetails($id){
-
-        /*$vendor =  $this->lPage->getVendorById($id) ;
-        $products = $vendor->products()->paginate(3);
-        dd($products->);*/
-
         return view("frontend.pages.vendor.vendor-details" ,
             [
-                'Categories' => $this->lPage->getAllCategories(),
+                /*'Categories' => $this->lPage->getAllCategories(),*/
                 'vendor' => $this->lPage->getVendorById($id),
             ]);
     }
@@ -71,7 +63,7 @@ class LandingPageController extends Controller
         dd($Vendors);*/
         return view("frontend.pages.vendor.all-vendors" ,
             [
-                'Categories' => $this->lPage->getAllCategories(),
+                /*'Categories' => $this->lPage->getAllCategories(),*/
                 'Vendors' => $this->lPage->getAllVendors(),
             ]);
     }
@@ -81,7 +73,7 @@ class LandingPageController extends Controller
 
         return view("frontend.pages.products.products-by-category" ,
         [
-            'Categories' => $this->lPage->getAllCategories(),
+            /*'Categories' => $this->lPage->getAllCategories(),*/
             'category' => $this->lPage->getCategory($uuid),
             'Products' => $this->lPage->getAllProducts()
         ]);
@@ -89,7 +81,7 @@ class LandingPageController extends Controller
     public function ProductsBySubcategory($uuid , $slug){
         return view("frontend.pages.products.products-by-subcategory" ,
         [
-            'Categories' => $this->lPage->getAllCategories(),
+            /*'Categories' => $this->lPage->getAllCategories(),*/
             'subcategory' => $this->lPage->getSubcategory($uuid),
             'Products' => $this->lPage->getAllProducts()
         ]);

@@ -16,7 +16,7 @@
 
                             <li><a href="{{route(\App\Constants\Constants::CART_INDEX)}}">My Cart</a></li>
                             <li><a href="{{route(\App\Constants\Constants::USER_WISH_LIST)}}" >Checkout</a></li>
-                            <li><a href="shop-order.html">Order Tracking</a></li>
+                            <li><a href="{{route(\App\Constants\Constants::USER_ACCOUNT_Track_Orders)}}">Order Tracking</a></li>
                         </ul>
                     </div>
                 </div>
@@ -44,7 +44,7 @@
                                 </ul>
                             </li>--}}
 
-                            <li>Need help? Call Us: <strong class="text-brand"> +213 000000000</strong></li>
+                            <li>Need help? Call Us: <strong class="text-brand">{{$Setting->support_phone}}</strong></li>
 
                         </ul>
                     </div>
@@ -57,7 +57,7 @@
             <div class="header-wrap">
                 <div class="logo logo-width-1">
                     <a href="{{route(\App\Constants\Constants::WELCOME)}}">
-                        <img src="{{asset("frontend/assets/imgs/theme/cart.svg")}}"alt="logo" width="180" height="56" />
+                        <img src="{{\Illuminate\Support\Facades\Storage::url($Setting?->logo)}}"alt="logo" width="180" height="56" />
                     </a>
                     {{--<a> <i class="fa-solid fa-cart-shopping fa-2xl"></i> </a>--}}
                 </div>
@@ -168,7 +168,7 @@
                                                 <a href="{{route(\App\Constants\Constants::USER_ACCOUNT_DASHBOARD)}}"><i class="fi fi-rs-user mr-10"></i>My Account</a>
                                             </li>
                                             <li>
-                                                <a href="page-account.html"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
+                                                <a href="{{route(\App\Constants\Constants::USER_ACCOUNT_Track_Orders)}}"><i class="fi fi-rs-location-alt mr-10"></i>Order Tracking</a>
                                             </li>
                                             <li>
                                                 <a href="page-account.html"><i class="fi fi-rs-label mr-10"></i>My Voucher</a>
@@ -205,10 +205,13 @@
 
     <div class="header-bottom header-bottom-bg-color sticky-bar">
         <div class="container">
+
             <div class="header-wrap header-space-between position-relative">
                 {{--Phone Grid--}}
                 <div class="logo logo-width-1 d-block d-lg-none">
-                    <a href="{{route(\App\Constants\Constants::CART_INDEX)}}"><img src="{{asset('/frontend/assets/imgs/theme/cart.svg')}}" alt="logo" width="50" height="50"></a>
+                    <a href="{{route(\App\Constants\Constants::CART_INDEX)}}">
+                        <img src="{{\Illuminate\Support\Facades\Storage::url($Setting?->logo)}}" alt="logo" width="50" height="50">
+                    </a>
                 </div>
 
 

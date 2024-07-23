@@ -153,7 +153,7 @@
                                                     </div>
                                                     @break
 
-                                                    @case('confirm')
+                                                    @case('confirmed')
                                                     <div class="badge rounded-pill text-info bg-light-info p-2 text-uppercase px-3">
                                                         {{ $order->status }}
                                                     </div>

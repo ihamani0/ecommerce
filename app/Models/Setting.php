@@ -7,12 +7,15 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * @method static updateOrCreate(string[] $array, int[] $array1)
+ * @method static first()
  */
 class Setting extends Model
 {
     use HasFactory;
 
     protected $guarded = [];
+
+
 
     public function social(): \Illuminate\Database\Eloquent\Relations\HasMany
     {

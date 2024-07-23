@@ -108,7 +108,7 @@
                                         @yield("account")
                                         {{----}}
                                         {{--View THe Order--}}
-                                        <!-- Quick view -->
+                                        <!-- Quick view Order Modal-->
                                         <div class="modal fade custom-modal" id="ViewModalOrder" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
                                             <div class="modal-dialog modal-dialog-scrollable">
                                                 <div class="modal-content">
@@ -116,54 +116,65 @@
                                                     <div class="modal-body">
                                                         {{--Row Table--}}
                                                         <div class="row">
-                                                            <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
-                                                                <div class="card">
-                                                                    <div class="card-header"><h4>Shipping Details</h4> </div>
-                                                                    <hr>
-                                                                    <table id="tableShipping" >
-                                                                        {{--Fetch ajax--}}
-                                                                    </table>
-                                                                </div>
 
-                                                            </div>
-                                                            <div class="col-md-6 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
+                                                            <div class="col-12 col-lg-6 mb-3">
                                                                 <div class="card">
                                                                     <div class="card-header"><h4>Order Details</h4> </div>
-                                                                    <hr>
-                                                                    <table id="tableOrder" class="table mb-0 table-hover">
-                                                                        {{--Fetch ajax--}}
-                                                                    </table>
+                                                                    <div class="card-body">
+                                                                        <div class="table-responsive">
+                                                                            <table id="tableShipping" class="mb-0 table-hover">
+                                                                                {{--Fetch ajax--}}
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
 
+                                                            <div class="col-12 col-lg-6 mb-3">
+                                                                <div class="card">
+                                                                    <div class="card-header"><h4>Order Details</h4> </div>
+                                                                    <div class="card-body">
+                                                                        <div class="table-responsive">
+                                                                            <table id="tableOrder" class="mb-0 table-hover">
+                                                                                {{--Fetch ajax--}}
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
                                                         </div>
+
                                                         <div class="row">
                                                             <div class="col-md-12 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
                                                                 <div class="card">
                                                                     <div class="card-header"><h4>Items  Details</h4> </div>
-                                                                    <hr>
-                                                                    <table>
-                                                                        <thead>
-                                                                        <tr>
-                                                                            <th>Image </th>
-                                                                            <th>Product Name </th>
-                                                                            <th>Size </th>
-                                                                            <th>color </th>
-                                                                            <th>QTY </th>
-                                                                            <td>Price </td>
-                                                                        </tr>
-                                                                        </thead>
-                                                                        <tbody id="tableItems">
+                                                                    <div class="card">
+                                                                        <div class="table-responsive">
+                                                                            <table class="table table-hover">
+                                                                                <thead>
+                                                                                <tr>
+                                                                                    <th>Image </th>
+                                                                                    <th>Product Name </th>
+                                                                                    <th>Size </th>
+                                                                                    <th>color </th>
+                                                                                    <th>QTY </th>
+                                                                                    <td>Price </td>
+                                                                                </tr>
+                                                                                </thead>
+                                                                                <tbody id="tableItems">
 
-                                                                        </tbody>
-                                                                    </table>
+                                                                                </tbody>
+                                                                            </table>
+                                                                        </div>
+                                                                    </div>
+
                                                                 </div>
 
                                                             </div>
                                                         </div>
                                                         <hr>
                                                         <div class="row" id="SectionReturn" style="display: none">
-                                                            <div class="col-md-12 col-sm-12 col-xs-12 mb-md-0 mb-sm-5">
+                                                            <div class="col-12 ">
                                                                 <div class="card">
                                                                     <div class="accordion" id="accordionPanelsStayOpenExample">
                                                                         <div class="accordion-item">
@@ -181,24 +192,24 @@
 
                                                                                         <div class="card mb-3">
 
-                                                                                            <div class="card-body shadow p-3 mb-5 bg-body rounded">
+                                                                                            <div class="card-body shadow p-3 mb-4 bg-body rounded">
                                                                                                 <p class="text-dark">Please Select The order That ou want to return it back and FeedBack</p>
                                                                                                 <h5 class="card-title">Items</h5>
-                                                                                                <button type="button" id="select-all" class="btn btn-outline-info">Select All</button>
+                                                                                                <button type="button" id="select-all" class="btn btn-outline-info btn-sm mb-3">Select All</button>
 
 
-                                                                                                <div id="checkBoxItems" class="p-3">
+                                                                                                <div id="checkBoxItems" class="p-2">
                                                                                                     {{--Ajax her --}}
                                                                                                 </div>
 
 
                                                                                             </div>
                                                                                         </div>
-                                                                                        <div class="card shadow p-3 mb-5 bg-body rounded">
+                                                                                        <div class="card shadow p-3 mb-4 bg-body rounded">
                                                                                             @csrf
                                                                                             <div class="card-title d-flex justify-content-between">
                                                                                                 <h4>Return Order</h4>
-                                                                                                <button class="btn btn-danger">Return</button>
+                                                                                                <button class="btn  btn-danger btn-sm">Return</button>
                                                                                             </div>
 
                                                                                             <div class="form-floating">
@@ -226,6 +237,9 @@
                                                 </div>
                                             </div>
                                         </div>
+
+
+
                                 </div>
 
                                 </div>
@@ -372,7 +386,7 @@
                                 <img src="${item.img_url}" alt="Product Thumbnail" width="40" height="40">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="ItemsReturn[]" value="${item.product.products_uuid}" id="flexCheckDefault${item.id}">
-                                    <label class="form-check-label" for="flexCheckDefault${item.id}">
+                                    <label class="form-check-label fs-5 " for="flexCheckDefault${item.id}">
                                          ${item.product.product_name}
                                     </label>
                                 </div>

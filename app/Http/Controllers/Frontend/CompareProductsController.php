@@ -10,12 +10,9 @@ use Illuminate\Http\Request;
 
 class CompareProductsController extends Controller
 {
-     public function __construct(public LandingPageInterface $lPage)
-     {}
 
     public function index(){
          return view('frontend.pages.products.compare-products' , [
-             'Categories' => $this->lPage->getAllCategories(),
              'user' => auth()->user(),
          ]);
     }

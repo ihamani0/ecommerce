@@ -10,13 +10,10 @@ use Illuminate\Http\Request;
 
 class WishListController extends Controller
 {
-    public function __construct(public LandingPageInterface $lPage)
-    {}
 
     //must be auth
     public function index(){
         return view('frontend.pages.products.wish-list' , [
-            'Categories' => $this->lPage->getAllCategories(),
             "user" => auth()->user()
         ]);
     }

@@ -44,6 +44,8 @@ class  Constants {
             public const USER_ACCOUNT_Orders_Return = "user.account.orders.return ";
             public const USER_ACCOUNT_INDEX_Return_Orders = "user.account.index.return.orders";
             public const USER_ACCOUNT_Track_Orders = "user.account.track.orders.index";
+            public const USER_ACCOUNT_Submit_Track_Orders = "user.account.submit.track.orders";
+            public const USER_ACCOUNT_Get_Track_Orders = "user.account.get.track.order";
             public const USER_ACCOUNT_ADDRESS_DETAILS = "user.account.address.index";
             public const USER_ACCOUNT_CHANGE_PASSWORD = "user.account.change.password";
             public const DOWNLOAD_INVOICE = "user.create.invoice";
@@ -222,5 +224,7 @@ class  Constants {
 
     public const Vendor_Review_List = "vendor.review.list";
     public const Vendor_Review_Approve = "vendor.review.approve";
+
+
 
 }

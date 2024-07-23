@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
 
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\View\View;
 
@@ -24,20 +25,18 @@ use Illuminate\View\View;
 class ProfileUserController extends Controller
 {
 
-    public function __construct(public LandingPageInterface $lPage , public OrderInterface $order)
+    public function __construct( public OrderInterface $order)
     {}
 
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view("frontend.pages.account" , [
-            'Categories' => $this->lPage->getAllCategories(),
         ]);
     }
 
     public function dashboard_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view("frontend.pages.Profile.dashboard" , [
-            'Categories' => $this->lPage->getAllCategories(),
         ]);
     }
 
@@ -45,38 +44,48 @@ class ProfileUserController extends Controller
 
     public function track_orders_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view("frontend.pages.Profile.track-orders" , [
-            'Categories' => $this->lPage->getAllCategories(),
+        return view("frontend.pages.Profile.track-orders");
+    }
+
+    public function submit_track_order(Request $request)
+    {
+        $request->validate([
+           "order_number" => ['required' , 'min:15' , 'max:15' , 'regex:/^Od[a-zA-Z0-9]{13}$/']
+        ]);
+        $order = $this->order->getOrdersDetailsByOrderNumber($request->order_number);
+
+        Session::put("Order",$order);
+        return redirect()->route(Constants::USER_ACCOUNT_Get_Track_Orders);
+    }
+
+    public function get_track_order()
+    {
+        $Order = Session::get('Order'); // this session put from the method up we send post and retrieve the data and put this data in session
+        return view("frontend.pages.Profile.get-track-order" , [
+            "Order" =>  $Order
         ]);
     }
 
+
     public function address_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view("frontend.pages.Profile.address-details" , [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view("frontend.pages.Profile.address-details");
     }
 
 
     public function account_detail_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view("frontend.pages.Profile.account-details" , [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view("frontend.pages.Profile.account-details");
     }
 
     public function change_password_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view("frontend.pages.Profile.change-password" , [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view("frontend.pages.Profile.change-password");
     }
 
     public function delete_account_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
-        return view("frontend.pages.Profile.delete-account" , [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view("frontend.pages.Profile.delete-account");
     }
 
 
@@ -85,7 +94,6 @@ class ProfileUserController extends Controller
     {
 
         return view("frontend.pages.Profile.orders" , [
-            'Categories' => $this->lPage->getAllCategories(),
             'Orders' => $this->order->getOrdersPendingBelongsToUser(auth()->user()->id),
         ]);
     }
@@ -101,7 +109,6 @@ class ProfileUserController extends Controller
     public function orders_return_index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application
     {
         return view("frontend.pages.Profile.return-orders" , [
-            'Categories' => $this->lPage->getAllCategories(),
             'OrdersReturn' => $this->order->getOrdersReturnBelongsToUser(auth()->user()->id),
         ]);
     }

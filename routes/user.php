@@ -62,8 +62,17 @@ Route::middleware(["auth.user" , 'activity'])->group(function (){
                 ->name(Constants::USER_ACCOUNT_Orders_Return);
 
 
+            /*--------Track Orders-----------------------------------*/
             Route::get('/track-orders' , 'track_orders_index')
                 ->name(Constants::USER_ACCOUNT_Track_Orders);
+
+            Route::post('/track-orders' , 'submit_track_order')
+                ->name(Constants::USER_ACCOUNT_Submit_Track_Orders);
+
+            Route::get('/get-track-order' , 'get_track_order')
+                ->name(Constants::USER_ACCOUNT_Get_Track_Orders);
+            /*-----------------------------------------------------------*/
+
 
             Route::get('/address-details' , 'address_index')
                 ->name(Constants::USER_ACCOUNT_ADDRESS_DETAILS);
@@ -165,6 +174,9 @@ Route::middleware(["auth.user" , 'activity'])->group(function (){
         Route::post("/add-to-compare-products" , 'store');
 
     });
+
+
+
 
 
 });//end middlware auth.user

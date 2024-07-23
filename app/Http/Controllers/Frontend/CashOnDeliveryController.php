@@ -15,15 +15,13 @@ use Illuminate\Support\Facades\Log;
 class CashOnDeliveryController extends Controller
 {
 
-    public function __construct(public LandingPageInterface $lPage , protected  OrderService $order_service)
+    public function __construct(protected  OrderService $order_service)
     {}
     //
 
     public function index(){
 
-        return view('frontend.pages.payment.cash-payment', [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view('frontend.pages.payment.cash-payment');
     }
 
 

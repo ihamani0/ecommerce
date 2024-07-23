@@ -21,15 +21,13 @@ use function PHPUnit\Framework\throwException;
 class CartShopController extends Controller
 {
 
-    public function __construct(public LandingPageInterface $lPage , public OrderService $order_service )
+    public function __construct( public OrderService $order_service )
     {}
 
 
     //---------for web page-----------------
     public function index(){
-        return view('frontend.pages.products.cart-index' , [
-            'Categories' => $this->lPage->getAllCategories(),
-        ]);
+        return view('frontend.pages.products.cart-index');
     }
 
     public function indexCheckOutCart(){
@@ -40,7 +38,6 @@ class CartShopController extends Controller
         }
 
         return view('frontend.pages.products.cart-checkout' , [
-            'Categories' => $this->lPage->getAllCategories(),
             "ContentCart" => Cart::content(), //get the carts content
             "count_cart" =>  Cart::count(), // how many items there are in your cart
             "TotalCart" =>  Cart::total(), // calculated total of all items in the cart
