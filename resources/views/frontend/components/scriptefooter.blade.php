@@ -552,3 +552,72 @@
 
     }
 </script>
+
+<script>
+    $(document).ready(function() {
+
+        let timeout = null;
+
+
+        $('#searchBox').on('keyup', function() {
+            clearTimeout(timeout);
+            const query = $(this).val();
+
+            timeout = setTimeout(() => {
+                if (query.length > 0) {
+                    fetchProducts(query);
+                } else {
+                    $('#searchResults').slideUp();
+                }
+            }, 300);
+        });
+
+        function fetchProducts(query){
+            let Searchurl = '{{route(\App\Constants\Constants::WEB_SEARCH)}}'
+            $.ajax({
+                url: Searchurl,
+                method: 'POST',
+                dataType : 'json',
+                data : {
+                    _token  :` {{csrf_token()}}` ,
+                    search : query
+                },
+                success: function(data) {
+                    //console.log(data)
+                    displayResults(data);
+                },
+                error: function(error) {
+                    console.error('Error fetching products:', error);
+                }
+            });
+        } //end function fetchProducts
+
+        function displayResults(products){
+            const resultsContainer = $('#searchResults');
+            resultsContainer.empty();
+            if (products.length > 0) {
+                products.forEach(product => {
+                    resultsContainer.append(`
+                    <div class="result-item">
+                        <img src='${product.product_thumbnail}' class="result-thumbnail">
+                        <div class="result-details">
+                            <a class="result-name" href="">${product.product_name}</a>
+                            <p class="result-price">${product.selling_price}</p>
+                        </div>
+                    </div>
+                    `);
+                });
+                resultsContainer.slideDown();
+            } else {
+                resultsContainer.slideUp();
+            }
+        }//end function displayResults
+
+        // Hide results when clicking outside
+        $(document).on('click', function(event) {
+            if (!$(event.target).closest('.search-style-2').length) {
+                $('#searchResults').slideUp();
+            }
+        });
+    });
+</script>

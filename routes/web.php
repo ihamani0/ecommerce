@@ -26,6 +26,15 @@ Route::controller(\App\Http\Controllers\Frontend\LandingPageController::class)->
 
     Route::get('/', "index")
             ->name(Constants::WELCOME);
+    Route::post('/', "search")
+        ->name(Constants::WEB_SEARCH);
+
+    Route::get('search-by-category' , "searchByCategory")
+            ->name(Constants::WEB_SEARCH_BY_Category);
+    Route::get('search-by-name-product' , "searchNameProduct")
+        ->name(Constants::WEB_SEARCH_Name_Product);
+
+
 
     Route::get('/Product-details/{uuid}/{slug}', "productDetails")
                 ->name(Constants::WEB_Products_Details);

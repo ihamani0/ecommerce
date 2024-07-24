@@ -10,6 +10,9 @@ class  Constants {
     //******** Route *********************************************************************************/
     /********Web PAGe Route**********************************************************************************/
     public const WELCOME = "web.welcome";
+    public const WEB_SEARCH = "web.search";
+    public const WEB_SEARCH_BY_Category = "web.search.by.category";
+    public const WEB_SEARCH_Name_Product = "web.search.name.product";
     public const WEB_Products_Details = "web.product.details";
     public const WEB_Vendor_Details = "web.vendor.details";
     public const WEB_All_Vendors = "web.all.vendors";

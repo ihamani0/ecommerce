@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Frontend;
 
+use App\Constants\Constants;
 use App\Contracts\Frontend\LandingPageInterface;
 use App\Http\Controllers\Controller;
 use App\Models\Banner;
@@ -9,6 +10,7 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\slide;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 // use Illuminate\Http\Request;
 
@@ -34,6 +36,47 @@ class LandingPageController extends Controller
                 ]);
     }
 
+
+    /*----------------Search-------------------*/
+    public function search(Request $request){
+
+        if($request->expectsJson()){
+            return response()->json($this->lPage->searchByName($request));
+        }
+
+        $request->validate(['search' => 'required']);
+
+        if($request->category){
+            //search by category
+            Session::put('products' , $this->lPage->searchByCategory($request));
+            Session::put('category' , Category::where('id' , $request->category)->first());
+            //redirect
+            return redirect()->route(Constants::WEB_SEARCH_BY_Category);
+        }
+            //search by name
+            Session::put('products' , $this->lPage->searchByName($request));
+            return redirect()->route(Constants::WEB_SEARCH_Name_Product);
+    }
+
+
+
+    public function searchByCategory(){
+        //dd( Session::get('category') , Session::get('products'));
+
+        return view('frontend.pages.Search.search-by-category' , [
+                "category" => Session::get('category'),
+                "products" => Session::get('products'),
+            ]);
+
+    }
+    public function searchNameProduct(){
+        return view('frontend.pages.Search.search', [
+            "products" => Session::get('products'),
+        ]);
+    }
+    /*--------------------------------------------*/
+
+
     public function productDetails(Request $request,$uuid,$slug){
 
         if ($request->expectsJson()) {
@@ -44,7 +87,6 @@ class LandingPageController extends Controller
 
         return view("frontend.pages.products.product-details" ,
             [
-                /*'Categories' => $this->lPage->getAllCategories(),*/
                 'Product' => $this->lPage->getProduct($uuid),
             ]);
     }
@@ -52,7 +94,6 @@ class LandingPageController extends Controller
     public function VendorDetails($id){
         return view("frontend.pages.vendor.vendor-details" ,
             [
-                /*'Categories' => $this->lPage->getAllCategories(),*/
                 'vendor' => $this->lPage->getVendorById($id),
             ]);
     }

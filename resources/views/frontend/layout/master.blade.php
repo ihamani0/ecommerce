@@ -23,6 +23,64 @@
     <!--Font awesome-->
     <link   rel="stylesheet" href="{{ asset("backend/assets/font-awosome/css/all.css") }}" />
 
+    <style>
+        .search-style-2{
+            position: relative;
+        }
+        .results-container {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: white;
+            border: 1px solid #ccc;
+            border-top: none;
+            max-height: 300px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1000;
+        }
+
+        .result-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+            margin-top: 10px;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-item:hover {
+            background-color: #f0f0f0;
+            cursor: pointer;
+        }
+
+        .result-thumbnail {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            margin-right: 10px;
+        }
+
+        .result-details {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .result-name {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .result-price {
+            color: #888;
+            margin: 0;
+        }
+    </style>
+
     @stack('style')
 </head>
 

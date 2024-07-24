@@ -10,6 +10,7 @@ use App\Models\Product;
 use App\Models\slide;
 use App\Models\Subcategory;
 use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use JetBrains\PhpStorm\ArrayShape;
 
@@ -105,5 +106,24 @@ class LandingPageRepo implements LandingPageInterface {
     public function countMaxCategories(){
         $count = Category::withCount('products')->get();
         return $count->sortByDesc('products_count')->take(3);
+    }
+
+    public function searchByCategory(Request $request)
+    {
+       return Product::where('product_name', "LIKE" , "%$request->search%")->where("category_id" , $request->category)->get();
+    }
+
+    public function searchByName(Request $request)
+    {
+        if($request->expectsJson()){
+            $Products =  Product::where('product_name', "LIKE" , "%$request->search%")
+                            ->select(['product_thumbnail' , 'product_name' , 'selling_price'])->get();
+            foreach ($Products as $product){
+                $product->product_thumbnail = Storage::url($product->product_thumbnail);
+            }
+            return $Products;
+        }
+
+        return Product::where('product_name', "LIKE" , "%$request->search%")->get();
     }
 }

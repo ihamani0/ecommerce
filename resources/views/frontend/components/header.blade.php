@@ -1,4 +1,9 @@
 
+@push('style')
+
+@endpush
+
+
 <!-- Header  -->
 <header class="header-area header-style-1 header-height-2">
 
@@ -63,16 +68,18 @@
                 </div>
                 <div class="header-right">
                     <div class="search-style-2">
-                        <form action="#">
-                            <select class="select-active">
-                                <option>All Categories</option>
+                        <form  id="searchForm" action="{{route(\App\Constants\Constants::WEB_SEARCH)}}" method="POST">
+                            @csrf
+                            <select class="select-active" name="category">
+                                <option selected disabled>All Categories</option>
                                 @foreach($Categories as $category)
-                                    <option>{{$category->category_name}}</option>
+                                    <option value="{{$category->id}}" >{{$category->category_name}}</option>
                                 @endforeach
 
                             </select>
-                            <input type="text" placeholder="Search for items..." />
+                            <input type="text" name="search" id="searchBox" placeholder="Search for items..." />
                         </form>
+                        <div id="searchResults" class="results-container"></div>
                     </div>
                     <div class="header-action-right">
                         <div class="header-action-2">
@@ -492,10 +499,12 @@
         </div>
         <div class="mobile-header-content-area">
             <div class="mobile-search search-style-3 mobile-header-border">
+
                 <form action="#">
-                    <input type="text" placeholder="Search for items…" />
+                    <input type="text" placeholder="Search for items… " />
                     <button type="submit"><i class="fi-rs-search"></i></button>
                 </form>
+
             </div>
             <div class="mobile-menu-wrap mobile-header-border">
                 <!-- mobile menu start -->

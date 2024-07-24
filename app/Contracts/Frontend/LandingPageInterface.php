@@ -2,6 +2,8 @@
 
 namespace App\Contracts\Frontend;
 
+use Illuminate\Http\Request;
+
 interface LandingPageInterface{
 
 
@@ -29,4 +31,9 @@ interface LandingPageInterface{
 
     public function getAllVendors();
     public function getVendorById($id);
+
+
+    //search
+    public function searchByCategory(Request $request);
+    public function searchByName(Request $request);
 }
