@@ -340,6 +340,9 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
 
             Route::put('admins-change-status' , 'changeStatusAdmin')
                 ->name(Constants::Admin_Register_Admin_Change_Status);
+            Route::delete('admins-destroy' , 'destroyAdmin')
+                ->name(Constants::Admin_Register_Admin_Delete);
+
 
         }) ; // end prefix
     });// end controller

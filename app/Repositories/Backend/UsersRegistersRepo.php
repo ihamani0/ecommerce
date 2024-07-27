@@ -64,4 +64,16 @@ class UsersRegistersRepo implements UsersRegistersInterface {
             throw new \Exception($exception->getMessage());
         }
     }
+
+    public function destroyAdmin(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+            Admin::find($request->id)->delete();
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            throw new \Exception($exception->getMessage());
+        }
+    }
 }

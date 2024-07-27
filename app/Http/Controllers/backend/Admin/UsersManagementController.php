@@ -72,4 +72,16 @@ class UsersManagementController extends Controller
             return redirect()->back()->with(['error' => $exception->getMessage()]);
         }
     }
+
+    public function destroyAdmin(Request $request){
+        $request->validate([
+            'id' => 'required',
+        ]);
+        try {
+            $this->user->destroyAdmin($request);
+            return redirect()->route(Constants::Admin_Register_Admin)->with(['success' => "The Admin Deleted Successfully"]);
+        }catch (\Exception $exception){
+            return redirect()->back()->with(['error' => $exception->getMessage()]);
+        }
+    }
 }

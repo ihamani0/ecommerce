@@ -13,4 +13,5 @@ interface UsersRegistersInterface{
     public function getAllAdmins();
     public function storeAdmin(Request $request);
     public function changeStatusAdmin(Request $request);
+    public function destroyAdmin(Request $request);
 }

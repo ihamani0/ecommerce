@@ -96,7 +96,12 @@
                                         <button type="submit"  @if($admin->status) class="btn btn-outline-danger" title="pause-admin" @else class="btn btn-outline-success" title="enable-admin" @endif  >
                                             <i class="fa-duotone fa-play-pause"></i></button></form>
                                     {{--delete user--}}
-
+                                    <form class="d-inline" method="POST" action="{{route(\App\Constants\Constants::Admin_Register_Admin_Delete)}}">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="hidden" name="id" value="{{$admin->id}}">
+                                        <button type="submit"  class="btn btn-outline-danger" title="delete"  >
+                                            <i class="fa-duotone fa-trash-alt-slash"></i></button></form>
                                     {{--Edit--}}
                                 </td>
 
