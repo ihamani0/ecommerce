@@ -71,7 +71,7 @@ class PolicyRepo implements PolicyInterface {
 
     /*-------------------------------------------*/
     /*-------------------------------------------*/
-    public function getAllRoles()
+    public function getAllRoles(): \Illuminate\Database\Eloquent\Collection
     {
         return Role::all();
     }

@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Permission;
+use Spatie\Permission\Models\Role;
 
 class UsersRegistersRepo implements UsersRegistersInterface {
 
@@ -36,11 +37,13 @@ class UsersRegistersRepo implements UsersRegistersInterface {
         try {
             DB::beginTransaction();
 
-                Admin::create([
+                $admin = Admin::create([
                     'name' => $request->name,
                     'email' => $request->email,
                     'password' => bcrypt($request->password),
                 ]);
+                $roleFromDB = Role::where('id', $request->role)->pluck('name')->toArray();
+                $admin->assignRole($roleFromDB);
 
             DB::commit();
         }catch (\Exception $exception){
@@ -75,5 +78,10 @@ class UsersRegistersRepo implements UsersRegistersInterface {
             DB::rollBack();
             throw new \Exception($exception->getMessage());
         }
+    }
+
+    public function getAllRoles(): \Illuminate\Database\Eloquent\Collection
+    {
+        return Role::all();
     }
 }

@@ -40,6 +40,7 @@
 
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Role</th>
                             <th>Status</th>
                             <th>Activity</th>
                             <th>Action</th>
@@ -64,6 +65,14 @@
                                 <td>{{ $admin->name }}</td>
                                 <td>{{ $admin->email }}</td>
                                 <td>{{ $admin->phone_number }}</td>
+                                <td>
+                                    @foreach($admin->getRoleNames() as $role)
+                                        <span class="badge rounded-2 p-2 bg-primary text-light" >
+                                             {{ $role }}
+                                        </span>
+                                    @endforeach
+
+                                </td>
                                 <td>
                                     @if($admin->status)
                                         <span class="badge rounded-1 p-1 bg-success text-light">enable</span>
@@ -119,6 +128,7 @@
 
                             <th>Email</th>
                             <th>Phone</th>
+                            <th>Role</th>
                             <th>Status</th>
                             <th>Activity</th>
                             <th>Action</th>

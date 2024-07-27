@@ -69,6 +69,17 @@
                                     </div>
 
                                     <div class="mb-3 form-group" >
+                                        <label for="role" class="form-label">Assigning Role<span class="text-danger">*</span></label>
+                                        <select name="role" class="form-select" id="role">
+                                            <option disabled="" selected="">Select Role</option>
+                                            @foreach($Roles as $role)
+                                                <option value="{{$role->id}}">{{$role->name}}</option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3 form-group" >
                                         <label for="inputProductTitle" class="form-label">Password Root<span class="text-danger">*</span></label>
                                         <input type="password" class="form-control @error("password_super_admin") is-invalid @enderror "
                                                name="password_super_admin" id="inputProductTitle" placeholder=" Super Admin Password" >

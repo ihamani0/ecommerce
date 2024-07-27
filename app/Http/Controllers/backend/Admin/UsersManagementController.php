@@ -37,7 +37,9 @@ class UsersManagementController extends Controller
     }
 
     public function admin_add(){
-        return view('backend.admin.pages.RegisterUser.admins-add');
+        return view('backend.admin.pages.RegisterUser.admins-add' , [
+            "Roles" => $this->user->getAllRoles()
+        ]);
 
     }
     public function admin_store(Request $request){

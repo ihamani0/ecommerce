@@ -25,11 +25,11 @@ class PermissionsController extends Controller
 
     public function store(Request $request){
 
-        try {
             $request->validate([
                 'name' => ['required'],
                 'group' => ['required']
             ]);
+        try {
             $this->permission->createPermission($request);
             toastr()->addSuccess('The Permission Added Successfully');
             return redirect()->route(Constants::Admin_Permission_Index);
@@ -49,11 +49,11 @@ class PermissionsController extends Controller
 
 
     public function update(Request $request){
-        try {
             $request->validate([
                 'name' => ['required'],
                 'group' => ['required']
             ]);
+        try {
             $this->permission->updatePermission($request);
             toastr()->addSuccess('The Permission Updated Successfully');
             return redirect()->route(Constants::Admin_Permission_Index);
@@ -64,10 +64,11 @@ class PermissionsController extends Controller
 
 
     public function destroy(Request $request){
+        $request->validate([
+            'id' => ['required'],
+        ]);
         try {
-            $request->validate([
-                'id' => ['required'],
-            ]);
+
             $this->permission->deletePermission($request);
             toastr()->addSuccess('The Permission Deleted Successfully');
             return redirect()->route(Constants::Admin_Permission_Index);

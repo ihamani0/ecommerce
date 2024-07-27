@@ -47,10 +47,11 @@ class RoleController extends Controller
 
 
     public function update(Request $request){
+
+        $request->validate([
+            'name' => ['required'],
+        ]);
         try {
-            $request->validate([
-                'name' => ['required'],
-            ]);
             $this->role->updateRole($request);
             toastr()->addSuccess('The Role Updated Successfully');
             return redirect()->route(Constants::Admin_Role_Index);
@@ -61,10 +62,11 @@ class RoleController extends Controller
 
 
     public function destroy(Request $request){
+        $request->validate([
+            'id' => ['required'],
+        ]);
         try {
-            $request->validate([
-                'id' => ['required'],
-            ]);
+
             $this->role->deleteRole($request);
             toastr()->addSuccess('The Role Deleted Successfully');
             return redirect()->route(Constants::Admin_Role_Index);
@@ -85,10 +87,10 @@ class RoleController extends Controller
 
     public function updatePermissionToRole(Request $request){
 
-        try {
             $request->validate([
                 'id' => ['required'],
             ]);
+        try {
             $this->role->AddPermissionsToRole($request);
             toastr()->addSuccess('Permissions Add To Role Successfully');
             return redirect()->route(Constants::Admin_Role_Index);

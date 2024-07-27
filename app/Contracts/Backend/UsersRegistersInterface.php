@@ -10,6 +10,7 @@ interface UsersRegistersInterface{
     public function getAllVendors();
     public function getAllUsers();
 
+    public function getAllRoles();
     public function getAllAdmins();
     public function storeAdmin(Request $request);
     public function changeStatusAdmin(Request $request);
