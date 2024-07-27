@@ -51,12 +51,12 @@
 
                                     <div class="mb-3 form-group" >
                                         <label for="inputProductTitle" class="form-label">Name <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="name" id="inputProductTitle" placeholder="Enter Name" >
+                                        <input type="text" class="form-control" name="name" id="inputProductTitle" value="{{old("name")}}" placeholder="Enter Name" >
                                     </div>
 
                                     <div class="mb-3 form-group" >
                                         <label for="inputProductTitle" class="form-label">Email <span class="text-danger">*</span></label>
-                                        <input type="text" class="form-control" name="email" id="inputProductTitle" placeholder="Enter email" >
+                                        <input type="text" class="form-control" name="email" id="inputProductTitle" value="{{old("email")}}" placeholder="Enter email" >
                                     </div>
 
                                     <div class="mb-3 form-group" >
@@ -70,7 +70,8 @@
 
                                     <div class="mb-3 form-group" >
                                         <label for="inputProductTitle" class="form-label">Password Root<span class="text-danger">*</span></label>
-                                        <input type="password" class="form-control" name="password_super_admin" id="inputProductTitle" placeholder=" Super Admin Password" >
+                                        <input type="password" class="form-control @error("password_super_admin") is-invalid @enderror "
+                                               name="password_super_admin" id="inputProductTitle" placeholder=" Super Admin Password" >
                                     </div>
                                     <div class=" mb-3 text-secondary">
                                         <input type="submit" class="btn btn-outline-success px-4" value="Add" />

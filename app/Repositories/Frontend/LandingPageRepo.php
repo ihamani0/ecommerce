@@ -116,8 +116,9 @@ class LandingPageRepo implements LandingPageInterface {
     public function searchByName(Request $request)
     {
         if($request->expectsJson()){
+            $columns = ['product_thumbnail' , 'product_name' , 'selling_price' , "products_uuid" , "product_slug"];
             $Products =  Product::where('product_name', "LIKE" , "%$request->search%")
-                            ->select(['product_thumbnail' , 'product_name' , 'selling_price'])->get();
+                            ->select($columns)->get();
             foreach ($Products as $product){
                 $product->product_thumbnail = Storage::url($product->product_thumbnail);
             }

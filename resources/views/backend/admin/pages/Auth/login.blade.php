@@ -34,9 +34,17 @@
 @section("auth")
 
 <div class="container">
+
     <div class="row">
       <div class="col-md-6 offset-md-3">
         <h2 class="text-center text-dark mt-5">Login </h2>
+
+          @if (session('isNotActive'))
+              <div class="alert alert-danger">
+                  {{ session('isNotActive') }}
+              </div>
+          @endif
+
         <div class="card my-5">
 
             @if ($errors->any())

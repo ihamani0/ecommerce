@@ -24,7 +24,7 @@ Route::middleware('guest.admin')->group(function (){
 
 
 
-Route::middleware('auth.admin')->group(function (){
+Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
 
 
     //controller admin Profile
@@ -320,7 +320,7 @@ Route::middleware('auth.admin')->group(function (){
         });//end prefix
     });//end Report Controller
 
-
+    //user and vendors and admins management
     Route::controller(\App\Http\Controllers\backend\Admin\UsersManagementController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -344,6 +344,7 @@ Route::middleware('auth.admin')->group(function (){
         }) ; // end prefix
     });// end controller
 
+    //review system
     Route::controller(\App\Http\Controllers\backend\Admin\Review\ReviewController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -354,7 +355,7 @@ Route::middleware('auth.admin')->group(function (){
         }) ; // end prefix
     });// end controller
 
-
+//Config system
     Route::controller(\App\Http\Controllers\backend\Admin\Setting\SettingController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -373,7 +374,7 @@ Route::middleware('auth.admin')->group(function (){
         }) ; // end prefix
     });// end controller
 
-
+//Stock system
     Route::controller(\App\Http\Controllers\backend\Admin\Products\StockController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -386,7 +387,7 @@ Route::middleware('auth.admin')->group(function (){
     });// end controller
 
 
-
+    //Permission Management
     Route::controller(\App\Http\Controllers\backend\Admin\Policy\PermissionsController::class)->group(function(){
         Route::prefix('admin')->group(function(){
 
@@ -405,7 +406,7 @@ Route::middleware('auth.admin')->group(function (){
 
         });// end prefix
     });// end controller
-
+//Role Management
     Route::controller(\App\Http\Controllers\backend\Admin\Policy\RoleController::class)->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('role-list' , 'index')

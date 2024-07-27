@@ -71,6 +71,7 @@ class Kernel extends HttpKernel
 
         //my middleware
         'auth.admin' => \App\Http\Middleware\AdminMiddleware::class,
+        "IsActive.admin" => \App\Http\Middleware\IsEnableAdminMiddleware::class,
 
         'auth.user' => \App\Http\Middleware\UserAuthnticate::class,
         'guest.admin'=> \App\Http\Middleware\Admin_RedirectIfAuthenticated::class,

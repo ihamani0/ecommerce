@@ -601,7 +601,8 @@
                     <div class="result-item">
                         <img src='${product.product_thumbnail}' class="result-thumbnail">
                         <div class="result-details">
-                            <a class="result-name" href="">${product.product_name}</a>
+                            <a class="result-name" href="/Product-details/${product.products_uuid}/${product.slug}">
+                                ${product.product_name}</a>
                             <p class="result-price">${product.selling_price}</p>
                         </div>
                     </div>
