@@ -17,6 +17,7 @@
         "livewire/livewire": "^3.5",
         "mindscms/laravelshoppingcart": "^2.1",
         "php-flasher/flasher-toastr-laravel": "^1.15",
+        "spatie/laravel-permission": "^6.9",
         "stripe/stripe-php": "^15.0"
     },
     "require-dev": {

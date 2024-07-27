@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use Spatie\Permission\Traits\HasRoles;
 
 /**
  * @property mixed $id
@@ -18,7 +19,7 @@ use Laravel\Sanctum\HasApiTokens;
  */
 class User extends Authenticatable implements IMustVerifyEmail
 {
-    use HasApiTokens, HasFactory, Notifiable , MustVerifyEmail;
+    use HasApiTokens, HasFactory, Notifiable , MustVerifyEmail , HasRoles;
 
     /**
      * The attributes that are mass assignable.

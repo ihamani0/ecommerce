@@ -164,6 +164,24 @@
                 </li>
                 <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Vendor)}}"><i class="bx bx-right-arrow-alt"></i>Vendor List</a>
                 </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Admin)}}"><i class="bx bx-right-arrow-alt"></i>Admin List</a>
+                </li>
+            </ul>
+        </li>
+
+        {{--Role\Permissions --}}
+
+        <li class="">
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="fa-duotone fa-solid fa-scale-balanced fa-xs"></i>
+                </div>
+                <div class="menu-title">Role & Permissions</div>
+            </a>
+            <ul>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Permission_Index)}}"><i class="bx bx-right-arrow-alt"></i>Permissions List</a>
+                </li>
+                <li> <a href="{{route(\App\Constants\Constants::Admin_Role_Index)}}"><i class="bx bx-right-arrow-alt"></i>Role List</a>
+                </li>
             </ul>
         </li>
 

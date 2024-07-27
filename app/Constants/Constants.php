@@ -170,6 +170,14 @@ class  Constants {
     /*********************************************/
     public const Admin_Register_Users = "admin.register.users";
     public const Admin_Register_Vendor = "admin.register.vendor";
+
+    /*********************************************/
+    public const Admin_Register_Admin = "admin.register.admins";
+    public const Admin_Register_Admin_ADD = "admin.register.admins.add";
+    public const Admin_Register_Admin_Store = "admin.register.admins.store";
+    public const Admin_Register_Admin_Change_Status = "admin.register.admins.edit";
+    public const Admin_Register_Admin_Update = "admin.register.admins.update";
+    public const Admin_Register_Admin_Delete = "admin.register.admins.delete";
     /*********************************************/
     public const Admin_Review_List = "admin.review.list";
     public const Admin_Review_Approve = "admin.review.approve";
@@ -184,9 +192,22 @@ class  Constants {
     /*********************************************/
     public const Admin_Stock_Index = "admin.stock.index";
     public const Admin_Stock_Change= "admin.stock.change";
-
-
-
+    /*********************************************/
+    public const Admin_Permission_Index = "admin.permission.index";
+    public const Admin_Permission_Add= "admin.permission.add";
+    public const Admin_Permission_Store= "admin.permission.store";
+    public const Admin_Permission_Edit= "admin.permission.edit";
+    public const Admin_Permission_Update= "admin.permission.update";
+    public const Admin_Permission_Destroy= "admin.permission.delete";
+    /*********************************************/
+    public const Admin_Role_Index = "admin.role.index";
+    public const Admin_Role_Add= "admin.role.add";
+    public const Admin_Role_Store= "admin.role.store";
+    public const Admin_Role_Edit= "admin.role.edit";
+    public const Admin_Role_Update= "admin.role.update";
+    public const Admin_Role_Destroy= "admin.role.delete";
+    public const Admin_Permission_To_Role= "admin.permission.to.role";
+    public const Admin_Update_Permission_To_Role= "admin.update.role.to.permission";
     /*********************************************/
     /********** Route Vendors **********************************************************************************************************/
     /*********************************************/

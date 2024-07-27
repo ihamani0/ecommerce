@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('last_activity')->nullable();
+        Schema::table('admins', function (Blueprint $table) {
+            $table->boolean('status')->default(0);
         });
     }
 
@@ -21,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('last_activity');
+        Schema::table('admins', function (Blueprint $table) {
+            $table->dropColumn('status');
         });
     }
 };

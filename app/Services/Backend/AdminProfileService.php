@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Hash;
 class AdminProfileService implements ProfileServiceInterface{
     // Define your service methods here
 
-    public function __construct(public ProfileRepoInterface $adminRep)
+    public function __construct()
     {
     }
 
@@ -21,7 +21,7 @@ class AdminProfileService implements ProfileServiceInterface{
 
     public function checkPassword($OldPasswordFromInput): bool
     {
-        $userPasswordFromDataBase = $this->adminRep->getUser()->password;
+        $userPasswordFromDataBase = auth()->guard('admin')->user()->password;
 
         return Hash::check( $OldPasswordFromInput , $userPasswordFromDataBase);
     }

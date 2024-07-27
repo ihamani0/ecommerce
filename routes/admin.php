@@ -322,11 +322,25 @@ Route::middleware('auth.admin')->group(function (){
 
 
     Route::controller(\App\Http\Controllers\backend\Admin\UsersManagementController::class)->group(function(){
+
         Route::prefix('admin')->group(function(){
+
             Route::get('users-management' , 'users_index')
                     ->name(Constants::Admin_Register_Users);
             Route::get('vendor-management' , 'vendor_index')
                 ->name(Constants::Admin_Register_Vendor);
+            //-------------For Admin Management---------------
+            Route::get('admins-management' , 'admin_index')
+                ->name(Constants::Admin_Register_Admin);
+            Route::get('admins-add' , 'admin_add')
+                ->name(Constants::Admin_Register_Admin_ADD);
+
+            Route::post('admins-add' , 'admin_store')
+                ->name(Constants::Admin_Register_Admin_Store);
+
+            Route::put('admins-change-status' , 'changeStatusAdmin')
+                ->name(Constants::Admin_Register_Admin_Change_Status);
+
         }) ; // end prefix
     });// end controller
 
@@ -371,6 +385,49 @@ Route::middleware('auth.admin')->group(function (){
         }) ; // end prefix
     });// end controller
 
+
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Policy\PermissionsController::class)->group(function(){
+        Route::prefix('admin')->group(function(){
+
+            Route::get('permission-list' , 'index')
+                ->name(Constants::Admin_Permission_Index);
+            Route::get('permission-add' , 'add')
+                ->name(Constants::Admin_Permission_Add);
+            Route::post('permission-add' , 'store')
+                ->name(Constants::Admin_Permission_Store);
+            Route::get('permission-edit/{id}' , 'edit')
+                ->name(Constants::Admin_Permission_Edit);
+            Route::put('permission-edit' , 'update')
+                ->name(Constants::Admin_Permission_Update);
+            Route::delete('permission-destroy' , 'destroy')
+                ->name(Constants::Admin_Permission_Destroy);
+
+        });// end prefix
+    });// end controller
+
+    Route::controller(\App\Http\Controllers\backend\Admin\Policy\RoleController::class)->group(function(){
+        Route::prefix('admin')->group(function(){
+            Route::get('role-list' , 'index')
+                ->name(Constants::Admin_Role_Index);
+            Route::get('role-add' , 'add')
+                ->name(Constants::Admin_Role_Add);
+            Route::post('role-add' , 'store')
+                ->name(Constants::Admin_Role_Store);
+            Route::get('role-edit/{id}' , 'edit')
+                ->name(Constants::Admin_Role_Edit);
+            Route::put('role-edit' , 'update')
+                ->name(Constants::Admin_Role_Update);
+            Route::delete('role-destroy' , 'destroy')
+                ->name(Constants::Admin_Role_Destroy);
+
+            Route::get('permission-to-role/{id}' , 'PermissionToRole')
+                ->name(Constants::Admin_Permission_To_Role);
+            Route::put('permission-to-role' , 'updatePermissionToRole')
+                ->name(Constants::Admin_Update_Permission_To_Role);
+
+        });// end prefix
+    });// end controller
 
 });//end auth admin middleware
 

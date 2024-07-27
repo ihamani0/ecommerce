@@ -18,10 +18,17 @@ class LastActivity
     public function handle(Request $request, Closure $next): Response
     {
 
-        if(auth()->check()){
-            auth()->user()->last_activity = Carbon::now();
-            auth()->user()->save();
+        $guards = ['web', 'admin'];
+
+        foreach ($guards as $guard){
+
+            if(Auth::guard($guard)->check()){
+                Auth::guard($guard)->user()->last_activity = Carbon::now();
+                Auth::guard($guard)->user()->save();
+                break;
+            }
         }
+
         return $next($request);
     }
 }

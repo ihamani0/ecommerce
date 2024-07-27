@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\backend\Auth;
 
 
+use App\Contracts\Backend\ProfileRepoInterface;
+use App\Contracts\Backend\ProfileServiceInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -14,6 +16,11 @@ use Illuminate\Validation\ValidationException;
 class AdminAuthController extends Controller
 {
 
+    public function __construct(
+        public ProfileRepoInterface $adminRepo,
+        public ProfileServiceInterface $adminService
+    )
+    {}
 
 
     public function showLogin()

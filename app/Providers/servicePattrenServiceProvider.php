@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Contracts\Backend\CouponInterface;
 use App\Contracts\Backend\CrudInterface;
 use App\Contracts\Backend\DashboardInterface;
+use App\Contracts\Backend\PolicyInterface;
 use App\Contracts\Backend\ProductInterface;
 use App\Contracts\Backend\ProfileRepoInterface;
 use App\Contracts\Backend\ProfileServiceInterface;
@@ -25,8 +26,11 @@ use App\Http\Controllers\backend\Admin\Coupon\CouponsController;
 use App\Http\Controllers\backend\Admin\Dashboard\DashboardController;
 use App\Http\Controllers\backend\Admin\Order\OrderController;
 use App\Http\Controllers\backend\Admin\Order\OrderController as OrderControllerAdmin;
+use App\Http\Controllers\backend\Admin\Policy\PermissionsController;
+use App\Http\Controllers\backend\Admin\Policy\RoleController;
 use App\Http\Controllers\backend\Admin\Products\StockController;
 use App\Http\Controllers\backend\Admin\UsersManagementController;
+use App\Http\Controllers\backend\Auth\AdminAuthController;
 use App\Http\Controllers\backend\Vendor\Order\OrderController as OrderControllerVendor;
 
 use App\Http\Controllers\backend\Admin\Products\ProductsController as adminProductsController;
@@ -53,6 +57,7 @@ use App\Repositories\Backend\BrandRepo;
 use App\Repositories\Backend\CategoryRepo;
 use App\Repositories\Backend\CouponRepo;
 use App\Repositories\Backend\DashboardRepo;
+use App\Repositories\Backend\PolicyRepo;
 use App\Repositories\Backend\ProductRepo;
 use App\Repositories\Backend\SlideRepo;
 use App\Repositories\Backend\SubcategoryRepo;
@@ -92,8 +97,8 @@ class servicePattrenServiceProvider extends ServiceProvider
             ->needs(\App\Contracts\Backend\OrderInterface::class)
             ->give(\App\Repositories\Backend\OrderRepo::class);
 
-        //------------------------------------------------------BACK END--------------------------------------------------------------------------------------
-
+//------------------------------------------------------BACK END--------------------------------------------------------------------------------------
+////----------for Admin-----------------
         //--------------------for Dashboard Admin--------------------
         $this->app->when(DashboardController::class)
                     ->needs(DashboardInterface::class)
@@ -102,6 +107,16 @@ class servicePattrenServiceProvider extends ServiceProvider
         $this->app->when(UsersManagementController::class)
                     ->needs(UsersRegistersInterface::class)
                             ->give(UsersRegistersRepo::class);
+
+        //--------------------for Permissions Admin--------------------
+        $this->app->when(PermissionsController::class)
+            ->needs(PolicyInterface::class)
+            ->give(PolicyRepo::class);
+        //--------------------for Role Admin--------------------
+        $this->app->when(RoleController::class)
+            ->needs(PolicyInterface::class)
+            ->give(PolicyRepo::class);
+
 
         //--------------------for Order--------------------
         $this->app->when(\App\Http\Controllers\backend\Admin\Order\OrderController::class)
@@ -163,7 +178,7 @@ class servicePattrenServiceProvider extends ServiceProvider
 
 
         //--------------------------------------------------------------------------------
-        //--------------------for vendor--------------------
+//--------------------for vendor--------------------
 
         //--------------------for Dashboard Admin--------------------
         $this->app->when(VendorController::class)
@@ -194,6 +209,15 @@ class servicePattrenServiceProvider extends ServiceProvider
                 $this->app->when(AdminProfileService::class)
                             ->needs(ProfileRepoInterface::class)
                                 ->give(AdminProfileRepo::class);
+
+
+                $this->app->when(AdminAuthController::class)
+                    ->needs(ProfileRepoInterface::class)
+                    ->give(AdminProfileRepo::class);
+                $this->app->when(AdminAuthController::class)
+                    ->needs(ProfileServiceInterface::class)
+                    ->give(AdminProfileService::class);
+
     }
 
     /**
