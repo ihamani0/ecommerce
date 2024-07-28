@@ -1,4 +1,8 @@
 
+{{--@php
+    $user = auth()->guard('admin')->user();
+    dd($user->getAllPermissions()->pluck('name'));
+@endphp--}}
 
 <div class="sidebar-wrapper" data-simplebar="true">
     <div class="sidebar-header">
@@ -134,6 +138,7 @@
 
         <li class="menu-label">Orders </li>
 
+
         {{--Orders Status--}}
         <li class="">
             <a href="javascript:;" class="has-arrow">
@@ -150,25 +155,33 @@
         </li>
 
 
-        {{--Register --}}
-        <li class="menu-label">Register</li>
 
-        <li class="">
-            <a href="javascript:;" class="has-arrow">
-                <div class="parent-icon"><i class="fa-duotone fa-book-user fa-xs"></i>
-                </div>
-                <div class="menu-title">Register Users</div>
-            </a>
-            <ul>
-                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Users)}}"><i class="bx bx-right-arrow-alt"></i>Client List</a>
-                </li>
-                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Vendor)}}"><i class="bx bx-right-arrow-alt"></i>Vendor List</a>
-                </li>
-                <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Admin)}}"><i class="bx bx-right-arrow-alt"></i>Admin List</a>
-                </li>
-            </ul>
-        </li>
 
+        @if(auth()->guard('admin')->user()->hasPermissionTo('register.users'))
+            {{--Register --}}
+            <li class="menu-label">Register</li>
+
+            <li class="">
+                <a href="javascript:;" class="has-arrow">
+                    <div class="parent-icon"><i class="fa-duotone fa-book-user fa-xs"></i>
+                    </div>
+                    <div class="menu-title">Register Users</div>
+                </a>
+                <ul>
+                    @if(auth()->guard('admin')->user()->can('view.register-vendors'))
+                        <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Users)}}"><i class="bx bx-right-arrow-alt"></i>Client List</a>
+                        </li>
+                    @endif
+
+                        <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Vendor)}}"><i class="bx bx-right-arrow-alt"></i>Vendor List</a>
+                        </li>
+
+                        <li> <a href="{{route(\App\Constants\Constants::Admin_Register_Admin)}}"><i class="bx bx-right-arrow-alt"></i>Admin List</a>
+                        </li>
+
+                </ul>
+            </li>
+        @endif
         {{--Role\Permissions --}}
 
         <li class="">

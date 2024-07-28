@@ -44,6 +44,7 @@
                                     <div class="form-group text-secondary">
                                         <select name="group" class="form-select mb-3" aria-label="Default select ">
                                             <option disabled selected="">Open this select Group</option>
+                                            <option value="dashboard">Dashboard</option>
                                             <option value="brand">Brand</option>
                                             <option value="category">Category</option>
                                             <option value="subcategory">Subcategory</option>
