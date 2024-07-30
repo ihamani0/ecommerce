@@ -17,7 +17,12 @@ use Mockery\Exception;
 class BrandController extends Controller
 {
     public function __construct(public CrudInterface $brand)
-    {}
+    {
+        $this->middleware('permission:view.brand,admin')->only('index');
+        $this->middleware('permission:add.brand,admin')->only('create');
+        $this->middleware('permission:update.brand,admin')->only('edit');
+        $this->middleware('permission:delete.brand,admin')->only('destroy');
+    }
 
     /**
      * Display a listing of the resource.

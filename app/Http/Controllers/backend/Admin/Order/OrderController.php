@@ -10,7 +10,12 @@ use Illuminate\Http\Request;
 class OrderController extends Controller
 {
     public function __construct(public OrderInterface $order)
-    {}
+    {
+        $this->middleware('permission:view.order,admin')->only('index');
+        $this->middleware('permission:change-status.order,admin')->only('changeStatus');
+        $this->middleware('permission:change-status.order-return,admin')->only('return_index');
+        $this->middleware('permission:change-status.order-return,admin')->only('changeStatus');
+    }
 
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\View\View|\Illuminate\Contracts\Foundation\Application
     {

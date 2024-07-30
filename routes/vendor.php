@@ -39,7 +39,7 @@ Route::middleware('guest.vendor')->group(function (){
 /*---------------------------------------------------------------------------*/
 /*---------------------- Vendor Route -------------------------------------*/
 /*---------------------------------------------------------------------------*/
-Route::middleware(['auth' ,'verified' , 'activity' , "role:vendor"])->group(function (){
+Route::middleware(['auth' ,'verified' , 'activity' , "role.vendor:vendor"])->group(function (){
 
     //Logout
     Route::post("vendor/logout" ,[VendorAuthController::class,'logout'])
@@ -52,6 +52,10 @@ Route::middleware(['auth' ,'verified' , 'activity' , "role:vendor"])->group(func
 
             Route::get("/vendor-dashboard" , "index" )
                     ->name(App\Constants\Constants::VENDOR_DASHBOARD);
+
+        //for notification admin
+        Route::get("vendor/get-notification-for-vendor/{idVendor}" ,'getVendorNotification');
+        Route::post("vendor/make-notification-as-read-vendor" ,'makeVendorNotificationAsRead');
 
     });
 

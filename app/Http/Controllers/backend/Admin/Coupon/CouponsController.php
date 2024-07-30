@@ -15,7 +15,13 @@ class CouponsController extends Controller
 {
 
     public function __construct(public CouponInterface $coupon)
-    {}
+    {
+        $this->middleware('permission:view.coupon,admin')->only('index');
+        $this->middleware('permission:add.coupon,admin')->only('create');
+        $this->middleware('permission:update.coupon,admin')->only('edit');
+        $this->middleware('permission:delete.coupon,admin')->only('destroy');
+        $this->middleware('permission:change-status.coupon,admin')->only('status');
+    }
 
     public function index()
     {

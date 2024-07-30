@@ -1,9 +1,6 @@
 <?php
 
 use App\Constants\Constants;
-use App\Http\Controllers\Auth\AuthenticatedSessionController;
-use App\Http\Controllers\Auth\RegisteredUserController;
-use App\Http\Controllers\Frontend\ProfileUserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +18,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::fallback([\App\Http\Controllers\Frontend\_404PageController::class , 'handle']);
 
+/*Route::get('/admin-notify' , function (){
+
+        $admins  = Admin::whereHas('roles' , function ($query)  {
+            $query->whereIn('name' , ['super-admin' , 'admin']);
+        })->get();
+
+         Notification::send($admins , new AdminNotification("New Order Has Been Charge"));
+});*/
 
 Route::controller(\App\Http\Controllers\Frontend\LandingPageController::class)->group(function(){
 

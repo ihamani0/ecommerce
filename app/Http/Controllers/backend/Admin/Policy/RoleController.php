@@ -10,7 +10,9 @@ use Illuminate\Http\Request;
 class RoleController extends Controller
 {
     public function __construct(public PolicyInterface $role)
-    {}
+    {
+        $this->middleware('role:super-admin,admin');
+    }
 
     public function index(){
         return view('backend.admin.pages.Policy.role-index' , [

@@ -84,4 +84,33 @@ class UsersRegistersRepo implements UsersRegistersInterface {
     {
         return Role::all();
     }
+
+    public function getAdmin($id)
+    {
+        return Admin::where('id' , $id)->first();
+    }
+
+    public function getRoleBelongToAdmin($id)
+    {
+        return $this->getAdmin($id)->roles->first();
+    }
+
+    public function updateAdmin(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $admin = $this->getAdmin($request->id);
+            $admin->update([
+                'name' => $request->name,
+                'email' => $request->email,
+            ]);
+            $roleFromDB = Role::where('id', $request->role)->pluck('name')->toArray();
+            $admin->syncRoles($roleFromDB);
+            DB::commit();
+        }catch (\Exception $exception){
+            DB::rollBack();
+            throw new \Exception($exception->getMessage());
+        }
+    }
 }

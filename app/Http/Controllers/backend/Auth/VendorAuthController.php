@@ -5,6 +5,7 @@ namespace App\Http\Controllers\backend\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Notifications\Auth\EmailVerifyNotification;
+use App\Services\Backend\NotificationService;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -105,11 +106,17 @@ class VendorAuthController extends Controller
 
             if($user){
 
+
+
                 Auth::login($user);
 
                 //notificate user to verify email before singind
 
                 event(new Registered($user));
+
+                //send notification to admin
+                NotificationService::sendNotificationToAdmins("RegisterNotify","New Register Vendor");
+
 
                 DB::commit();
 

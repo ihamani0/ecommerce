@@ -80,10 +80,14 @@ class Kernel extends HttpKernel
 
         'activity' =>  \App\Http\Middleware\LastActivity::class,
 
-        'role' => \App\Http\Middleware\RoleMiddleware::class,
+        'role.vendor' => \App\Http\Middleware\RoleMiddleware::class,
         'VerifyEmail' => \App\Http\Middleware\VerifyEmail::class ,
 
         'visit_log' => \App\Http\Middleware\VisitorLog::class,
+        //Permission
+        'role' => \Spatie\Permission\Middleware\RoleMiddleware::class,
+        'permission' => \Spatie\Permission\Middleware\PermissionMiddleware::class,
+        'role_or_permission' => \Spatie\Permission\Middleware\RoleOrPermissionMiddleware::class,
     ];
 
 }

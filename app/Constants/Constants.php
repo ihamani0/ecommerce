@@ -175,8 +175,9 @@ class  Constants {
     public const Admin_Register_Admin = "admin.register.admins";
     public const Admin_Register_Admin_ADD = "admin.register.admins.add";
     public const Admin_Register_Admin_Store = "admin.register.admins.store";
-    public const Admin_Register_Admin_Change_Status = "admin.register.admins.edit";
-    /*public const Admin_Register_Admin_Update = "admin.register.admins.update";*/
+    public const Admin_Register_Admin_Change_Status = "admin.register.admins.change.status";
+    public const Admin_Register_Admin_Edit = "admin.register.admins.edit";
+    public const Admin_Register_Admin_Update = "admin.register.admins.update";
     public const Admin_Register_Admin_Delete = "admin.register.admins.delete";
     /*********************************************/
     public const Admin_Review_List = "admin.review.list";

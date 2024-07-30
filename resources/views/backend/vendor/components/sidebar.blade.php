@@ -26,7 +26,7 @@
 
 
 
-        @can('isActive')
+        @if(auth()->user()->status)
             {{--Product Manag--}}
             <li>
                 <a href="javascript:;" class="has-arrow">
@@ -70,7 +70,7 @@
 
                 </ul>
             </li>
-        @endcan
+        @endif
 
 
 

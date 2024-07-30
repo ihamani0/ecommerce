@@ -55,13 +55,19 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
     Route::controller(AdminAuthController::class)->group(function (){
         Route::post("admin/logout" ,'logout')
             ->name('admin.logout'); // logout
-
     });
+
+
 
     Route::controller(\App\Http\Controllers\backend\Admin\Dashboard\DashboardController::class)->group(function (){
         Route::prefix("admin" ,'logout')->group(function (){
             Route::get("dashboard" ,'index')
-                ->name(Constants::Admin_DASHBOARD); //end dashboard
+                ->name(Constants::Admin_DASHBOARD);
+
+
+            //for notification admin
+            Route::get("get-notification-for-admin/{idAdmin}" ,'getAdminNotification');
+            Route::post("make-notification-as-read" ,'makeAdminNotificationAsRead');
         });
     });
 
@@ -72,6 +78,7 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
     //Brand Route
 
     Route::controller(\App\Http\Controllers\backend\Admin\Brand\BrandController::class)->group(function (){
+
             Route::get("/admin/brand-List" , "index")
                 ->name(Constants::Admin_BRAND_INDEX);
 
@@ -338,6 +345,12 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
             Route::post('admins-add' , 'admin_store')
                 ->name(Constants::Admin_Register_Admin_Store);
 
+            Route::get('admins-edit/{id}' , 'admin_edit')
+                ->name(Constants::Admin_Register_Admin_Edit);
+
+            Route::put('admins-edit' , 'admin_update')
+                ->name(Constants::Admin_Register_Admin_Update);
+
             Route::put('admins-change-status' , 'changeStatusAdmin')
                 ->name(Constants::Admin_Register_Admin_Change_Status);
             Route::delete('admins-destroy' , 'destroyAdmin')
@@ -358,7 +371,7 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
         }) ; // end prefix
     });// end controller
 
-//Config system
+    //Config system || i applied middleware role inside __const in this controller
     Route::controller(\App\Http\Controllers\backend\Admin\Setting\SettingController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -377,7 +390,7 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
         }) ; // end prefix
     });// end controller
 
-//Stock system
+    //Stock system
     Route::controller(\App\Http\Controllers\backend\Admin\Products\StockController::class)->group(function(){
 
         Route::prefix('admin')->group(function(){
@@ -390,10 +403,9 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
     });// end controller
 
 
-    //Permission Management
+    //Permission Management || i applied middleware role inside __const in this controller
     Route::controller(\App\Http\Controllers\backend\Admin\Policy\PermissionsController::class)->group(function(){
         Route::prefix('admin')->group(function(){
-
             Route::get('permission-list' , 'index')
                 ->name(Constants::Admin_Permission_Index);
             Route::get('permission-add' , 'add')
@@ -409,7 +421,7 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
 
         });// end prefix
     });// end controller
-//Role Management
+    //Role Management || i applied middleware role inside __const in this controller
     Route::controller(\App\Http\Controllers\backend\Admin\Policy\RoleController::class)->group(function(){
         Route::prefix('admin')->group(function(){
             Route::get('role-list' , 'index')
@@ -432,6 +444,9 @@ Route::middleware(['auth.admin' , "IsActive.admin"])->group(function (){
 
         });// end prefix
     });// end controller
+
+
+
 
 });//end auth admin middleware
 

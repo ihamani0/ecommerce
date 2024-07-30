@@ -10,7 +10,10 @@ use Illuminate\Http\Request;
 class ReviewController extends Controller
 {
     public function __construct(public ReviewService $review)
-    {}
+    {
+        $this->middleware('permission:view.review,admin')->only('index');
+        $this->middleware('permission:change-status.review,admin')->only('changeStatus');
+    }
 
     public function index(){
 

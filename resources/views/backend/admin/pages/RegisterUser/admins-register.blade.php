@@ -104,6 +104,12 @@
                                         <input type="hidden" name="id" value="{{$admin->id}}">
                                         <button type="submit"  @if($admin->status) class="btn btn-outline-danger" title="pause-admin" @else class="btn btn-outline-success" title="enable-admin" @endif  >
                                             <i class="fa-duotone fa-play-pause"></i></button></form>
+                                    {{--Edit Admins--}}
+
+                                    <a href="{{route(App\Constants\Constants::Admin_Register_Admin_Edit , $admin->id)}}" class="btn btn-outline-secondary" title="edit">
+                                        <i class="fa-duotone fa-pen"></i>
+                                    </a>
+
                                     {{--delete user--}}
                                     <form class="d-inline" method="POST" action="{{route(\App\Constants\Constants::Admin_Register_Admin_Delete)}}">
                                         @csrf

@@ -16,8 +16,12 @@ use Mockery\Exception;
 class SubcategoryController extends Controller
 {
     public function __construct(public CrudInterface $sub_category)
-    {}
-
+    {
+        $this->middleware('permission:view.subcategory,admin')->only('index');
+        $this->middleware('permission:add.subcategory,admin')->only('create');
+        $this->middleware('permission:update.subcategory,admin')->only('edit');
+        $this->middleware('permission:delete.subcategory,admin')->only('destroy');
+    }
 
 
     /**

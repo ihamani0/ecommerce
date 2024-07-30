@@ -14,9 +14,13 @@ use Symfony\Component\HttpFoundation\File\Exception\ExtensionFileException;
 
 class SettingController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('role:super-admin,admin');
+    }
+
     public function index(){
-
-
         return view('backend.admin.pages.Setting.index' , ['Setting' =>Setting::firstOrNew()]);
     }
 

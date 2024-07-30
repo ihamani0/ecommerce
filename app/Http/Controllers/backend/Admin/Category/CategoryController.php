@@ -15,7 +15,12 @@ class CategoryController extends Controller
 {
 
     public function __construct(public CrudInterface $category)
-    {}
+    {
+        $this->middleware('permission:view.category,admin')->only('index');
+        $this->middleware('permission:add.category,admin')->only('create');
+        $this->middleware('permission:update.category,admin')->only('edit');
+        $this->middleware('permission:delete.category,admin')->only('destroy');
+    }
 
 
 

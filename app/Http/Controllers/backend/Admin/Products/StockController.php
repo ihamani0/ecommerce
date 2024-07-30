@@ -9,7 +9,11 @@ use Illuminate\Http\Request;
 class StockController extends Controller
 {
     public function __construct(Public ProductInterface $product)
-    {}
+    {
+
+        $this->middleware('permission:view.stock,admin')->only('index');
+        $this->middleware('permission:update.stock,admin')->only('changeStock');
+    }
 
     public function index(){
         return view('backend.admin.pages.Product.stock-index',['products'=> $this->product->getAllProducts()]);

@@ -19,6 +19,7 @@
 <script src="{{ asset("backend/assets/plugins/jquery-knob/excanvas.js") }}"></script>
 <script src="{{ asset("backend/assets/plugins/jquery-knob/jquery.knob.js") }}"></script>
 
+
 {{--Image upload File--}}
 {{--<script src="{{ asset("backend/assets/plugins/Drag-And-Drop/dist/imageuploadify.min.js") }}"></script>--}}
 {{--Image upload File--}}
@@ -28,6 +29,8 @@
 {{---- Tag input ----}}
 <!--Datatable-->
 <script src="{{ asset("backend/assets/plugins/datatable/js/jquery.dataTables.min.js") }}"></script>
+
+
 <script>
     $(document).ready(function() {
         $('#example').DataTable();
@@ -47,4 +50,101 @@
 <script src="{{ asset("backend/assets/js/app.js") }}"></script>
 
 
+
 @stack('script')
+
+
+<script>
+
+
+        function getNotification(){
+            let adminId = '{{auth()->guard('admin')->user()->id}}'
+            let baseUrl = '{{url('admin/get-notification-for-admin')}}/'+adminId
+            $.ajax({
+                type : "GET" ,
+                url : baseUrl ,
+                dataType : 'json',
+                success : (response)=>{
+                    //console.log(response);
+                    //set also Count
+
+                    if(response.data.unreadNotificationCount){
+                        $("#notification-count").empty();
+                        $("#notification-count").html(`
+                                                <span class="alert-count" >${response.data.unreadNotificationCount}</span>
+                                                <i class='fa-light fa-bell'></i>`)
+                    }else{
+                        $("#notification-count").empty();
+                    }
+
+                     setData(response.data.unreadNotification)
+                } ,
+                error : (error)=>{
+                    console.error(error);
+                }
+            });//end ajax
+        } // end function
+
+        function setData(data){
+            let row = '';
+            $.each(data , (index , item)=>{
+
+                if(item.type === 'OrderNotify'){
+                    row += `
+                <a class="dropdown-item" href="javascript:;" data-id="${item.id}" onclick="makeAsRead(this)">
+                   <div class="d-flex align-items-center">
+                        <div class="notify bg-light-danger text-danger"><i class="bx bx-cart-alt"></i></div>
+                        <div class="flex-grow-1">
+                            <h6 class="msg-name d-flex justify-content-between align-items-center ">New Order
+                            <span class="msg-time float-end">${item.created_at}</span></h6>
+                            <p class="msg-info">${item.message}</p>
+                        </div>
+                   </div>
+                </a>
+                `
+                }else if(item.type === 'RegisterNotify'){
+                    row += `
+                        <a class="dropdown-item" href="javascript:;" data-id="${item.id}" onclick="makeAsRead(this)" >
+                           <div class="d-flex align-items-center">
+                                <div class="notify bg-light-primary text-primary"><i class="fa-light fa-user-group"></i></div>
+                                <div class="flex-grow-1">
+                                    <h6 class="msg-name d-flex justify-content-between align-items-center ">New Register
+                                    <span class="msg-time float-end">${item.created_at}</span></h6>
+                                    <p class="msg-info">${item.message}</p>
+                                </div>
+                           </div>
+                        </a>
+                        `
+                }
+
+            }); //end foreach
+            $(".header-notifications-list").html(row);
+        }
+
+
+        getNotification();
+
+
+
+        function makeAsRead(element){
+            let id = element.getAttribute('data-id')
+            let baseUrl = '{{url('admin/make-notification-as-read')}}';
+            $.ajax({
+               type : "POST",
+               url : baseUrl ,
+                dataType : "json",
+                data : {
+                   notifyId : id,
+                    _token: '{{csrf_token()}}'
+                } ,
+                success : function (response) {
+                   console.log(response)
+                    getNotification();
+                },
+                error : function(error){
+                   console.log(error);
+                }
+
+            });
+        }
+</script>

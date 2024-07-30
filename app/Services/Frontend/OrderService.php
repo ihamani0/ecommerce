@@ -4,6 +4,10 @@ namespace App\Services\Frontend;
 
 use App\Contracts\Frontend\OrderInterface;
 use App\Mail\OrderPlaced;
+use App\Models\Admin;
+use App\Notifications\BackendNotification;
+use App\Services\Backend\NotificationService;
+use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
@@ -26,8 +30,16 @@ class OrderService{
             //  retrieve The details of  order
             $orderDetail = $this->cashRepo->getOrderById($orderID);
 
+
             // Send confirmation email to the user
-            Mail::to($order->get('email'))->send(new OrderPlaced($orderDetail));
+             //Mail::to($order->get('email'))->send(new OrderPlaced($orderDetail));
+
+            //send notification to admins
+            NotificationService::sendNotificationToAdmins("OrderNotify","The order Has Been Charge");
+
+            //send notification to vendors
+            NotificationService::sendNotificationToVendors($orderDetail,"OrderNotify" , "The order Has Been Charge");
+
 
             DB::commit();
         } catch (\Exception $exception) {
@@ -40,5 +52,20 @@ class OrderService{
 
         }
 
+    }
+
+    private function sendNotificationToAdmins($order_number): void
+    {
+        //send notification to Admin and Vendor
+        $admins = $this->getAdminWithRoles();
+        Notification::send($admins , new BackendNotification('THe Order has been charge , nu: '.$order_number));
+
+    }
+
+    private function getAdminWithRoles(){
+        $roles = ['super-admin', 'admin'];
+        return Admin::whereHas('roles' , function ($query) use ($roles){
+            $query->whereIn('name' , $roles);
+        })->get();
     }
 }

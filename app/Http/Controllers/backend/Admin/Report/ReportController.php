@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class ReportController extends Controller
 {
     public function __construct(public ReportService $report)
-    {}
+    {
+        $this->middleware('permission:view.report,admin')->only('index');
+    }
 
 
     public function index(): \Illuminate\Contracts\View\Factory|\Illuminate\Foundation\Application|\Illuminate\Contracts\View\View|\Illuminate\Contracts\Foundation\Application

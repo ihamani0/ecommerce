@@ -14,16 +14,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
 
-        DB::table('model_has_roles')->insert([
-            'role_id' => 1 ,
-            'model_type' => 'App\Models\Admin' ,
-            'model_id' => 1
-        ]);
-        /*$this->call([
-            UserSeeder::class,
-            AdmintableSeeder::class ,
+
+        $this->call([
+            /*UserSeeder::class,
+            AdmintableSeeder::class ,*/
             PermissionSeeder::class ,
             RoleSeeder::class
-        ]);*/
+        ]);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -26,6 +27,14 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define("isActive" , function (User $user){
            return  $user->status;
+        });
+
+        // Define a gate for each permission, or use a wildcard
+        Gate::before(function (Admin $admin, $ability) {
+            if ($admin->hasPermissionTo($ability)) {
+                return true;
+            }
+            return false;
         });
     }
 }

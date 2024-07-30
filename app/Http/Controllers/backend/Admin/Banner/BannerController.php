@@ -14,7 +14,12 @@ use Mockery\Exception;
 class BannerController extends Controller
 {
     public function __construct(public CrudInterface $banner)
-    {}
+    {
+        $this->middleware('permission:view.banner,admin')->only('index');
+        $this->middleware('permission:add.banner,admin')->only('create');
+        $this->middleware('permission:update.banner,admin')->only('edit');
+        $this->middleware('permission:delete.banner,admin')->only('destroy');
+    }
 
     /**
      * Display a listing of the resource.

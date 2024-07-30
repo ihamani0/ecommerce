@@ -14,7 +14,12 @@ use Mockery\Exception;
 class SlideController extends Controller
 {
     public function __construct(public CrudInterface $slide)
-    {}
+    {
+        $this->middleware('permission:view.slider,admin')->only('index');
+        $this->middleware('permission:add.slider,admin')->only('create');
+        $this->middleware('permission:update.slider,admin')->only('edit');
+        $this->middleware('permission:delete.slider,admin')->only('destroy');
+    }
 
 
 

@@ -15,7 +15,12 @@ use Mockery\Exception;
 class ProductsController extends Controller
 {
     public function __construct(Public ProductInterface $product)
-    {}
+    {
+        $this->middleware('permission:view.product,admin')->only('index');
+        $this->middleware('permission:add.product,admin')->only('create');
+        $this->middleware('permission:update.product,admin')->only('edit');
+        $this->middleware('permission:delete.product,admin')->only('destroy');
+    }
 
     /**
      * Display a listing of the resource.

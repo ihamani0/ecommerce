@@ -11,7 +11,9 @@ class PermissionsController extends Controller
 {
 
     public function __construct(public PolicyInterface $permission)
-    {}
+    {
+        $this->middleware('role:super-admin,admin');
+    }
 
     public function index(){
          return view('backend.admin.pages.Policy.permissions-index' , [

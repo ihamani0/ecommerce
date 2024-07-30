@@ -12,7 +12,11 @@ use Mockery\Exception;
 class VendorStatus extends Controller
 {
     public function __construct(public VendorInterface $vendor)
-    {}
+    {
+
+        $this->middleware('permission:view.vendor,admin')->only(['index_active' , 'index_in_active']);
+        $this->middleware('permission:change-status.vendor,admin')->only(['active' , 'inactive']);
+    }
 
 
     public function index_active()

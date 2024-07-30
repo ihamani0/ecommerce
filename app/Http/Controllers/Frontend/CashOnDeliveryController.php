@@ -44,7 +44,8 @@ class CashOnDeliveryController extends Controller
             $this->order_service->storeOrder($order , $sessionData);
 
             DB::commit();
-            return redirect()->route(Constants::USER_ACCOUNT)->with(['success'=>"Your order was placed Successfully !"]);
+            return redirect()->route(Constants::USER_ACCOUNT_DASHBOARD)
+                        ->with(['success'=>"Your order was placed Successfully !"]);
         }catch (\Exception $exception){
             DB::rollBack();
             // Log the exception message
